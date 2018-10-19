@@ -15,13 +15,25 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->integer('company_id');
+            $table->index('company_id');
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('user_name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->timestamps();
+            $table->timestamp('created_at')->default(\DB::raw('NOW()'));
+            $table->timestamp('updated_at')->default(\DB::raw('NOW()'));
         });
+
+        require_once 'pg_functions.php';
+
+        \DB::unprepared('
+            CREATE TRIGGER set_timestamp
+            BEFORE UPDATE ON users
+            FOR EACH ROW EXECUTE PROCEDURE set_timestamp();
+        ');
     }
 
     /**

@@ -16,8 +16,16 @@ class CreatePasswordResetsTable extends Migration
         Schema::create('password_resets', function (Blueprint $table) {
             $table->string('email')->index();
             $table->string('token');
-            $table->timestamp('created_at')->nullable();
+            $table->timestamp('created_at')->nullable()->default(\DB::raw('NOW()'));
         });
+
+        require_once 'pg_functions.php';
+
+        \DB::unprepared('
+            CREATE TRIGGER set_timestamp
+            BEFORE UPDATE ON password_resets
+            FOR EACH ROW EXECUTE PROCEDURE set_timestamp();
+        ');
     }
 
     /**
