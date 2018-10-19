@@ -16,8 +16,8 @@ class Companies extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->increments('id');
             $table->string('company_name')->unique();
-            $table->timestamp('created_at')->default(\DB::raw('NOW()'));
-            $table->timestamp('updated_at')->default(\DB::raw('NOW()'));
+            $table->timestampTz('created_at')->default(\DB::raw('NOW()'));
+            $table->timestampTz('updated_at')->default(\DB::raw('NOW()'));
         });
 
         require_once 'pg_functions.php';
