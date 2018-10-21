@@ -15,9 +15,6 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('company_id');
-            $table->index('company_id');
-            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade')->onUpdate('cascade');
             $table->string('user_name');
             $table->string('email')->unique();
             $table->timestampTz('email_verified_at')->nullable();
@@ -25,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestampTz('created_at')->default(\DB::raw('NOW()'));
             $table->timestampTz('updated_at')->default(\DB::raw('NOW()'));
+            $table->timestampTz('deleted_at')->nullable();
         });
 
         require_once 'pg_functions.php';

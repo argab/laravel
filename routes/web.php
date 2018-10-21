@@ -11,6 +11,15 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function()
+{
     return view('welcome');
 });
+
+Route::get('company', 'CompanyController@index')->name('company');
+
+Route::get('user', 'UserController@index')->name('user');
+Route::any('user/create', 'UserController@create')->name('user.create');
+Route::any('user/update/{id}', 'UserController@update')->name('user.update')->where('id', '[0-9]+');
+Route::get('user/delete/{id?}', 'UserController@destroy')->name('user.delete')->where('id', '[0-9]+');
+

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Companies extends Migration
+class CompanyUser extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,14 @@ class Companies extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('company_user', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('company_name')->unique();
+            $table->integer('company_id')->nullable();
+            $table->integer('user_id')->nullable();
+            $table->index('company_id');
+            $table->index('user_id');
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestampTz('created_at')->default(\DB::raw('NOW()'));
             $table->timestampTz('updated_at')->default(\DB::raw('NOW()'));
             $table->timestampTz('deleted_at')->nullable();
@@ -25,7 +30,7 @@ class Companies extends Migration
 
         \DB::unprepared('
             CREATE TRIGGER set_timestamp
-            BEFORE UPDATE ON companies
+            BEFORE UPDATE ON company_user
             FOR EACH ROW EXECUTE PROCEDURE set_timestamp();
         ');
     }
@@ -37,6 +42,6 @@ class Companies extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('company_user');
     }
 }

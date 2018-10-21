@@ -17,6 +17,7 @@ class CreatePasswordResetsTable extends Migration
             $table->string('email')->index();
             $table->string('token');
             $table->timestampTz('created_at')->nullable()->default(\DB::raw('NOW()'));
+            $table->timestampTz('deleted_at')->nullable();
         });
 
         require_once 'pg_functions.php';
