@@ -1,15 +1,14 @@
 <?php
 /**
  * Class Grid
- *
- * @project <Grid Data Providing for PHP language>
- * @package App\lib\grid
- * @author ArGabid <argabid@gmail.com>
+ * @project   <Grid Data Providing for PHP language>
+ * @package   App\lib\grid
+ * @author    ArGabid <argabid@gmail.com>
  * @copyright 2018-2019, ArGabid, License MIT, All rights reserved
  */
 
-namespace App\lib\grid {
-
+namespace App\lib\grid
+{
     /*
      * @property IGridProvider|GridDataProvider $provider
      * */
@@ -256,7 +255,6 @@ namespace App\lib\grid {
         /**
          * @param string $bindKey
          * @param array|callable $data
-         *
          *  Example: bindLayout('{some-key}', ['<template></template>', '<{tag}']) - insert template before tag;
          *  Example: bindLayout('{some-key}', ['<template></template>', null, '</{tag}>']) - insert template after tag;
          *  Example: bindLayout('{some-key}', function($layout){return $layout;}) - set layout string;
@@ -374,8 +372,6 @@ namespace App\lib\grid {
                         $a[] = $order[$keys[$ii]];
 
                         $r[$keys[$ii]] = $r[$order[$keys[$ii]]] = true;
-
-                        unset($keys[$ii]);
 
                         break;
                     }

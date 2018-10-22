@@ -31,7 +31,7 @@
 
             })
 
-            ->replaceColumns(['company' => 'user_name', 'created_at' => 'email']);
+            ->replaceColumns(['company' => 'user_name']);
 
         echo $table->render();
 
