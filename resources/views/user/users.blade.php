@@ -29,7 +29,9 @@
 
                 return join(';<br>', $company);
 
-            });
+            })
+
+            ->replaceColumns(['company' => 'user_name', 'created_at' => 'email']);
 
         echo $table->render();
 

@@ -9,7 +9,6 @@
 
 namespace App\lib\grid
 {
-
     use App\lib\grid\plugins\pagination\Pagination;
 
     class GridTable extends Grid
