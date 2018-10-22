@@ -23,3 +23,5 @@ Route::any('user/create', 'UserController@create')->name('user.create');
 Route::any('user/update/{id}', 'UserController@update')->name('user.update')->where('id', '[0-9]+');
 Route::get('user/delete/{id?}', 'UserController@destroy')->name('user.delete')->where('id', '[0-9]+');
 
+Route::get('api', 'ApiController@index')->name('api');
+
