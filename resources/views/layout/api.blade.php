@@ -1,7 +1,7 @@
 <!doctype html>
 <html  lang="ru">
 <head>
-<script src="{!! asset('css/app.css') !!}"></script>
+<link rel="stylesheet" href="{!! asset('css/app.css') !!}">
 </head>
 <body>
 

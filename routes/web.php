@@ -24,4 +24,5 @@ Route::any('user/update/{id}', 'UserController@update')->name('user.update')->wh
 Route::get('user/delete/{id?}', 'UserController@destroy')->name('user.delete')->where('id', '[0-9]+');
 
 Route::get('api', 'ApiController@index')->name('api');
-
+Route::post('api/search', 'ApiController@search')->name('api-search');
+Route::get('api/search-options', 'ApiController@searchOptions')->name('api-search-options');

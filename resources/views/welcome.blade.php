@@ -64,7 +64,13 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+    <script>
+        window.Laravel = <?php echo json_encode([
+            'csrfToken' => csrf_token(),
+        ]); ?>
+    </script>
+
+    <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
