@@ -1,7 +1,5 @@
 <?php
 
-use App\Api;
-
 return [
 
     'get_token' => [

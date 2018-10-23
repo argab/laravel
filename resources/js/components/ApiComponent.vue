@@ -57,13 +57,7 @@
 
         props: {},
 
-        computed: {
-            lastMonth() {
-                let dt = new Date();
-                dt.setMonth(dt.getMonth()-1);
-                return moment(dt).format('YYYY-MM-DD');
-            }
-        },
+        computed: {},
 
         data () {
             return {
