@@ -377,6 +377,5 @@ namespace App\lib\grid
         {
             return $this->data['items'];
         }
-
     }
 }

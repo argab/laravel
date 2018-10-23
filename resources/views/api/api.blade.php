@@ -2,6 +2,7 @@
 
 @section('content')
 
-    <example-component></example-component>
+    <api-component></api-component>
 
 @endsection
+
