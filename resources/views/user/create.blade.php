@@ -24,7 +24,7 @@
 
         $form->setValue('company', $provider->getCompanyAttribute());
 
-        $form->bindLayout('_submit_', ['<button type="submit" class="btn btn-success">Сохранить</button>', '</{tag}>']);
+        $form->setRow('_submit_', '<button type="submit" class="btn btn-success">Сохранить</button>');
 
         echo $form->render();
 

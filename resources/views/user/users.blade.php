@@ -28,7 +28,6 @@
                 }
 
                 return join(';<br>', $company);
-
             })
 
             ->replaceColumns(['company' => 'user_name']);
