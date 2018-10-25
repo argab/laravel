@@ -39,11 +39,9 @@ class ApiController extends Controller
 
     public function getOffers(Request $request)
     {
-        $rid = $request->get('request_id');
-
         $res = $this->_api->curlGet(config('api.get_offers.url'), array_merge(
 
-            config('api.get_offers.body'), ['request_id' => $rid]
+            config('api.get_offers.body'), ['request_id' => $request->get('request_id')]
 
         ));
 
