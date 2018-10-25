@@ -5,7 +5,7 @@ class Matrix
         this.param = {
             matrix_width:  10,
             matrix_height: 10
-        }
+        };
 
         this.matrix = {};
 
@@ -40,49 +40,48 @@ class Matrix
 
             return false;
 
-        let count = 0;
+        let count = [];
 
-        let py = 1, my = 1, px = 1, mx = 1;
+        let stack = {inc:{}, dec:{}};
 
-        for (let yy = posY; yy <= this.param.matrix_width*2; ++yy)
+        for (let x = posX; x < this.param.matrix_height; ++x)
         {
-            if (typeof(this.matrix[posX][yy]) !== 'undefined' && py === 1)
+            if (this.matrix[x][posY] === 0)
+
+                break;
+
+            for (let y = posY; y < this.param.matrix_width; ++y)
             {
-                if (this.matrix[posX][yy] === 1)
+                // debugger;
 
-                    count += 1;
+                if (typeof(stack['inc'][x]) === 'undefined')
+                {
+                    if (this.matrix[x][y] === 1)
 
-                else py = 0;
-            }
+                        count.push([x, y]);
 
-            if (typeof(this.matrix[posX][posY-yy]) !== 'undefined' && my === 1)
-            {
-                if (this.matrix[posX][posY-yy] === 1)
+                    else stack['inc'][x] = 1;
+                }
 
-                    count += 1;
+                if (posY-y >= 0 && typeof(stack['dec'][x]) === 'undefined')
+                {
+                    if (this.matrix[x][posY-y] === 1)
 
-                else my = 0;
-            }
-        }
+                        count.push([x, posY-y]);
 
-        for (let xx = posX; xx <= this.param.matrix_height*2; ++xx)
-        {
-            if (typeof(this.matrix[xx]) !== 'undefined' && px === 1)
-            {
-                if (this.matrix[xx][posY] === 1)
+                    else stack['dec'][x] = 1;
+                }
 
-                    count += 1;
+                if (posX-x >= 0)
+                {
+                    if (posY-y >= 0 && this.matrix[posX-x][posY-y] === 1)
 
-                else px = 0;
-            }
+                        count.push([posX-x, posY-y]);
 
-            if (typeof(this.matrix[posX-xx]) !== 'undefined' && mx === 1)
-            {
-                if (this.matrix[posX-xx][posY] === 1)
+                    if (this.matrix[posX-x][y] === 1)
 
-                    count += 1;
-
-                else mx = 0;
+                        count.push([posX-x, y]);
+                }
             }
         }
 
