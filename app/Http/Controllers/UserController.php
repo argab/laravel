@@ -4,22 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\User;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
-use App\Company;
+use App\User;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
+     * @param User $provider
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $provider)
     {
-        $provider = new User;
-
         return view('user.users', ['provider' => $provider, 'users' => $provider->with('companies')->get()->all()]);
     }
 
@@ -27,13 +25,11 @@ class UserController extends Controller
      * Show the form for creating a new resource.
      *
      * @param  \Illuminate\Http\Request  $request
-     *
+     * @param  User $provider
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(Request $request, User $provider)
     {
-        $provider = new User;
-
         if ($request->isMethod('post'))
         {
             $rules = $provider->rules();
@@ -76,7 +72,7 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)

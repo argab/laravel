@@ -8,10 +8,8 @@ use App\Company;
 
 class CompanyController extends Controller
 {
-    public function index()
+    public function index(Company $provider)
     {
-        $provider = new Company;
-
         return view('company.companies', ['provider' => $provider, 'companies' => $provider->with('users')->get()->all()]);
     }
 }
