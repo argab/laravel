@@ -24,17 +24,15 @@ class ApiController extends Controller
 
     public function search(Request $request)
     {
-        $body = array_merge(config('api.get_search_id.body'),
-            [
-                'directions' => [[
-                    'departure_code' => $request->post('flight_from'),
-                    'arrival_code'   => $request->post('flight_to'),
-                    'date'           => Carbon::createFromFormat('d/m/Y', $request->post('flight_date'))->format('Y-m-d'),
-                    'time'           => 'M',
-                ]],
-                'class'      => $request->post('flight_class'),
-            ]
-        );
+        $body = array_merge(config('api.get_search_id.body'), [
+            'directions' => [[
+                'departure_code' => $request->post('flight_from'),
+                'arrival_code'   => $request->post('flight_to'),
+                'date'           => Carbon::createFromFormat('d/m/Y', $request->post('flight_date'))->format('Y-m-d'),
+                'time'           => 'M',
+            ]],
+            'class'      => $request->post('flight_class'),
+        ]);
 
         return response()->json($this->_api->curlPost(config('api.get_search_id.url'), $body));
     }
