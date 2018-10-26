@@ -113,19 +113,13 @@ namespace App\lib\grid
                 {
                     preg_match('|^([a-z]+)((\()([\d]+)(\)))?$|', $field['Type'], $match);
 
-                    $type = $match[1] === 'text' ? 'textarea' : $match[1];
-
                     $name = $field['Field'];
 
-                    $size = $match[4] ?? null;
+                    $types[$name] = $match[1];
 
-                    $prompt = $field['Default'];
+                    $sizes[$name] = $match[4] ?? null;
 
-                    $types[$name] = $type;
-
-                    $sizes[$name] = $size;
-
-                    $prompts[$name] = $prompt;
+                    $prompts[$name] = $field['Default'];
                 }
             }
 

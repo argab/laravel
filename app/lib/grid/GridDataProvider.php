@@ -95,7 +95,7 @@ namespace App\lib\grid
             return $this->entity;
         }
 
-        private function checkData($key)
+        private function checkData(string $key)
         {
             if (false == array_key_exists($key, $this->data))
 
