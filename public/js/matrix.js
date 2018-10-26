@@ -36,6 +36,8 @@ class Matrix
 
     countItems(posX, posY)
     {
+        //https://www.geeksforgeeks.org/find-number-of-islands/
+
         if (this.matrix[posX][posY] === 0)
 
             return false;
