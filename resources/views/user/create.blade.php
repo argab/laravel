@@ -22,7 +22,7 @@
 
         $form->setValue('password', '');
 
-        $form->setValue('company', $provider->getCompanyAttribute());
+        $form->setValue('company', array_keys((array) $provider->getCompanies()));
 
         $form->setRow('_submit_', '<button type="submit" class="btn btn-success">Сохранить</button>');
 

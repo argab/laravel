@@ -41,8 +41,6 @@ class User extends Authenticatable implements IGridTableProvider, IGridFormProvi
 
     protected $dateFormat = 'Y-m-d H:i:sP';
 
-    private $_errors = [];
-
     public $company;
 
     public function companies()
@@ -50,16 +48,16 @@ class User extends Authenticatable implements IGridTableProvider, IGridFormProvi
         return $this->belongsToMany('App\Company');
     }
 
-    public function getCompanyAttribute()
+    public function getCompanies()
     {
-        $this->company = [];
+        $data = [];
 
         foreach ($this->companies->all() as $company)
         {
-            $this->company[] = $company->id;
+            $data[$company->id] = $company->company_name;
         }
 
-        return $this->company;
+        return $data;
     }
 
     public function rules()
@@ -100,11 +98,6 @@ class User extends Authenticatable implements IGridTableProvider, IGridFormProvi
         return [
             'company' => Company::all()->pluck('company_name', 'id')->all()
         ];
-    }
-
-    public function setErrors(array $errors)
-    {
-        $this->_errors = $errors;
     }
 
     public function gridInputErrors(): array

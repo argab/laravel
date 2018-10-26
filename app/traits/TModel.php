@@ -6,29 +6,28 @@
 
 namespace App\traits
 {
-
     trait TModel
     {
+        private $_errors = [];
+
         public function loadData(array $data)
         {
-            try
+            if ($fillable = $this->fillable)
             {
-                if ($fillable = $this->fillable)
+                foreach ($fillable as $item)
                 {
-                    foreach ($fillable as $item)
-                    {
-                        $this->{$item} = $data[$item] ?? null;
-                    }
-
-                    return true;
+                    $this->{$item} = $data[$item] ?? null;
                 }
-            }
-            catch (\Exception $e)
-            {
-                return null;
+
+                return true;
             }
 
             return false;
+        }
+
+        public function setErrors(array $errors)
+        {
+            $this->_errors = $errors;
         }
     }
 

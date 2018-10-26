@@ -19,16 +19,9 @@
             ->setItems($users)
 
             ->setCell('company', function($data)
-            {
-                $company = [];
-
-                foreach ($data->companies->all() as $item)
-                {
-                    $company[] = $item->company_name;
-                }
-
-                return join(';<br>', $company);
-            })
+             {
+                return join(';<br>', (array) $data->getCompanies());
+             })
 
             ->replaceColumns(['company' => 'user_name']);
 
