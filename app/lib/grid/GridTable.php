@@ -176,7 +176,7 @@ namespace App\lib\grid
             return array_keys($this->row);
         }
 
-        public function setCellAttributes($cell = null, array $attr = null)
+        public function setCellAttributes(string $cell = null, array $attr = null)
         {
             $cell !== null
 
@@ -191,7 +191,7 @@ namespace App\lib\grid
             return $this;
         }
 
-        public function getCellAttributes($cell = null)
+        public function getCellAttributes(string $cell = null)
         {
             return $this->cellAttributes['cell'][$cell] ?? $this->cellAttributes['base'];
         }
