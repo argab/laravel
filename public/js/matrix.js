@@ -9,6 +9,8 @@ class Matrix
 
         this.matrix = {};
 
+        this.count = {};
+
         this.param = Object.assign(this.param, params)
     }
 
@@ -38,56 +40,78 @@ class Matrix
     {
         //https://www.geeksforgeeks.org/find-number-of-islands/
 
-        if (this.matrix[posX][posY] === 0)
-
-            return false;
-
-        let count = [];
-
-        let stack = {inc:{}, dec:{}};
+        let goXx = 1;
+        let goXX = 1;
+        let dcx = 1;
 
         for (let x = posX; x < this.param.matrix_height; ++x)
         {
-            if (this.matrix[x][posY] === 0)
+            // debugger;
 
-                break;
-
-            for (let y = posY; y < this.param.matrix_width; ++y)
+            if (x-dcx >= 0 && goXx)
             {
-                // debugger;
+                if (this.matrix[x - dcx][posY] === 1)
 
-                if (typeof(stack['inc'][x]) === 'undefined')
-                {
-                    if (this.matrix[x][y] === 1)
+                    this.count[(x - dcx) + '-' + posY] = 1;
 
-                        count.push([x, y]);
+                else goXx = 0;
 
-                    else stack['inc'][x] = 1;
-                }
-
-                if (posY-y >= 0 && typeof(stack['dec'][x]) === 'undefined')
-                {
-                    if (this.matrix[x][posY-y] === 1)
-
-                        count.push([x, posY-y]);
-
-                    else stack['dec'][x] = 1;
-                }
-
-                if (posX-x >= 0)
-                {
-                    if (posY-y >= 0 && this.matrix[posX-x][posY-y] === 1)
-
-                        count.push([posX-x, posY-y]);
-
-                    if (this.matrix[posX-x][y] === 1)
-
-                        count.push([posX-x, y]);
-                }
+                if ()
             }
+
+            dcx += 1;
+
+            if (this.matrix[x][posY] === 1 && goXX)
+            {
+                if (this.matrix[x][posY] === 1)
+
+                    this.count[x + '-' + posY] = 1;
+
+                else goXX = 0;
+            }
+
+            // for (let y = posY; y < this.param.matrix_width; ++y)
+            // {
+
+
+                // if (goXY === 1)
+                // {
+                //     if (this.matrix[x][y] === 1)
+                //
+                //         this.count[x + '-' + y] = 1;
+                //
+                //     else goXY = 0;
+                //
+                //     if (x-dcx >= 0 && this.matrix[x-dcx][y] === 1)
+                //     {
+                //         this.count[(x-dcx) + '-' + y] = 1;
+                //     }
+                // }
+                //
+                // if (posY-dcy >= 0 && goXy === 1)
+                // {
+                //     if (this.matrix[x][posY-dcy] === 1)
+                //
+                //         this.count[x + '-' + (posY-dcy)] = 1;
+                //
+                //     else goXy = 0;
+                //
+                //     if (x-dcx >= 0 && this.matrix[x-dcx][posY-dcy] === 1)
+                //     {
+                //         this.count[(x-dcx) + '-' + (posY-dcy)] = 1;
+                //     }
+                // }
+
+                // dcy += 1;
+                // dcx += 1;
+            // }
+
+            // if (this.matrix[x][posY] === 0)
+            //
+            //     break;
         }
 
-        return count;
+        return this.count;
     }
 
 }

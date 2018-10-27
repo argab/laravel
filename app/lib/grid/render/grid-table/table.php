@@ -1,6 +1,5 @@
 <?php
 
-use App\lib\grid\IGridFormProvider;
 use App\lib\grid\GridDataFormatter as GF;
 
 /* @var \App\lib\grid\GridTable $this */
