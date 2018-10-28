@@ -28,7 +28,7 @@ Route::post('api/search', 'ApiController@search')->name('api-search');
 Route::get('api/search-options', 'ApiController@searchOptions')->name('api-search-options');
 Route::get('/api/get-offers', 'ApiController@getOffers')->name('api-get-offers');
 
-Route::get('isle', function()
+Route::get('matrix', function()
 {
-    return view('isle.isle');
+    return view('matrix.matrix');
 });

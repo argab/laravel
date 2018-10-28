@@ -1,4 +1,5 @@
-class Matrix
+
+export class Matrix
 {
     constructor(params = {})
     {
@@ -44,16 +45,23 @@ class Matrix
 
     addStack(posX, posY)
     {
-        if ( ! (('' + posX + posY) in this.stackFilter))
+        try
         {
-            if ((posX-1 >=0 && this.matrix[posX-1][posY] === 1)
-
-                || (posX+1 < this.param.matrix_height && this.matrix[posX+1][posY] === 1))
+            if ( ! (('' + posX + posY) in this.stackFilter))
             {
-                this.stack.push([posX, posY]);
+                if ((posX-1 >=0 && this.matrix[posX-1][posY] === 1)
 
-                this.stackFilter['' + posX + posY] = 1;
+                    || (posX+1 < this.param.matrix_height && this.matrix[posX+1][posY] === 1))
+                {
+                    this.stack.push([posX, posY]);
+
+                    this.stackFilter['' + posX + posY] = 1;
+                }
             }
+        }
+        catch(exception)
+        {
+            console.log('out of stack.');
         }
     }
 

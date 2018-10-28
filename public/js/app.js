@@ -2133,6 +2133,125 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/MatrixComponent.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__classes_Matrix__ = __webpack_require__("./resources/js/classes/Matrix.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    components: {},
+
+    props: {},
+
+    computed: {},
+
+    data: function data() {
+        return {
+            matrix: {},
+            count: 0,
+            count_items: {},
+            params: {
+                width: 0,
+                height: 0
+            }
+        };
+    },
+
+
+    methods: {
+        fetchMatrix: function fetchMatrix(width, height) {
+            this.matrix = new __WEBPACK_IMPORTED_MODULE_0__classes_Matrix__["a" /* Matrix */]({
+                matrix_width: width ? width : 10,
+                matrix_height: height ? height : 10
+            });
+
+            this.params.width = this.matrix.param.matrix_width;
+            this.params.height = this.matrix.param.matrix_height;
+
+            this.count = 0;
+            this.count_items = {};
+
+            $('.matrix-rows>.matrix-row>div').removeClass('counted');
+
+            this.matrix.setMatrix();
+        },
+        resetMatrix: function resetMatrix() {
+            var width = $('#matrix-width').val();
+            var height = $('#matrix-height').val();
+
+            this.fetchMatrix(width, height);
+        },
+        countItems: function countItems(x, y) {
+            if (this.matrix.matrix[x][y] === 0) return false;
+
+            this.matrix.countItems(x, y);
+
+            this.matrix.fetchStack();
+
+            this.count = 0;
+
+            var items = {};
+
+            for (var key in this.matrix.count) {
+                if (!(key in this.count_items)) {
+                    this.count += 1;
+
+                    this.count_items[key] = 1;
+
+                    items[key] = 1;
+                }
+            }
+
+            if (Object.keys(items).length) {
+                var matrix = $('.matrix-rows');
+
+                $.each(items, function (i, val) {
+                    $('.matrix-rows').find('#' + i).addClass('counted');
+                });
+            }
+        }
+    },
+
+    created: function created() {
+
+        this.fetchMatrix();
+    }
+});
+
+/***/ }),
+
 /***/ "./node_modules/bootstrap/dist/js/bootstrap.js":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6093,6 +6212,21 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 // module
 exports.push([module.i, "/*!\n * Datetimepicker for Bootstrap 3\n * version : 4.17.47\n * https://github.com/Eonasdan/bootstrap-datetimepicker/\n */\n.bootstrap-datetimepicker-widget {\n  list-style: none;\n}\n.bootstrap-datetimepicker-widget.dropdown-menu {\n  display: block;\n  margin: 2px 0;\n  padding: 4px;\n  width: 19em;\n}\n@media (min-width: 576px) {\n  .bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {\n    width: 38em;\n  }\n}\n@media (min-width: 768px) {\n  .bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {\n    width: 38em;\n  }\n}\n@media (min-width: 992px) {\n  .bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {\n    width: 38em;\n  }\n}\n.bootstrap-datetimepicker-widget.dropdown-menu:before,\n.bootstrap-datetimepicker-widget.dropdown-menu:after {\n  content: '';\n  display: inline-block;\n  position: absolute;\n}\n.bootstrap-datetimepicker-widget.dropdown-menu.bottom:before {\n  border-left: 7px solid transparent;\n  border-right: 7px solid transparent;\n  border-bottom: 7px solid #ccc;\n  border-bottom-color: rgba(0, 0, 0, 0.2);\n  top: -7px;\n  left: 7px;\n}\n.bootstrap-datetimepicker-widget.dropdown-menu.bottom:after {\n  border-left: 6px solid transparent;\n  border-right: 6px solid transparent;\n  border-bottom: 6px solid white;\n  top: -6px;\n  left: 8px;\n}\n.bootstrap-datetimepicker-widget.dropdown-menu.top:before {\n  border-left: 7px solid transparent;\n  border-right: 7px solid transparent;\n  border-top: 7px solid #ccc;\n  border-top-color: rgba(0, 0, 0, 0.2);\n  bottom: -7px;\n  left: 6px;\n}\n.bootstrap-datetimepicker-widget.dropdown-menu.top:after {\n  border-left: 6px solid transparent;\n  border-right: 6px solid transparent;\n  border-top: 6px solid white;\n  bottom: -6px;\n  left: 7px;\n}\n.bootstrap-datetimepicker-widget.dropdown-menu.pull-right:before {\n  left: auto;\n  right: 6px;\n}\n.bootstrap-datetimepicker-widget.dropdown-menu.pull-right:after {\n  left: auto;\n  right: 7px;\n}\n.bootstrap-datetimepicker-widget .list-unstyled {\n  margin: 0;\n}\n.bootstrap-datetimepicker-widget a[data-action] {\n  padding: 6px 0;\n}\n.bootstrap-datetimepicker-widget a[data-action]:active {\n  box-shadow: none;\n}\n.bootstrap-datetimepicker-widget .timepicker-hour,\n.bootstrap-datetimepicker-widget .timepicker-minute,\n.bootstrap-datetimepicker-widget .timepicker-second {\n  width: 54px;\n  font-weight: bold;\n  font-size: 1.2em;\n  margin: 0;\n}\n.bootstrap-datetimepicker-widget button[data-action] {\n  padding: 6px;\n}\n.bootstrap-datetimepicker-widget .btn[data-action=\"incrementHours\"]::after {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  border: 0;\n  content: \"Increment Hours\";\n}\n.bootstrap-datetimepicker-widget .btn[data-action=\"incrementMinutes\"]::after {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  border: 0;\n  content: \"Increment Minutes\";\n}\n.bootstrap-datetimepicker-widget .btn[data-action=\"decrementHours\"]::after {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  border: 0;\n  content: \"Decrement Hours\";\n}\n.bootstrap-datetimepicker-widget .btn[data-action=\"decrementMinutes\"]::after {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  border: 0;\n  content: \"Decrement Minutes\";\n}\n.bootstrap-datetimepicker-widget .btn[data-action=\"showHours\"]::after {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  border: 0;\n  content: \"Show Hours\";\n}\n.bootstrap-datetimepicker-widget .btn[data-action=\"showMinutes\"]::after {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  border: 0;\n  content: \"Show Minutes\";\n}\n.bootstrap-datetimepicker-widget .btn[data-action=\"togglePeriod\"]::after {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  border: 0;\n  content: \"Toggle AM/PM\";\n}\n.bootstrap-datetimepicker-widget .btn[data-action=\"clear\"]::after {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  border: 0;\n  content: \"Clear the picker\";\n}\n.bootstrap-datetimepicker-widget .btn[data-action=\"today\"]::after {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  border: 0;\n  content: \"Set the date to today\";\n}\n.bootstrap-datetimepicker-widget .picker-switch {\n  text-align: center;\n}\n.bootstrap-datetimepicker-widget .picker-switch::after {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  border: 0;\n  content: \"Toggle Date and Time Screens\";\n}\n.bootstrap-datetimepicker-widget .picker-switch td {\n  padding: 0;\n  margin: 0;\n  height: auto;\n  width: auto;\n  line-height: inherit;\n}\n.bootstrap-datetimepicker-widget .picker-switch td span,\n.bootstrap-datetimepicker-widget .picker-switch td i {\n  line-height: 2.5;\n  height: 2.5em;\n  width: 100%;\n}\n.bootstrap-datetimepicker-widget table {\n  width: 100%;\n  margin: 0;\n}\n.bootstrap-datetimepicker-widget table td,\n.bootstrap-datetimepicker-widget table th {\n  text-align: center;\n  border-radius: 0.25rem;\n  padding: 0.5em;\n}\n.bootstrap-datetimepicker-widget table th {\n  height: 20px;\n  line-height: 20px;\n  width: 20px;\n}\n.bootstrap-datetimepicker-widget table th.picker-switch {\n  width: 145px;\n}\n.bootstrap-datetimepicker-widget table th.disabled,\n.bootstrap-datetimepicker-widget table th.disabled:hover {\n  background: none;\n  color: #dee2e6;\n  cursor: not-allowed;\n}\n.bootstrap-datetimepicker-widget table th.prev::after {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  border: 0;\n  content: \"Previous Month\";\n}\n.bootstrap-datetimepicker-widget table th.next::after {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  border: 0;\n  content: \"Next Month\";\n}\n.bootstrap-datetimepicker-widget table thead tr:first-child th {\n  cursor: pointer;\n}\n.bootstrap-datetimepicker-widget table thead tr:first-child th:hover {\n  background: #f8f9fa;\n}\n.bootstrap-datetimepicker-widget table td {\n  height: 54px;\n  line-height: 54px;\n  width: 54px;\n}\n.bootstrap-datetimepicker-widget table td.cw {\n  font-size: .8em;\n  height: 20px;\n  line-height: 20px;\n  color: #dee2e6;\n}\n.bootstrap-datetimepicker-widget table td.day {\n  height: 20px;\n  line-height: 20px;\n  width: 20px;\n}\n.bootstrap-datetimepicker-widget table td.day:hover,\n.bootstrap-datetimepicker-widget table td.hour:hover,\n.bootstrap-datetimepicker-widget table td.minute:hover,\n.bootstrap-datetimepicker-widget table td.second:hover {\n  background: #f8f9fa;\n  cursor: pointer;\n}\n.bootstrap-datetimepicker-widget table td.old,\n.bootstrap-datetimepicker-widget table td.new {\n  color: #dee2e6;\n}\n.bootstrap-datetimepicker-widget table td.today {\n  position: relative;\n}\n.bootstrap-datetimepicker-widget table td.today:before {\n  content: '';\n  display: inline-block;\n  border: solid transparent;\n  border-width: 0 0 7px 7px;\n  border-bottom-color: #dee2e6;\n  border-top-color: rgba(0, 0, 0, 0.2);\n  position: absolute;\n  bottom: 4px;\n  right: 4px;\n}\n.bootstrap-datetimepicker-widget table td.active,\n.bootstrap-datetimepicker-widget table td.active:hover {\n  background-color: #dee2e6;\n  color: #007bff;\n  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);\n}\n.bootstrap-datetimepicker-widget table td.active.today:before {\n  border-bottom-color: #fff;\n}\n.bootstrap-datetimepicker-widget table td.disabled,\n.bootstrap-datetimepicker-widget table td.disabled:hover {\n  background: none;\n  color: #dee2e6;\n  cursor: not-allowed;\n}\n.bootstrap-datetimepicker-widget table td span,\n.bootstrap-datetimepicker-widget table td i {\n  display: inline-block;\n  width: 54px;\n  height: 54px;\n  line-height: 54px;\n  margin: 2px 1.5px;\n  cursor: pointer;\n  border-radius: 0.25rem;\n}\n.bootstrap-datetimepicker-widget table td span:hover,\n.bootstrap-datetimepicker-widget table td i:hover {\n  background: #f8f9fa;\n}\n.bootstrap-datetimepicker-widget table td span.active,\n.bootstrap-datetimepicker-widget table td i.active {\n  background-color: #dee2e6;\n  color: #007bff;\n  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);\n}\n.bootstrap-datetimepicker-widget table td span.old,\n.bootstrap-datetimepicker-widget table td i.old {\n  color: #dee2e6;\n}\n.bootstrap-datetimepicker-widget table td span.disabled,\n.bootstrap-datetimepicker-widget table td i.disabled,\n.bootstrap-datetimepicker-widget table td span.disabled:hover,\n.bootstrap-datetimepicker-widget table td i.disabled:hover {\n  background: none;\n  color: #dee2e6;\n  cursor: not-allowed;\n}\n.bootstrap-datetimepicker-widget.usetwentyfour td.hour {\n  height: 27px;\n  line-height: 27px;\n}\n.bootstrap-datetimepicker-widget.wider {\n  width: 21em;\n}\n.bootstrap-datetimepicker-widget .datepicker-decades .decade {\n  line-height: 1.8em !important;\n}\n.input-group.date .input-group-addon {\n  cursor: pointer;\n}\n.sr-only {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  border: 0;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0c7e5ca1\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/components/MatrixComponent.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.container {\n    padding-top: 50px;\n}\n.w-100 {\n    width: 100%;\n}\n.matrix-block > div > h1 {\n    padding: 0 0 20px;\n}\n.matrix-rows {\n    display: inline-block;\n    margin: 0 auto;\n    width: auto !important;\n    border-top: #dadada 1px solid;\n    border-left: #dadada 1px solid;\n}\n.matrix-col {\n    display: inline-block;\n    padding: 13px 20px;\n    border-right: #dadada 1px solid;\n    border-bottom: #dadada 1px solid;\n    cursor: pointer;\n}\n.matrix-col:hover {\n    border: #1b1e21 1px solid;\n    padding: 12px 19.5px;\n    background: wheat;\n}\n.matrix-col.counted {\n    background-color: gainsboro;\n}\n.matrix-count {\n    margin-top: 20px;\n}\n.matrix-count .count {\n    color: red;\n    font-weight: 600;\n}\n.matrix-params {\n    padding-top: 20px;\n}\n.matrix-params input {\n    width: 50px;\n    padding: 5px 10px;\n}\n\n", ""]);
 
 // exports
 
@@ -57192,6 +57326,144 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-0c7e5ca1\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/MatrixComponent.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "matrix" }, [
+    _c("div", { staticClass: "matrix-block-wr" }, [
+      _c("div", { staticClass: "matrix-block row" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "w-100 matrix-rows" },
+          _vm._l(_vm.matrix.matrix, function(item, x) {
+            return _c(
+              "div",
+              { staticClass: "matrix-row" },
+              _vm._l(item, function(row, y) {
+                return _c(
+                  "div",
+                  {
+                    staticClass: "matrix-col",
+                    attrs: { id: x + "-" + y },
+                    on: {
+                      click: function($event) {
+                        _vm.countItems(x, y)
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(row) +
+                        "\n                    "
+                    )
+                  ]
+                )
+              })
+            )
+          })
+        ),
+        _vm._v(" "),
+        _vm.count
+          ? _c("div", { staticClass: "w-100 matrix-count text-center" }, [
+              _vm._v("Найдено островов: "),
+              _c("span", { staticClass: "count" }, [_vm._v(_vm._s(_vm.count))])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("div", { staticClass: "matrix-params w-100 text-center" }, [
+          _vm._v("\n                Ширина матрицы: "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.params.width,
+                expression: "params.width"
+              }
+            ],
+            attrs: { id: "matrix-width", type: "text" },
+            domProps: { value: _vm.params.width },
+            on: {
+              keyup: function($event) {
+                if (
+                  !("button" in $event) &&
+                  _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                ) {
+                  return null
+                }
+                _vm.resetMatrix()
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.params, "width", $event.target.value)
+              }
+            }
+          }),
+          _vm._v("\n                Высота матрицы: "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.params.height,
+                expression: "params.height"
+              }
+            ],
+            attrs: { id: "matrix-height", type: "text" },
+            domProps: { value: _vm.params.height },
+            on: {
+              keyup: function($event) {
+                if (
+                  !("button" in $event) &&
+                  _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                ) {
+                  return null
+                }
+                _vm.resetMatrix()
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.params, "height", $event.target.value)
+              }
+            }
+          })
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-100" }, [
+      _c("h1", { staticClass: "text-center" }, [_vm._v("Острова")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0c7e5ca1", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-6c5c3a6e\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/ApiComponent.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -57586,6 +57858,33 @@ if (false) {
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-6c5c3a6e", module.exports)
   }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0c7e5ca1\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/components/MatrixComponent.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0c7e5ca1\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/components/MatrixComponent.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("72922ab8", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0c7e5ca1\",\"scoped\":false,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MatrixComponent.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0c7e5ca1\",\"scoped\":false,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MatrixComponent.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
 }
 
 /***/ }),
@@ -68926,6 +69225,7 @@ window.Vue = __webpack_require__("./node_modules/vue/dist/vue.common.js");
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('api-component', __webpack_require__("./resources/js/components/ApiComponent.vue"));
+Vue.component('matrix-component', __webpack_require__("./resources/js/components/MatrixComponent.vue"));
 
 var app = new Vue({
   el: '#app'
@@ -68995,6 +69295,140 @@ if (token) {
 
 /***/ }),
 
+/***/ "./resources/js/classes/Matrix.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Matrix; });
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Matrix = function () {
+    function Matrix() {
+        var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+        _classCallCheck(this, Matrix);
+
+        this.param = {
+            matrix_width: 10,
+            matrix_height: 10
+        };
+
+        this.matrix = {};
+
+        this.count = {};
+
+        this.stack = [];
+
+        this.stackFilter = {};
+
+        this.param = Object.assign(this.param, params);
+    }
+
+    _createClass(Matrix, [{
+        key: 'setMatrix',
+        value: function setMatrix() {
+            for (var i = 0; i < this.param.matrix_height; i++) {
+                this.matrix[i] = [];
+
+                for (var ii = 0; ii < this.param.matrix_width; ii++) {
+                    this.matrix[i].push(Matrix.setItem());
+                }
+            }
+
+            // this.matrix = JSON.parse('{"0":[1,1,0,0,1,1,0,0,0,0],"1":[1,0,0,1,0,1,1,1,0,0],"2":[1,1,1,0,1,0,0,1,0,1],"3":[1,0,0,1,0,0,1,1,0,0],"4":[0,0,1,1,1,0,0,0,0,1],"5":[1,0,1,1,0,0,0,0,1,1],"6":[0,1,0,0,1,1,0,0,0,0],"7":[1,1,0,1,0,1,0,0,0,1],"8":[0,1,1,0,0,1,0,1,0,0],"9":[1,1,0,1,1,1,0,1,0,1]}');
+
+            return this;
+        }
+    }, {
+        key: 'addStack',
+        value: function addStack(posX, posY) {
+            try {
+                if (!('' + posX + posY in this.stackFilter)) {
+                    if (posX - 1 >= 0 && this.matrix[posX - 1][posY] === 1 || posX + 1 < this.param.matrix_height && this.matrix[posX + 1][posY] === 1) {
+                        this.stack.push([posX, posY]);
+
+                        this.stackFilter['' + posX + posY] = 1;
+                    }
+                }
+            } catch (exception) {
+                console.log('out of stack.');
+            }
+        }
+    }, {
+        key: 'countItemsY',
+        value: function countItemsY(posX, posY) {
+            var goXY = 1;
+            var goXy = 1;
+            var dcy = 0;
+
+            for (var y = posY; y < this.param.matrix_width * 2; ++y) {
+                if (goXY && y < this.param.matrix_width && this.matrix[posX][y] === 1) {
+                    this.count[posX + '-' + y] = 1;
+
+                    this.addStack(posX, y);
+                } else goXY = 0;
+
+                if (goXy && posY - dcy >= 0 && this.matrix[posX][posY - dcy] === 1) {
+                    this.count[posX + '-' + (posY - dcy)] = 1;
+
+                    this.addStack(posX, posY - dcy);
+                } else goXy = 0;
+
+                dcy += 1;
+            }
+        }
+    }, {
+        key: 'countItems',
+        value: function countItems(posX, posY) {
+            var goXx = 1;
+            var goXX = 1;
+            var dcx = 0;
+
+            for (var x = posX; x < this.param.matrix_height * 2; ++x) {
+                // debugger;
+
+                if (goXX && x < this.param.matrix_height && this.matrix[x][posY] === 1) {
+                    this.count[x + '-' + posY] = 1;
+
+                    this.countItemsY(x, posY);
+                } else goXX = 0;
+
+                if (goXx && posX - dcx >= 0) {
+                    if (this.matrix[posX - dcx][posY] === 1) {
+                        this.count[posX - dcx + '-' + posY] = 1;
+
+                        this.countItemsY(posX - dcx, posY);
+                    } else goXx = 0;
+                }
+
+                dcx += 1;
+            }
+        }
+    }, {
+        key: 'fetchStack',
+        value: function fetchStack() {
+            while (this.stack.length > 0) {
+                this.countItems(this.stack[0][0], this.stack[0][1]);
+
+                this.stack.shift();
+            }
+        }
+    }], [{
+        key: 'setItem',
+        value: function setItem() {
+            var item = Math.random();
+
+            return item < 0.5 ? Math.floor(item) : Math.ceil(item);
+        }
+    }]);
+
+    return Matrix;
+}();
+
+/***/ }),
+
 /***/ "./resources/js/components/ApiComponent.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -69036,6 +69470,58 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-6c5c3a6e", Component.options)
   } else {
     hotAPI.reload("data-v-6c5c3a6e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/js/components/MatrixComponent.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0c7e5ca1\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/components/MatrixComponent.vue")
+}
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/MatrixComponent.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-0c7e5ca1\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/MatrixComponent.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/MatrixComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0c7e5ca1", Component.options)
+  } else {
+    hotAPI.reload("data-v-0c7e5ca1", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
