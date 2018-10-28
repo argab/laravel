@@ -13,6 +13,8 @@ class Matrix
 
         this.stack = [];
 
+        this.stackFilter = {};
+
         this.param = Object.assign(this.param, params)
     }
 
@@ -35,7 +37,24 @@ class Matrix
             }
         }
 
+        // this.matrix = JSON.parse('{"0":[1,1,0,0,1,1,0,0,0,0],"1":[1,0,0,1,0,1,1,1,0,0],"2":[1,1,1,0,1,0,0,1,0,1],"3":[1,0,0,1,0,0,1,1,0,0],"4":[0,0,1,1,1,0,0,0,0,1],"5":[1,0,1,1,0,0,0,0,1,1],"6":[0,1,0,0,1,1,0,0,0,0],"7":[1,1,0,1,0,1,0,0,0,1],"8":[0,1,1,0,0,1,0,1,0,0],"9":[1,1,0,1,1,1,0,1,0,1]}');
+
         return this;
+    }
+
+    addStack(posX, posY)
+    {
+        if ( ! (('' + posX + posY) in this.stackFilter))
+        {
+            if ((posX-1 >=0 && this.matrix[posX-1][posY] === 1)
+
+                || (posX+1 < this.param.matrix_height && this.matrix[posX+1][posY] === 1))
+            {
+                this.stack.push([posX, posY]);
+
+                this.stackFilter['' + posX + posY] = 1;
+            }
+        }
     }
 
     countItemsY(posX, posY)
@@ -44,17 +63,13 @@ class Matrix
         let goXy = 1;
         let dcy = 0;
 
-        for (let y = posY; y < this.param.matrix_width; ++y)
+        for (let y = posY; y < this.param.matrix_width*2; ++y)
         {
-            if (goXY && this.matrix[posX][y] === 1)
+            if (goXY && y < this.param.matrix_width && this.matrix[posX][y] === 1)
             {
                 this.count[posX + '-' + y] = 1;
 
-                if (y > posY && ((posX - 1 >= 0 && this.matrix[posX - 1][y] === 1)
-
-                    || (posX + 1 < this.param.matrix_height && this.matrix[posX + 1][y] === 1)))
-
-                        this.stack.push([posX, y]);
+                this.addStack(posX, y)
             }
 
             else goXY = 0;
@@ -63,11 +78,7 @@ class Matrix
             {
                 this.count[posX + '-' + (posY-dcy)] = 1;
 
-                if ((posX - 1 >= 0 && this.matrix[posX - 1][posY-dcy] === 1)
-
-                    || (posX + 1 < this.param.matrix_height && this.matrix[posX + 1][posY-dcy] === 1))
-
-                        this.stack.push([posX, posY-dcy]);
+                this.addStack(posX, posY-dcy)
             }
 
             else goXy = 0;
@@ -82,20 +93,18 @@ class Matrix
         let goXX = 1;
         let dcx = 0;
 
-        for (let x = posX; x < this.param.matrix_height; ++x)
+        for (let x = posX; x < this.param.matrix_height*2; ++x)
         {
             // debugger;
 
-            if (goXX && this.matrix[x][posY] === 1)
+            if (goXX && x < this.param.matrix_height && this.matrix[x][posY] === 1)
             {
                 this.count[x + '-' + posY] = 1;
 
                 this.countItemsY(x, posY)
             }
-            else
-            {
-                goXX = 0;
-            }
+
+            else goXX = 0;
 
             if (goXx && posX-dcx >= 0)
             {
@@ -105,10 +114,8 @@ class Matrix
 
                     this.countItemsY(posX - dcx, posY)
                 }
-                else
-                {
-                    goXx = 0;
-                }
+
+                else goXx = 0;
             }
 
             dcx += 1;
@@ -117,35 +124,11 @@ class Matrix
 
     fetchStack()
     {
-        let x = 0;
-        let y = 0;
-        let s = {};
-        let f = [];
-
-        while(true)
+        while (this.stack.length>0)
         {
-            if (this.stack.length === 0)
+            this.countItems(this.stack[0][0], this.stack[0][1]);
 
-                break;
-
-            this.stack.filter(stack =>
-            {
-                if ( ! (('' + stack[0] + stack[1]) in s))
-                {
-                    f.push([stack[0], stack[1]]);
-
-                    s['' + stack[0] + stack[1]] = 1;
-                }
-            });
-
-            x = f[0];
-            y = f[1];
-
-            this.stack = f.slice(0, 1);
-
-            this.countItems(x, y);
+            this.stack.shift();
         }
-
-        console.log(this.count);
     }
 }
