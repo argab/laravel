@@ -114,17 +114,14 @@ export class Matrix
 
             else goXX = 0;
 
-            if (goXx && posX-dcx >= 0)
+            if (goXx && posX-dcx >= 0 && this.matrix[posX - dcx][posY] === 1)
             {
-                if (this.matrix[posX - dcx][posY] === 1)
-                {
-                    this.count[(posX - dcx) + '-' + posY] = 1;
+                this.count[(posX - dcx) + '-' + posY] = 1;
 
-                    this.countItemsY(posX - dcx, posY)
-                }
-
-                else goXx = 0;
+                this.countItemsY(posX - dcx, posY)
             }
+
+            else goXx = 0;
 
             dcx += 1;
         }
