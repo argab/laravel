@@ -14,7 +14,6 @@
                         </option>
                     </select>
                 </div>
-
                 <div class="search-block-input col-md-3 col-sm-6 col-xs-12">
                     <select v-model="search.flight_to" @change="fetch" class="w-100 select">
                         <option value="">Код аэропорта прилета</option>
@@ -25,12 +24,10 @@
                         </option>
                     </select>
                 </div>
-
                 <div class="search-block-input col-md-3 col-sm-6 col-xs-12">
                     <date-picker v-model="search.flight_date" :config="pickerOptions" @dp-change="fetch"
                                  placeholder="Дата вылета"></date-picker>
                 </div>
-
                 <div class="search-block-input col-md-3 col-sm-6 col-xs-12">
                     <select v-model="search.flight_class" @change="fetch" class="w-100 select">
                         <option value="">Класс перелета</option>

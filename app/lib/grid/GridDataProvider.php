@@ -9,8 +9,6 @@
 
 namespace App\lib\grid
 {
-    use PDO;
-
     class GridDataProvider implements IGridFormProvider, IGridTableProvider
     {
         /*
@@ -29,26 +27,9 @@ namespace App\lib\grid
         ];
 
         /*
-         * PDO instance
-         * */
-        protected $pdo = null;
-
-        /*
          * Data Object
          * */
         protected $entity = null;
-
-        /*
-         * The Entity's Database Table name
-         * */
-        protected $table = null;
-
-        /*
-         * The database Raw SQL query string for fetching entity's items from database table
-         *
-         * Example: 'SELECT * FROM `users`'
-         * */
-        protected $query = null;
 
         /*
          * The Total Number of Items fetched by PDO data object
@@ -114,7 +95,7 @@ namespace App\lib\grid
             return $this->entity;
         }
 
-        private function checkData($key)
+        private function checkData(string $key)
         {
             if (false == array_key_exists($key, $this->data))
 
@@ -143,75 +124,6 @@ namespace App\lib\grid
         public function getConfig()
         {
             return $this->config;
-        }
-
-        /**
-         * @param PDO $pdo
-         * @param array $conn : PDO connection options
-         *
-         * @return $this
-         */
-        public function setPdo(PDO $pdo = null, array $conn = [])
-        {
-            $this->pdo = $pdo ?? new PDO($conn['dsn'], $conn['user'] ?? null, $conn['pass'] ?? null, $conn['options'] ?? null);
-
-            return $this;
-        }
-
-        /**
-         * @return PDO
-         */
-        public function getPdo()
-        {
-            if (null === $this->pdo)
-
-                throw new \logicException('The pdo property is not defined.');
-
-            return $this->pdo;
-        }
-
-        /**
-         * @param string $table
-         *
-         * @return $this
-         */
-        public function setTable(string $table)
-        {
-            $this->table = $table;
-
-            return $this;
-        }
-
-        /**
-         * @return string
-         */
-        public function getTable()
-        {
-            if (null === $this->table)
-
-                throw new \logicException('The table property is not defined.');
-
-            return $this->table;
-        }
-
-        /**
-         * @param string $query
-         *
-         * @return $this
-         */
-        public function setQuery(string $query)
-        {
-            $this->query = $query;
-
-            return $this;
-        }
-
-        /**
-         * @return string
-         */
-        public function getQuery()
-        {
-            return $this->query;
         }
 
         /**
@@ -254,83 +166,32 @@ namespace App\lib\grid
             return $this->page;
         }
 
-        public function fetchData()
+        public function fetchFields(IGridData $data)
         {
-            $this->fetchFields();
+            $fields = $data->fetchFields();
 
-            if ($this->getQuery()) $this->fetchItems();
-        }
-
-        protected function setFieldName($key, $name)
-        {
-            $this->data['fields'][$key] = $name;
-        }
-
-        public function fetchFields()
-        {
-            if ($data = $this->getPdo()->query('DESCRIBE ' . $this->getTable())->fetchAll(PDO::FETCH_ASSOC))
-            {
-                $types = $this->gridInputTypes();
-
-                $sizes = $this->gridInputSizes();
-
-                $prompts = $this->gridInputPrompts();
-
-                $cellPrompts = $this->gridTableCellPrompts();
-
-                foreach ($data as $field)
-                {
-                    preg_match('|^([a-z]+)((\()([\d]+)(\)))?$|', $field['Type'], $match);
-
-                    $type = $match[1] === 'text' ? 'textarea' : $match[1];
-
-                    $name = $field['Field'];
-
-                    $size = $match[4] ?? null;
-
-                    $def = $field['Default'];
-
-                    $types[$name] = $types[$name] ?? $type;
-
-                    if (false == isset($this->gridFields()[$name]))
-
-                        $this->setFieldName($name, $name);
-
-                    if ($size && in_array($type, ['char', 'varchar', 'textarea', 'tinyint', 'smallint']))
-
-                        $sizes[$name] = $sizes[$name] ?? $size;
-
-                    if (null !== $def && false == in_array($type, ['timestamp', 'date', 'time', 'datetime', 'year']))
-                    {
-                        $prompts[$name] = $prompts[$name] ?? $def;
-
-                        $cellPrompts[$name] = $cellPrompts[$name] ?? $def;
-                    }
-                }
-
-                $this->setData([
-                    'inputTypes'       => $types,
-                    'inputSizes'       => $sizes,
-                    'inputPrompts'     => $prompts,
-                    'tableCellPrompts' => $cellPrompts,
-                ]);
-            }
+            //TODO
 
             return $this;
         }
 
-        public function fetchCount()
+        public function fetchCount(IGridData $data)
         {
-            $this->count = $this->getPdo()->query('SELECT COUNT(*) FROM (' . $this->getQuery() . ') AS count')->fetchColumn();
+            $this->count = $data->fetchCount();
 
             return $this;
         }
 
         public function fetchItems(IGridData $data)
         {
-            // TODO
+            $this->data['items'] = $data->fetchItems();
 
             return $this;
+        }
+
+        public function getItems()
+        {
+            return $this->data['items'];
         }
 
         public function gridFields(): array
@@ -371,11 +232,6 @@ namespace App\lib\grid
         public function gridTableCellPrompts()
         {
             return $this->data['tableCellPrompts'];
-        }
-
-        public function getItems()
-        {
-            return $this->data['items'];
         }
     }
 }

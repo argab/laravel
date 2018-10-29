@@ -11,6 +11,12 @@ namespace App\lib\grid
 {
     interface IGridData
     {
+        //TODO
 
+        public function fetchFields(): array;
+
+        public function fetchItems(): array;
+
+        public function fetchCount(): int;
     }
 }
