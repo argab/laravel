@@ -22,10 +22,12 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new resource;
+     * Create a new Entity if form post data sent.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  User $provider
+     *
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request, User $provider)
@@ -61,6 +63,13 @@ class UserController extends Controller
         return view('user.create', ['provider' => $provider]);
     }
 
+    /**
+     * Attaches / Detaches Company to/from User
+     *
+     * @param User $provider
+     *
+     * @return $this
+     */
     protected function attachCompany(User $provider)
     {
         $provider->companies()->sync($provider->company);
@@ -70,6 +79,7 @@ class UserController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * Update an Entity if form post data sent.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int $id
