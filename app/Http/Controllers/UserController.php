@@ -11,7 +11,7 @@ use App\User;
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the Users.
      *
      * @param User $provider
      * @return \Illuminate\Http\Response
@@ -22,7 +22,9 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display the form for creating a new User;
+     *
+     * Create a new User if the form post data sent.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  User $provider
@@ -61,6 +63,13 @@ class UserController extends Controller
         return view('user.create', ['provider' => $provider]);
     }
 
+    /**
+     * Attach/Detach the specified User to Company and vice versa.
+     *
+     * @param User $provider
+     *
+     * @return $this
+     */
     protected function attachCompany(User $provider)
     {
         $provider->companies()->sync($provider->company);
@@ -69,7 +78,9 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Display the form for updating specified User;
+     *
+     * Update the specified User in storage if the form post data sent.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int $id
