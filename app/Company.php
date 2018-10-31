@@ -24,7 +24,6 @@ class Company extends Model implements IGridTableProvider, IGridFormProvider
 
     /**
      * The Company`s many to many Users Relationship.
-     *
      * The second set of parameters indicates which table is used for the relationship.
      * The third set of parameters (external key) is used to store data for Company`s id.
      * The fourth set of parameters (external key) is used to store data for Users`s id.

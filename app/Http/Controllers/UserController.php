@@ -23,7 +23,6 @@ class UserController extends Controller
 
     /**
      * Display the form for creating a new User;
-     *
      * Create a new User if the form post data sent.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -79,7 +78,6 @@ class UserController extends Controller
 
     /**
      * Display the form for updating specified User;
-     *
      * Update the specified User in storage if the form post data sent.
      *
      * @param  \Illuminate\Http\Request  $request
