@@ -1,0 +1,2762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>App\lib\grid\GridView | API</title>
+
+            <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../css/sami.css">
+        <script src="../../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../../js/bootstrap.min.js"></script>
+        <script src="../../../js/typeahead.min.js"></script>
+        <script src="../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    
+    
+    </head>
+
+    <body id="class" data-name="class:App_lib_grid_GridView" data-root-path="../../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../search.html" method="GET">
+            <span class="glyphicon glyphicon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../../index.html">API</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../../classes.html">Classes</a></li>
+                                            <li><a href="../../../namespaces.html">Namespaces</a></li>
+                                        <li><a href="../../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../../traits.html">Traits</a></li>
+                    <li><a href="../../../doc-index.html">Index</a></li>
+                    <li><a href="../../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                        <li><a href="../../../App.html">App</a></li><li class="backslash">\</li><li><a href="../../../App/lib.html">lib</a></li><li class="backslash">\</li><li><a href="../../../App/lib/grid.html">grid</a></li><li class="backslash">\</li><li>GridView</li>
+            </ol>
+        </div>
+                <div id="page-content">
+                
+    <div class="page-header">
+        <h1>
+            GridView
+                
+        </h1>
+    </div>
+
+    <p>    class
+    <strong>GridView</strong>        extends <a href="../../../App/lib/grid/Grid.html"><abbr title="App\lib\grid\Grid">Grid</abbr></a>
+</p>
+
+        
+    
+
+    
+    
+            <h2>Constants</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td>NO_DATA</td>
+                <td class="last">
+                    <p><em></em></p>
+                    <p></p>
+                </td>
+            </tr>
+            </table>
+
+    
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property_provider">
+                                        protected                                        
+                </td>
+                <td>$provider</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_provider"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_items">
+                                        protected                                        
+                </td>
+                <td>$items</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_items"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_field">
+                                        protected                                        
+                </td>
+                <td>$field</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_field"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_prompt">
+                                        protected                                        
+                </td>
+                <td>$prompt</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_prompt"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_row">
+                                        protected                                        
+                </td>
+                <td>$row</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_row"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_renderPath">
+                                        protected                                        
+                </td>
+                <td>$renderPath</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_renderPath"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_renderTemplate">
+                                        protected                                        
+                </td>
+                <td>$renderTemplate</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_template">
+                                        protected                                        
+                </td>
+                <td>$template</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_template"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_rowTemplate">
+                                        protected                                        
+                </td>
+                <td>$rowTemplate</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_rowTemplate"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_layout">
+                                        protected                                        
+                </td>
+                <td>$layout</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_layout"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_bindLayout">
+                                        protected                                        
+                </td>
+                <td>$bindLayout</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_bindLayout"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_tag">
+                                        protected                                        
+                </td>
+                <td>$tag</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_tagAttributes">
+                                        protected                                        
+                </td>
+                <td>$tagAttributes</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_tagAttributes"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_rowAttributes">
+                                        protected                                        
+                </td>
+                <td>$rowAttributes</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_rowAttributes"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_sortOrder">
+                                        protected                                        
+                </td>
+                <td>$sortOrder</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_sortOrder"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_plugins">
+                                        protected                                        
+                </td>
+                <td>$plugins</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_plugins"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_pluginData">
+                                        protected                                        
+                </td>
+                <td>$pluginData</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_pluginData"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_requiredPluginParams">
+                                        protected                                        
+                </td>
+                <td>$requiredPluginParams</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_requiredPluginParams"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_pluginConfig">
+                                        protected                                        
+                </td>
+                <td>$pluginConfig</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_pluginConfig"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_pluginHook">
+                                        protected                                        
+                </td>
+                <td>$pluginHook</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_pluginHook"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_pluginFetchPath">
+                                        protected                                        
+                </td>
+                <td>$pluginFetchPath</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_pluginFetchPath"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_pluginFetched">
+                                        protected                                        
+                </td>
+                <td>$pluginFetched</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_pluginFetched"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_fetch">
+                                        protected                                        
+                </td>
+                <td>$fetch</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+            </table>
+
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___construct">__construct</a>(<a href="../../../App/lib/grid/IGridProvider.html"><abbr title="App\lib\grid\IGridProvider">IGridProvider</abbr></a> $provider)
+        
+                                            <p>Grid constructor.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method___construct"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getProvider">getProvider</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getProvider"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getEntity">getEntity</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getEntity"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getEntityName">getEntityName</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getEntityName"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getEntityProp">getEntityProp</a>(string $property)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getEntityProp"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setItems">setItems</a>(array $items = null)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setItems"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getItems">getItems</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getItems"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_checkField">checkField</a>(string $key)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_checkField"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setFields">setFields</a>(array $data)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setFields"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getFields">getFields</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getFields"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getField">getField</a>(string $key)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getField"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setPrompt">setPrompt</a>(string $key, $value)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setPrompt"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setPrompts">setPrompts</a>(array $keyData = [], $prompt = null)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setPrompts"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getPrompt">getPrompt</a>(string $key)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getPrompt"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setRow">setRow</a>(string $key, $val, string $template = null)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setRow"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getRows">getRows</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getRows"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_checkRow">checkRow</a>(string $key)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_checkRow"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getRow">getRow</a>(string $key)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getRow"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_unsetFields">unsetFields</a>(array $keys)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_unsetFields"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setRenderPath">setRenderPath</a>(string $path)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setRenderPath"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getRenderPath">getRenderPath</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getRenderPath"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setRenderTemplate">setRenderTemplate</a>(string $template)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setRenderTemplate"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setTemplate">setTemplate</a>(string $template, string $rowKey = null)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setTemplate"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getTemplate">getTemplate</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getTemplate"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_checkRowTemplate">checkRowTemplate</a>(string $key)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_checkRowTemplate"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getRowTemplate">getRowTemplate</a>(string $key)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getRowTemplate"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setLayout">setLayout</a>(string $layout)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setLayout"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getLayout">getLayout</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getLayout"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_bindLayout">bindLayout</a>(string $bindKey, array|callable $data)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_bindLayout"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getLayoutBindings">getLayoutBindings</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getLayoutBindings"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_fetchLayout">fetchLayout</a>(string $layout)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_fetchLayout"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setTag">setTag</a>(string $tag)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setTag"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getTag">getTag</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getTag"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setTagAttributes">setTagAttributes</a>(array $attr = null)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setTagAttributes"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getTagAttributes">getTagAttributes</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getTagAttributes"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setRowAttributes">setRowAttributes</a>(array $attr = null)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setRowAttributes"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getRowAttributes">getRowAttributes</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getRowAttributes"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setSortOrder">setSortOrder</a>(array $order)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setSortOrder"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setReplaceOrder">setReplaceOrder</a>(array $order)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setReplaceOrder"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_fetchSortOrder">fetchSortOrder</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_fetchSortOrder"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getSortOrder">getSortOrder</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getSortOrder"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setPlugin">setPlugin</a>(string $plugin, string $class = null)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setPlugin"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setPlugins">setPlugins</a>(array $data)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setPlugins"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getPlugin">getPlugin</a>(string $plugin)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getPlugin"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setRequiredPluginParams">setRequiredPluginParams</a>(string $plugin, array $params)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setRequiredPluginParams"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getRequiredPluginParams">getRequiredPluginParams</a>(string $plugin)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getRequiredPluginParams"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_checkRequiredPluginParams">checkRequiredPluginParams</a>(string $plugin)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_checkRequiredPluginParams"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setPluginConfig">setPluginConfig</a>(string $plugin, array $params)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setPluginConfig"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getPluginConfig">getPluginConfig</a>(string $plugin)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getPluginConfig"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setPluginData">setPluginData</a>(string $plugin, array $data)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setPluginData"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getPluginData">getPluginData</a>(string $plugin)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getPluginData"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getPluginInstance">getPluginInstance</a>(string $plugin)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getPluginInstance"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_fetchPlugin">fetchPlugin</a>(string $plugin, callable $fetch)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_fetchPlugin"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_fetchPlugins">fetchPlugins</a>(array $plugins = [])
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_fetchPlugins"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setPluginFetched">setPluginFetched</a>(string $plugin, bool $fetched = true)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setPluginFetched"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_checkPluginFetched">checkPluginFetched</a>(string $plugin)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_checkPluginFetched"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_pluginHook">pluginHook</a>(string $plugin, callable $hook)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_pluginHook"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setPluginFetchPaths">setPluginFetchPaths</a>(array $data)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setPluginFetchPaths"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getPluginFetchPath">getPluginFetchPath</a>(string $plugin)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getPluginFetchPath"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_render">render</a>(bool $fetchPlugins = true)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_render"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_fetch">fetch</a>(callable $fetch)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_fetchData">fetchData</a>($data, $index)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method___construct">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method___construct"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 68</div>
+        <code>                    
+    <strong>__construct</strong>(<a href="../../../App/lib/grid/IGridProvider.html"><abbr title="App\lib\grid\IGridProvider">IGridProvider</abbr></a> $provider)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Grid constructor.</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../App/lib/grid/IGridProvider.html"><abbr title="App\lib\grid\IGridProvider">IGridProvider</abbr></a></td>
+                <td>$provider</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getProvider">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getProvider"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 75</div>
+        <code>                    
+    <strong>getProvider</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getEntity">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getEntity"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 80</div>
+        <code>                    
+    <strong>getEntity</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getEntityName">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getEntityName"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 85</div>
+        <code>                    
+    <strong>getEntityName</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getEntityProp">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getEntityProp"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 90</div>
+        <code>                    
+    <strong>getEntityProp</strong>(string $property)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$property</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setItems">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setItems"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 95</div>
+        <code>                    
+    <strong>setItems</strong>(array $items = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$items</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getItems">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getItems"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 102</div>
+        <code>                    
+    <strong>getItems</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_checkField">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_checkField"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 107</div>
+        <code>                    
+    <strong>checkField</strong>(string $key)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setFields">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setFields"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 112</div>
+        <code>                    
+    <strong>setFields</strong>(array $data)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$data</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getFields">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getFields"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 119</div>
+        <code>                    
+    <strong>getFields</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getField">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getField"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 124</div>
+        <code>                    
+    <strong>getField</strong>(string $key)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setPrompt">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setPrompt"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 129</div>
+        <code>                    
+    <strong>setPrompt</strong>(string $key, $value)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$value</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setPrompts">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setPrompts"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 136</div>
+        <code>                    
+    <strong>setPrompts</strong>(array $keyData = [], $prompt = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$keyData</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$prompt</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getPrompt">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getPrompt"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 148</div>
+        <code>                    
+    <strong>getPrompt</strong>(string $key)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setRow">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setRow"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 153</div>
+        <code>                    
+    <strong>setRow</strong>(string $key, $val, string $template = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$val</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$template</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getRows">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getRows"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 164</div>
+        <code>                    
+    <strong>getRows</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_checkRow">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_checkRow"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 169</div>
+        <code>                    
+    <strong>checkRow</strong>(string $key)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getRow">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getRow"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 174</div>
+        <code>                    
+    <strong>getRow</strong>(string $key)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_unsetFields">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_unsetFields"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 183</div>
+        <code>                    
+    <strong>unsetFields</strong>(array $keys)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$keys</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setRenderPath">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setRenderPath"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 195</div>
+        <code>                    mixed
+    <strong>setRenderPath</strong>(string $path)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$path</td>
+                <td>Path to template parent folder</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getRenderPath">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getRenderPath"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 202</div>
+        <code>                    
+    <strong>getRenderPath</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setRenderTemplate">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setRenderTemplate"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 207</div>
+        <code>                    
+    <strong>setRenderTemplate</strong>(string $template)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$template</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setTemplate">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setTemplate"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 214</div>
+        <code>                    
+    <strong>setTemplate</strong>(string $template, string $rowKey = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$template</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$rowKey</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getTemplate">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getTemplate"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 228</div>
+        <code>                    
+    <strong>getTemplate</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_checkRowTemplate">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_checkRowTemplate"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 233</div>
+        <code>                    
+    <strong>checkRowTemplate</strong>(string $key)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getRowTemplate">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getRowTemplate"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 238</div>
+        <code>                    
+    <strong>getRowTemplate</strong>(string $key)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setLayout">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setLayout"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 243</div>
+        <code>                    
+    <strong>setLayout</strong>(string $layout)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$layout</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getLayout">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getLayout"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 250</div>
+        <code>                    
+    <strong>getLayout</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_bindLayout">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_bindLayout"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 264</div>
+        <code>                    $this
+    <strong>bindLayout</strong>(string $bindKey, array|callable $data)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$bindKey</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array|callable</td>
+                <td>$data</td>
+                <td>Example: bindLayout('{some-key}', ['<template></template>', '&lt;{tag}']) - insert template before tag;
+ Example: bindLayout('{some-key}', ['<template></template>', null, '&lt;/{tag}>']) - insert template after tag;
+ Example: bindLayout('{some-key}', function($layout){return $layout;}) - set layout string;</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getLayoutBindings">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getLayoutBindings"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 271</div>
+        <code>                    
+    <strong>getLayoutBindings</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_fetchLayout">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_fetchLayout"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 276</div>
+        <code>            protected        string
+    <strong>fetchLayout</strong>(string $layout)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$layout</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setTag">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setTag"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 313</div>
+        <code>                    
+    <strong>setTag</strong>(string $tag)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$tag</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getTag">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getTag"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 320</div>
+        <code>                    string
+    <strong>getTag</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setTagAttributes">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setTagAttributes"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 325</div>
+        <code>                    
+    <strong>setTagAttributes</strong>(array $attr = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$attr</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getTagAttributes">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getTagAttributes"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 332</div>
+        <code>                    
+    <strong>getTagAttributes</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setRowAttributes">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setRowAttributes"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 337</div>
+        <code>                    
+    <strong>setRowAttributes</strong>(array $attr = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$attr</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getRowAttributes">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getRowAttributes"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 344</div>
+        <code>                    
+    <strong>getRowAttributes</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setSortOrder">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setSortOrder"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 349</div>
+        <code>                    
+    <strong>setSortOrder</strong>(array $order)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$order</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setReplaceOrder">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setReplaceOrder"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 356</div>
+        <code>            protected        
+    <strong>setReplaceOrder</strong>(array $order)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$order</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_fetchSortOrder">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_fetchSortOrder"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 390</div>
+        <code>                    
+    <strong>fetchSortOrder</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getSortOrder">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getSortOrder"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 395</div>
+        <code>                    
+    <strong>getSortOrder</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setPlugin">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setPlugin"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 400</div>
+        <code>                    
+    <strong>setPlugin</strong>(string $plugin, string $class = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$plugin</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$class</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setPlugins">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setPlugins"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 407</div>
+        <code>                    
+    <strong>setPlugins</strong>(array $data)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$data</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getPlugin">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getPlugin"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 417</div>
+        <code>                    
+    <strong>getPlugin</strong>(string $plugin)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$plugin</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setRequiredPluginParams">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setRequiredPluginParams"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 422</div>
+        <code>                    
+    <strong>setRequiredPluginParams</strong>(string $plugin, array $params)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$plugin</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$params</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getRequiredPluginParams">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getRequiredPluginParams"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 429</div>
+        <code>                    
+    <strong>getRequiredPluginParams</strong>(string $plugin)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$plugin</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_checkRequiredPluginParams">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_checkRequiredPluginParams"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 434</div>
+        <code>                    
+    <strong>checkRequiredPluginParams</strong>(string $plugin)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$plugin</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setPluginConfig">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setPluginConfig"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 452</div>
+        <code>                    
+    <strong>setPluginConfig</strong>(string $plugin, array $params)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$plugin</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$params</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getPluginConfig">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getPluginConfig"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 459</div>
+        <code>                    
+    <strong>getPluginConfig</strong>(string $plugin)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$plugin</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setPluginData">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setPluginData"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 464</div>
+        <code>                    
+    <strong>setPluginData</strong>(string $plugin, array $data)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$plugin</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$data</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getPluginData">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getPluginData"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 471</div>
+        <code>                    
+    <strong>getPluginData</strong>(string $plugin)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$plugin</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getPluginInstance">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getPluginInstance"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 476</div>
+        <code>            protected        
+    <strong>getPluginInstance</strong>(string $plugin)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$plugin</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_fetchPlugin">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_fetchPlugin"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 497</div>
+        <code>                    
+    <strong>fetchPlugin</strong>(string $plugin, callable $fetch)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$plugin</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>callable</td>
+                <td>$fetch</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_fetchPlugins">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_fetchPlugins"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 530</div>
+        <code>                    
+    <strong>fetchPlugins</strong>(array $plugins = [])
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$plugins</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setPluginFetched">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setPluginFetched"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 542</div>
+        <code>                    
+    <strong>setPluginFetched</strong>(string $plugin, bool $fetched = true)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$plugin</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>bool</td>
+                <td>$fetched</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_checkPluginFetched">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_checkPluginFetched"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 549</div>
+        <code>                    
+    <strong>checkPluginFetched</strong>(string $plugin)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$plugin</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_pluginHook">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_pluginHook"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 554</div>
+        <code>                    
+    <strong>pluginHook</strong>(string $plugin, callable $hook)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$plugin</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>callable</td>
+                <td>$hook</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setPluginFetchPaths">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setPluginFetchPaths"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 565</div>
+        <code>                    
+    <strong>setPluginFetchPaths</strong>(array $data)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$data</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getPluginFetchPath">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getPluginFetchPath"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 575</div>
+        <code>                    
+    <strong>getPluginFetchPath</strong>(string $plugin)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$plugin</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_render">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_render"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 580</div>
+        <code>                    mixed
+    <strong>render</strong>(bool $fetchPlugins = true)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>bool</td>
+                <td>$fetchPlugins</td>
+                <td>run Plugins</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_fetch">
+        <div class="location">at         line 20</div>
+        <code>                    
+    <strong>fetch</strong>(callable $fetch)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>callable</td>
+                <td>$fetch</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_fetchData">
+        <div class="location">at         line 27</div>
+        <code>            protected        
+    <strong>fetchData</strong>($data, $index)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$data</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$index</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+            </div>
+                <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/">Sami, the API Documentation Generator</a>.
+    </div>
+
+        </div>
+    </div>
+    </body>
+
+</html>
