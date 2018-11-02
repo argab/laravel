@@ -11,7 +11,7 @@ use App\User;
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the Users.
      *
      * @param User $provider
      * @return \Illuminate\Http\Response
@@ -22,12 +22,11 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource;
-     * Create a new Entity if form post data sent.
+     * Display the form for creating a new User;
+     * Create a new User if the form post data sent.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  User $provider
-     *
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request, User $provider)
@@ -64,7 +63,7 @@ class UserController extends Controller
     }
 
     /**
-     * Attaches / Detaches Company to/from User
+     * Attach/Detach the specified User to Company and vice versa.
      *
      * @param User $provider
      *
@@ -78,8 +77,8 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     * Update an Entity if form post data sent.
+     * Display the form for updating specified User;
+     * Update the specified User in storage if the form post data sent.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int $id

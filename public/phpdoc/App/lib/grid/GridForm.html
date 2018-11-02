@@ -1,0 +1,5356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>App\lib\grid\GridForm | API</title>
+
+            <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../css/sami.css">
+        <script src="../../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../../js/bootstrap.min.js"></script>
+        <script src="../../../js/typeahead.min.js"></script>
+        <script src="../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    
+    
+    </head>
+
+    <body id="class" data-name="class:App_lib_grid_GridForm" data-root-path="../../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../../search.html" method="GET">
+            <span class="glyphicon glyphicon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../../index.html">API</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../../classes.html">Classes</a></li>
+                                            <li><a href="../../../namespaces.html">Namespaces</a></li>
+                                        <li><a href="../../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../../traits.html">Traits</a></li>
+                    <li><a href="../../../doc-index.html">Index</a></li>
+                    <li><a href="../../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                        <li><a href="../../../App.html">App</a></li><li class="backslash">\</li><li><a href="../../../App/lib.html">lib</a></li><li class="backslash">\</li><li><a href="../../../App/lib/grid.html">grid</a></li><li class="backslash">\</li><li>GridForm</li>
+            </ol>
+        </div>
+                <div id="page-content">
+                
+    <div class="page-header">
+        <h1>
+            GridForm
+                
+        </h1>
+    </div>
+
+    <p>    class
+    <strong>GridForm</strong>        extends <a href="../../../App/lib/grid/Grid.html"><abbr title="App\lib\grid\Grid">Grid</abbr></a>
+</p>
+
+        
+    
+
+    
+    
+            <h2>Constants</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td>NO_DATA</td>
+                <td class="last">
+                    <p><em></em></p>
+                    <p></p>
+                </td>
+            </tr>
+                    <tr>
+                <td>DEFAULT_INPUT_TYPE</td>
+                <td class="last">
+                    <p><em></em></p>
+                    <p></p>
+                </td>
+            </tr>
+                    <tr>
+                <td>DEFAULT_INPUT_TAG</td>
+                <td class="last">
+                    <p><em></em></p>
+                    <p></p>
+                </td>
+            </tr>
+            </table>
+
+    
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property_provider">
+                                        protected                                        
+                </td>
+                <td>$provider</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_provider"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_items">
+                                        protected                                        
+                </td>
+                <td>$items</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_items"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_field">
+                                        protected                                        
+                </td>
+                <td>$field</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_field"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_prompt">
+                                        protected                                        
+                </td>
+                <td>$prompt</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_prompt"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_row">
+                                        protected                                        
+                </td>
+                <td>$row</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_row"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_renderPath">
+                                        protected                                        
+                </td>
+                <td>$renderPath</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_renderPath"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_renderTemplate">
+                                        protected                                        
+                </td>
+                <td>$renderTemplate</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_template">
+                                        protected                                        
+                </td>
+                <td>$template</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_template"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_rowTemplate">
+                                        protected                                        
+                </td>
+                <td>$rowTemplate</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_rowTemplate"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_layout">
+                                        protected                                        
+                </td>
+                <td>$layout</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_layout"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_bindLayout">
+                                        protected                                        
+                </td>
+                <td>$bindLayout</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_bindLayout"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_tag">
+                                        protected                                        
+                </td>
+                <td>$tag</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_tagAttributes">
+                                        protected                                        
+                </td>
+                <td>$tagAttributes</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_tagAttributes"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_rowAttributes">
+                                        protected                                        
+                </td>
+                <td>$rowAttributes</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_rowAttributes"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_sortOrder">
+                                        protected                                        
+                </td>
+                <td>$sortOrder</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_sortOrder"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_plugins">
+                                        protected                                        
+                </td>
+                <td>$plugins</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_plugins"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_pluginData">
+                                        protected                                        
+                </td>
+                <td>$pluginData</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_pluginData"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_requiredPluginParams">
+                                        protected                                        
+                </td>
+                <td>$requiredPluginParams</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_requiredPluginParams"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_pluginConfig">
+                                        protected                                        
+                </td>
+                <td>$pluginConfig</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_pluginConfig"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_pluginHook">
+                                        protected                                        
+                </td>
+                <td>$pluginHook</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_pluginHook"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_pluginFetchPath">
+                                        protected                                        
+                </td>
+                <td>$pluginFetchPath</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_pluginFetchPath"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_pluginFetched">
+                                        protected                                        
+                </td>
+                <td>$pluginFetched</td>
+                <td class="last"></td>
+                <td><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#property_pluginFetched"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_token">
+                                        protected                                        
+                </td>
+                <td>$token</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_input">
+                                        protected                                        
+                </td>
+                <td>$input</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_inputAttributes">
+                                        protected                                        
+                </td>
+                <td>$inputAttributes</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_inputOptions">
+                                        protected                                        
+                </td>
+                <td>$inputOptions</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_label">
+                                        protected                                        
+                </td>
+                <td>$label</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_labelTemplate">
+                                        protected                                        
+                </td>
+                <td>$labelTemplate</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_labelAttributes">
+                                        protected                                        
+                </td>
+                <td>$labelAttributes</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_inputRequestName">
+                                        protected                                        
+                </td>
+                <td>$inputRequestName</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_prefixID">
+                                        protected                                        
+                </td>
+                <td>$prefixID</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_setTypes">
+                                        protected                                        
+                </td>
+                <td>$setTypes</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_maxTextInputSize">
+                                        protected                                        
+                </td>
+                <td>$maxTextInputSize</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+            </table>
+
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___construct">__construct</a>(<a href="../../../App/lib/grid/IGridProvider.html"><abbr title="App\lib\grid\IGridProvider">IGridProvider</abbr></a> $provider, array $tagAttributes = null, bool $loadInputs = true)
+        
+                                            <p>GridForm constructor.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getProvider">getProvider</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getProvider"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getEntity">getEntity</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getEntity"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getEntityName">getEntityName</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getEntityName"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getEntityProp">getEntityProp</a>(string $property)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getEntityProp"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setItems">setItems</a>(array $items = null)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setItems"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getItems">getItems</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getItems"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_checkField">checkField</a>(string $key)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_checkField"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setFields">setFields</a>(array $data)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setFields"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getFields">getFields</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getFields"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getField">getField</a>(string $key)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getField"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setPrompt">setPrompt</a>(string $key, $value)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setPrompt"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setPrompts">setPrompts</a>(array $keyData = [], $prompt = null)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setPrompts"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getPrompt">getPrompt</a>(string $key)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getPrompt"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setRow">setRow</a>(string $key, $val, string $template = null)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setRow"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getRows">getRows</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getRows"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_checkRow">checkRow</a>(string $key)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_checkRow"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getRow">getRow</a>(string $key)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getRow"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_unsetFields">unsetFields</a>(array $keys)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_unsetFields"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setRenderPath">setRenderPath</a>(string $path)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setRenderPath"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getRenderPath">getRenderPath</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getRenderPath"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setRenderTemplate">setRenderTemplate</a>(string $template)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setRenderTemplate"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setTemplate">setTemplate</a>(string $template, string $rowKey = null)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setTemplate"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getTemplate">getTemplate</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getTemplate"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_checkRowTemplate">checkRowTemplate</a>(string $key)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_checkRowTemplate"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getRowTemplate">getRowTemplate</a>(string $key)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getRowTemplate"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setLayout">setLayout</a>(string $layout)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setLayout"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getLayout">getLayout</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getLayout"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_bindLayout">bindLayout</a>(string $bindKey, array|callable $data)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_bindLayout"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getLayoutBindings">getLayoutBindings</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getLayoutBindings"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_fetchLayout">fetchLayout</a>(string $layout)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_fetchLayout"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setTag">setTag</a>(string $tag)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setTag"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getTag">getTag</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getTag"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setTagAttributes">setTagAttributes</a>(array $attr = null)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setTagAttributes"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getTagAttributes">getTagAttributes</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getTagAttributes"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setRowAttributes">setRowAttributes</a>(array $attr = null)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setRowAttributes"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getRowAttributes">getRowAttributes</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getRowAttributes"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setSortOrder">setSortOrder</a>(array $keysOrder)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setReplaceOrder">setReplaceOrder</a>(array $order)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setReplaceOrder"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_fetchSortOrder">fetchSortOrder</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_fetchSortOrder"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getSortOrder">getSortOrder</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getSortOrder"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setPlugin">setPlugin</a>(string $plugin, string $class = null)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setPlugin"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setPlugins">setPlugins</a>(array $data)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setPlugins"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getPlugin">getPlugin</a>(string $plugin)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getPlugin"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setRequiredPluginParams">setRequiredPluginParams</a>(string $plugin, array $params)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setRequiredPluginParams"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getRequiredPluginParams">getRequiredPluginParams</a>(string $plugin)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getRequiredPluginParams"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_checkRequiredPluginParams">checkRequiredPluginParams</a>(string $plugin)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_checkRequiredPluginParams"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setPluginConfig">setPluginConfig</a>(string $plugin, array $params)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setPluginConfig"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getPluginConfig">getPluginConfig</a>(string $plugin)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getPluginConfig"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setPluginData">setPluginData</a>(string $plugin, array $data)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setPluginData"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getPluginData">getPluginData</a>(string $plugin)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getPluginData"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getPluginInstance">getPluginInstance</a>(string $plugin)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getPluginInstance"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_fetchPlugin">fetchPlugin</a>(string $plugin, callable $fetch)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_fetchPlugin"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_fetchPlugins">fetchPlugins</a>(array $plugins = [])
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_fetchPlugins"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setPluginFetched">setPluginFetched</a>(string $plugin, bool $fetched = true)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setPluginFetched"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_checkPluginFetched">checkPluginFetched</a>(string $plugin)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_checkPluginFetched"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_pluginHook">pluginHook</a>(string $plugin, callable $hook)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_pluginHook"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setPluginFetchPaths">setPluginFetchPaths</a>(array $data)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_setPluginFetchPaths"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getPluginFetchPath">getPluginFetchPath</a>(string $plugin)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_getPluginFetchPath"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_render">render</a>(bool $fetchPlugins = true)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../App/lib/grid/Grid.html#method_render"><abbr title="App\lib\grid\Grid">Grid</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setForm">setForm</a>(array $attr = [])
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setInputRequestName">setInputRequestName</a>(bool $dash = true, string $name = null, array $inputData = [])
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getInputRequestName">getInputRequestName</a>(string $key = null)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getInputName">getInputName</a>(string $key)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setPrefixID">setPrefixID</a>(string $name = null, bool $dash = true)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getPrefixedInputID">getPrefixedInputID</a>(string $key)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setInputID">setInputID</a>(array $inputData, bool $dash = true)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getInputID">getInputID</a>(string $key)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_loadInput">loadInput</a>(string $key)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_loadInputs">loadInputs</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_switchInputType">switchInputType</a>($type, $inputKey)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setSizes">setSizes</a>(array $sizes)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setMaxTextInputSize">setMaxTextInputSize</a>(int $max)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setValues">setValues</a>(array $values = [], callable $func = null)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setInputType">setInputType</a>(string $key, string $type, bool $setAttribute = true)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getInputType">getInputType</a>(string $key)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_checkInput">checkInput</a>(string $key)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getInput">getInput</a>(string $key = null)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setError">setError</a>(string $key, $message)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getError">getError</a>(string $key)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_unsetInput">unsetInput</a>(string $key)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_unsetInputs">unsetInputs</a>(array $keys)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getInputKeys">getInputKeys</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setInputTag">setInputTag</a>(string $key, string $tag)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setValue">setValue</a>(string $key, $value = null)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getInputValue">getInputValue</a>(string $key, bool $getPrompt = true)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isOptionalInput">isOptionalInput</a>(string $key, bool $checkValue = false)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setInputOptions">setInputOptions</a>(string $key, array $options = null)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getInputOptions">getInputOptions</a>(string $key)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setLabel">setLabel</a>(string $key, string $name, array $attr = [])
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getLabel">getLabel</a>(string $key)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setLabelAttributes">setLabelAttributes</a>(string $key, array $attr = null)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getLabelAttributes">getLabelAttributes</a>(string $key)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getLabels">getLabels</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setLabels">setLabels</a>(array $data = [])
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setLabelTemplate">setLabelTemplate</a>(string $template, array $inputKeys = [])
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getLabelTemplate">getLabelTemplate</a>(string $key)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setToken">setToken</a>(string $value, string $name = &#039;_token&#039;)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getTokenValue">getTokenValue</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getTokenName">getTokenName</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_inputUnwrap">inputUnwrap</a>(string $key)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_hideInput">hideInput</a>(string $key, $value = null, array $attr = [])
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_hideInputs">hideInputs</a>(array $keys)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_toggleInput">toggleInput</a>(string $key, bool $toggle = false)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_toggleInputs">toggleInputs</a>(array $inputData)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_unsetValue">unsetValue</a>(string $key)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_unsetValues">unsetValues</a>(array $inputKeys)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_resetForm">resetForm</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setInput">setInput</a>(string $key, $value = null, $type = null, array $attr = [])
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setTextarea">setTextarea</a>(string $key, $value = null, array $attr = [])
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setRadio">setRadio</a>(string $key, array $options = null, $value = null, array $attr = [])
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setCheckbox">setCheckbox</a>(string $key, array $options = null, $value = null, array $attr = [])
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setSelect">setSelect</a>(string $key, array $options = null, $prompt = null, $value = null, array $attr = [])
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setDate">setDate</a>(string $key, string $value = null, array $attr = [])
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setTime">setTime</a>(string $key, string $value = null, array $attr = [])
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setDateTime">setDateTime</a>(string $key, string $value = null, array $attrDate = [], array $attrTime = [])
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setInputAttribute">setInputAttribute</a>(string $key, array $attr = null)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setInputAttributes">setInputAttributes</a>(array $inputData)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getInputAttributes">getInputAttributes</a>(string $key)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_loadAttributes">loadAttributes</a>(array $attr = null, array $skipTypes = [], array $skipKeys = [])
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method___construct">
+        <div class="location">at         line 51</div>
+        <code>                    
+    <strong>__construct</strong>(<a href="../../../App/lib/grid/IGridProvider.html"><abbr title="App\lib\grid\IGridProvider">IGridProvider</abbr></a> $provider, array $tagAttributes = null, bool $loadInputs = true)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>GridForm constructor.</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../App/lib/grid/IGridProvider.html"><abbr title="App\lib\grid\IGridProvider">IGridProvider</abbr></a></td>
+                <td>$provider</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$tagAttributes</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>bool</td>
+                <td>$loadInputs</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getProvider">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getProvider"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 75</div>
+        <code>                    
+    <strong>getProvider</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getEntity">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getEntity"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 80</div>
+        <code>                    
+    <strong>getEntity</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getEntityName">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getEntityName"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 85</div>
+        <code>                    
+    <strong>getEntityName</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getEntityProp">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getEntityProp"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 90</div>
+        <code>                    
+    <strong>getEntityProp</strong>(string $property)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$property</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setItems">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setItems"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 95</div>
+        <code>                    
+    <strong>setItems</strong>(array $items = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$items</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getItems">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getItems"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 102</div>
+        <code>                    
+    <strong>getItems</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_checkField">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_checkField"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 107</div>
+        <code>                    
+    <strong>checkField</strong>(string $key)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setFields">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setFields"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 112</div>
+        <code>                    
+    <strong>setFields</strong>(array $data)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$data</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getFields">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getFields"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 119</div>
+        <code>                    
+    <strong>getFields</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getField">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getField"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 124</div>
+        <code>                    
+    <strong>getField</strong>(string $key)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setPrompt">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setPrompt"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 129</div>
+        <code>                    
+    <strong>setPrompt</strong>(string $key, $value)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$value</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setPrompts">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setPrompts"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 136</div>
+        <code>                    
+    <strong>setPrompts</strong>(array $keyData = [], $prompt = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$keyData</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$prompt</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getPrompt">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getPrompt"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 148</div>
+        <code>                    
+    <strong>getPrompt</strong>(string $key)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setRow">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setRow"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 153</div>
+        <code>                    
+    <strong>setRow</strong>(string $key, $val, string $template = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$val</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$template</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getRows">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getRows"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 164</div>
+        <code>                    
+    <strong>getRows</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_checkRow">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_checkRow"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 169</div>
+        <code>                    
+    <strong>checkRow</strong>(string $key)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getRow">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getRow"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 174</div>
+        <code>                    
+    <strong>getRow</strong>(string $key)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_unsetFields">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_unsetFields"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 183</div>
+        <code>                    
+    <strong>unsetFields</strong>(array $keys)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$keys</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setRenderPath">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setRenderPath"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 195</div>
+        <code>                    mixed
+    <strong>setRenderPath</strong>(string $path)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$path</td>
+                <td>Path to template parent folder</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getRenderPath">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getRenderPath"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 202</div>
+        <code>                    
+    <strong>getRenderPath</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setRenderTemplate">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setRenderTemplate"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 207</div>
+        <code>                    
+    <strong>setRenderTemplate</strong>(string $template)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$template</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setTemplate">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setTemplate"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 214</div>
+        <code>                    
+    <strong>setTemplate</strong>(string $template, string $rowKey = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$template</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$rowKey</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getTemplate">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getTemplate"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 228</div>
+        <code>                    
+    <strong>getTemplate</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_checkRowTemplate">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_checkRowTemplate"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 233</div>
+        <code>                    
+    <strong>checkRowTemplate</strong>(string $key)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getRowTemplate">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getRowTemplate"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 238</div>
+        <code>                    
+    <strong>getRowTemplate</strong>(string $key)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setLayout">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setLayout"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 243</div>
+        <code>                    
+    <strong>setLayout</strong>(string $layout)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$layout</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getLayout">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getLayout"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 250</div>
+        <code>                    
+    <strong>getLayout</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_bindLayout">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_bindLayout"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 264</div>
+        <code>                    $this
+    <strong>bindLayout</strong>(string $bindKey, array|callable $data)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$bindKey</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array|callable</td>
+                <td>$data</td>
+                <td>Example: bindLayout('{some-key}', ['<template></template>', '&lt;{tag}']) - insert template before tag;
+ Example: bindLayout('{some-key}', ['<template></template>', null, '&lt;/{tag}>']) - insert template after tag;
+ Example: bindLayout('{some-key}', function($layout){return $layout;}) - set layout string;</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getLayoutBindings">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getLayoutBindings"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 271</div>
+        <code>                    
+    <strong>getLayoutBindings</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_fetchLayout">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_fetchLayout"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 276</div>
+        <code>            protected        string
+    <strong>fetchLayout</strong>(string $layout)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$layout</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setTag">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setTag"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 313</div>
+        <code>                    
+    <strong>setTag</strong>(string $tag)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$tag</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getTag">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getTag"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 320</div>
+        <code>                    string
+    <strong>getTag</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setTagAttributes">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setTagAttributes"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 325</div>
+        <code>                    
+    <strong>setTagAttributes</strong>(array $attr = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$attr</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getTagAttributes">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getTagAttributes"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 332</div>
+        <code>                    
+    <strong>getTagAttributes</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setRowAttributes">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setRowAttributes"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 337</div>
+        <code>                    
+    <strong>setRowAttributes</strong>(array $attr = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$attr</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getRowAttributes">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getRowAttributes"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 344</div>
+        <code>                    
+    <strong>getRowAttributes</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setSortOrder">
+        <div class="location">at         line 750</div>
+        <code>                    
+    <strong>setSortOrder</strong>(array $keysOrder)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$keysOrder</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setReplaceOrder">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setReplaceOrder"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 356</div>
+        <code>            protected        
+    <strong>setReplaceOrder</strong>(array $order)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$order</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_fetchSortOrder">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_fetchSortOrder"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 390</div>
+        <code>                    
+    <strong>fetchSortOrder</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getSortOrder">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getSortOrder"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 395</div>
+        <code>                    
+    <strong>getSortOrder</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setPlugin">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setPlugin"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 400</div>
+        <code>                    
+    <strong>setPlugin</strong>(string $plugin, string $class = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$plugin</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$class</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setPlugins">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setPlugins"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 407</div>
+        <code>                    
+    <strong>setPlugins</strong>(array $data)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$data</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getPlugin">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getPlugin"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 417</div>
+        <code>                    
+    <strong>getPlugin</strong>(string $plugin)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$plugin</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setRequiredPluginParams">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setRequiredPluginParams"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 422</div>
+        <code>                    
+    <strong>setRequiredPluginParams</strong>(string $plugin, array $params)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$plugin</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$params</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getRequiredPluginParams">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getRequiredPluginParams"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 429</div>
+        <code>                    
+    <strong>getRequiredPluginParams</strong>(string $plugin)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$plugin</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_checkRequiredPluginParams">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_checkRequiredPluginParams"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 434</div>
+        <code>                    
+    <strong>checkRequiredPluginParams</strong>(string $plugin)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$plugin</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setPluginConfig">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setPluginConfig"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 452</div>
+        <code>                    
+    <strong>setPluginConfig</strong>(string $plugin, array $params)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$plugin</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$params</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getPluginConfig">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getPluginConfig"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 459</div>
+        <code>                    
+    <strong>getPluginConfig</strong>(string $plugin)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$plugin</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setPluginData">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setPluginData"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 464</div>
+        <code>                    
+    <strong>setPluginData</strong>(string $plugin, array $data)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$plugin</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$data</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getPluginData">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getPluginData"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 471</div>
+        <code>                    
+    <strong>getPluginData</strong>(string $plugin)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$plugin</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getPluginInstance">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getPluginInstance"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 476</div>
+        <code>            protected        
+    <strong>getPluginInstance</strong>(string $plugin)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$plugin</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_fetchPlugin">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_fetchPlugin"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 497</div>
+        <code>                    
+    <strong>fetchPlugin</strong>(string $plugin, callable $fetch)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$plugin</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>callable</td>
+                <td>$fetch</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_fetchPlugins">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_fetchPlugins"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 530</div>
+        <code>                    
+    <strong>fetchPlugins</strong>(array $plugins = [])
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$plugins</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setPluginFetched">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setPluginFetched"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 542</div>
+        <code>                    
+    <strong>setPluginFetched</strong>(string $plugin, bool $fetched = true)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$plugin</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>bool</td>
+                <td>$fetched</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_checkPluginFetched">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_checkPluginFetched"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 549</div>
+        <code>                    
+    <strong>checkPluginFetched</strong>(string $plugin)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$plugin</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_pluginHook">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_pluginHook"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 554</div>
+        <code>                    
+    <strong>pluginHook</strong>(string $plugin, callable $hook)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$plugin</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>callable</td>
+                <td>$hook</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setPluginFetchPaths">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_setPluginFetchPaths"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 565</div>
+        <code>                    
+    <strong>setPluginFetchPaths</strong>(array $data)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$data</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getPluginFetchPath">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_getPluginFetchPath"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 575</div>
+        <code>                    
+    <strong>getPluginFetchPath</strong>(string $plugin)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$plugin</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_render">
+        <div class="location">in <a href="../../../App/lib/grid/Grid.html#method_render"><abbr title="App\lib\grid\Grid">Grid</abbr></a> at         line 580</div>
+        <code>                    mixed
+    <strong>render</strong>(bool $fetchPlugins = true)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>bool</td>
+                <td>$fetchPlugins</td>
+                <td>run Plugins</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setForm">
+        <div class="location">at         line 64</div>
+        <code>                    
+    <strong>setForm</strong>(array $attr = [])
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$attr</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setInputRequestName">
+        <div class="location">at         line 71</div>
+        <code>                    
+    <strong>setInputRequestName</strong>(bool $dash = true, string $name = null, array $inputData = [])
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>bool</td>
+                <td>$dash</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$name</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$inputData</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getInputRequestName">
+        <div class="location">at         line 87</div>
+        <code>                    
+    <strong>getInputRequestName</strong>(string $key = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getInputName">
+        <div class="location">at         line 94</div>
+        <code>                    
+    <strong>getInputName</strong>(string $key)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setPrefixID">
+        <div class="location">at         line 99</div>
+        <code>                    
+    <strong>setPrefixID</strong>(string $name = null, bool $dash = true)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$name</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>bool</td>
+                <td>$dash</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getPrefixedInputID">
+        <div class="location">at         line 108</div>
+        <code>                    
+    <strong>getPrefixedInputID</strong>(string $key)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setInputID">
+        <div class="location">at         line 113</div>
+        <code>                    
+    <strong>setInputID</strong>(array $inputData, bool $dash = true)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$inputData</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>bool</td>
+                <td>$dash</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getInputID">
+        <div class="location">at         line 129</div>
+        <code>                    
+    <strong>getInputID</strong>(string $key)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_loadInput">
+        <div class="location">at         line 134</div>
+        <code>                    
+    <strong>loadInput</strong>(string $key)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_loadInputs">
+        <div class="location">at         line 160</div>
+        <code>                    
+    <strong>loadInputs</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_switchInputType">
+        <div class="location">at         line 223</div>
+        <code>            protected        
+    <strong>switchInputType</strong>($type, $inputKey)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$type</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$inputKey</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setSizes">
+        <div class="location">at         line 265</div>
+        <code>                    
+    <strong>setSizes</strong>(array $sizes)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$sizes</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setMaxTextInputSize">
+        <div class="location">at         line 319</div>
+        <code>                    
+    <strong>setMaxTextInputSize</strong>(int $max)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>int</td>
+                <td>$max</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setValues">
+        <div class="location">at         line 326</div>
+        <code>                    
+    <strong>setValues</strong>(array $values = [], callable $func = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$values</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>callable</td>
+                <td>$func</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setInputType">
+        <div class="location">at         line 336</div>
+        <code>                    
+    <strong>setInputType</strong>(string $key, string $type, bool $setAttribute = true)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$type</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>bool</td>
+                <td>$setAttribute</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getInputType">
+        <div class="location">at         line 345</div>
+        <code>                    
+    <strong>getInputType</strong>(string $key)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_checkInput">
+        <div class="location">at         line 350</div>
+        <code>                    
+    <strong>checkInput</strong>(string $key)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getInput">
+        <div class="location">at         line 355</div>
+        <code>                    
+    <strong>getInput</strong>(string $key = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setError">
+        <div class="location">at         line 360</div>
+        <code>                    
+    <strong>setError</strong>(string $key, $message)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$message</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getError">
+        <div class="location">at         line 367</div>
+        <code>                    
+    <strong>getError</strong>(string $key)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_unsetInput">
+        <div class="location">at         line 372</div>
+        <code>                    
+    <strong>unsetInput</strong>(string $key)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_unsetInputs">
+        <div class="location">at         line 389</div>
+        <code>                    
+    <strong>unsetInputs</strong>(array $keys)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$keys</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getInputKeys">
+        <div class="location">at         line 399</div>
+        <code>                    
+    <strong>getInputKeys</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setInputTag">
+        <div class="location">at         line 404</div>
+        <code>            protected        
+    <strong>setInputTag</strong>(string $key, string $tag)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$tag</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setValue">
+        <div class="location">at         line 411</div>
+        <code>                    
+    <strong>setValue</strong>(string $key, $value = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$value</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getInputValue">
+        <div class="location">at         line 418</div>
+        <code>                    
+    <strong>getInputValue</strong>(string $key, bool $getPrompt = true)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>bool</td>
+                <td>$getPrompt</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isOptionalInput">
+        <div class="location">at         line 432</div>
+        <code>                    
+    <strong>isOptionalInput</strong>(string $key, bool $checkValue = false)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>bool</td>
+                <td>$checkValue</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setInputOptions">
+        <div class="location">at         line 441</div>
+        <code>                    
+    <strong>setInputOptions</strong>(string $key, array $options = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$options</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getInputOptions">
+        <div class="location">at         line 448</div>
+        <code>                    
+    <strong>getInputOptions</strong>(string $key)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setLabel">
+        <div class="location">at         line 453</div>
+        <code>                    
+    <strong>setLabel</strong>(string $key, string $name, array $attr = [])
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$name</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$attr</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getLabel">
+        <div class="location">at         line 464</div>
+        <code>                    
+    <strong>getLabel</strong>(string $key)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setLabelAttributes">
+        <div class="location">at         line 469</div>
+        <code>                    
+    <strong>setLabelAttributes</strong>(string $key, array $attr = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$attr</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getLabelAttributes">
+        <div class="location">at         line 476</div>
+        <code>                    
+    <strong>getLabelAttributes</strong>(string $key)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getLabels">
+        <div class="location">at         line 481</div>
+        <code>                    
+    <strong>getLabels</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setLabels">
+        <div class="location">at         line 486</div>
+        <code>                    
+    <strong>setLabels</strong>(array $data = [])
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$data</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setLabelTemplate">
+        <div class="location">at         line 496</div>
+        <code>                    
+    <strong>setLabelTemplate</strong>(string $template, array $inputKeys = [])
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$template</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$inputKeys</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getLabelTemplate">
+        <div class="location">at         line 506</div>
+        <code>                    
+    <strong>getLabelTemplate</strong>(string $key)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setToken">
+        <div class="location">at         line 511</div>
+        <code>                    
+    <strong>setToken</strong>(string $value, string $name = &#039;_token&#039;)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$value</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$name</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getTokenValue">
+        <div class="location">at         line 518</div>
+        <code>                    
+    <strong>getTokenValue</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getTokenName">
+        <div class="location">at         line 523</div>
+        <code>                    
+    <strong>getTokenName</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_inputUnwrap">
+        <div class="location">at         line 528</div>
+        <code>                    
+    <strong>inputUnwrap</strong>(string $key)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hideInput">
+        <div class="location">at         line 537</div>
+        <code>                    
+    <strong>hideInput</strong>(string $key, $value = null, array $attr = [])
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$value</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$attr</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hideInputs">
+        <div class="location">at         line 542</div>
+        <code>                    
+    <strong>hideInputs</strong>(array $keys)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$keys</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_toggleInput">
+        <div class="location">at         line 552</div>
+        <code>                    
+    <strong>toggleInput</strong>(string $key, bool $toggle = false)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>bool</td>
+                <td>$toggle</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_toggleInputs">
+        <div class="location">at         line 559</div>
+        <code>                    
+    <strong>toggleInputs</strong>(array $inputData)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$inputData</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_unsetValue">
+        <div class="location">at         line 569</div>
+        <code>                    
+    <strong>unsetValue</strong>(string $key)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_unsetValues">
+        <div class="location">at         line 578</div>
+        <code>                    
+    <strong>unsetValues</strong>(array $inputKeys)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$inputKeys</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_resetForm">
+        <div class="location">at         line 588</div>
+        <code>                    
+    <strong>resetForm</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setInput">
+        <div class="location">at         line 593</div>
+        <code>                    
+    <strong>setInput</strong>(string $key, $value = null, $type = null, array $attr = [])
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$value</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$type</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$attr</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setTextarea">
+        <div class="location">at         line 614</div>
+        <code>                    
+    <strong>setTextarea</strong>(string $key, $value = null, array $attr = [])
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$value</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$attr</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setRadio">
+        <div class="location">at         line 629</div>
+        <code>                    
+    <strong>setRadio</strong>(string $key, array $options = null, $value = null, array $attr = [])
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$options</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$value</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$attr</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setCheckbox">
+        <div class="location">at         line 640</div>
+        <code>                    
+    <strong>setCheckbox</strong>(string $key, array $options = null, $value = null, array $attr = [])
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$options</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$value</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$attr</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setSelect">
+        <div class="location">at         line 651</div>
+        <code>                    
+    <strong>setSelect</strong>(string $key, array $options = null, $prompt = null, $value = null, array $attr = [])
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$options</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$prompt</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$value</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$attr</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setDate">
+        <div class="location">at         line 672</div>
+        <code>                    
+    <strong>setDate</strong>(string $key, string $value = null, array $attr = [])
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$value</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$attr</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setTime">
+        <div class="location">at         line 683</div>
+        <code>                    
+    <strong>setTime</strong>(string $key, string $value = null, array $attr = [])
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$value</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$attr</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setDateTime">
+        <div class="location">at         line 694</div>
+        <code>                    
+    <strong>setDateTime</strong>(string $key, string $value = null, array $attrDate = [], array $attrTime = [])
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$value</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$attrDate</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$attrTime</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setInputAttribute">
+        <div class="location">at         line 709</div>
+        <code>                    
+    <strong>setInputAttribute</strong>(string $key, array $attr = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$attr</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setInputAttributes">
+        <div class="location">at         line 718</div>
+        <code>                    
+    <strong>setInputAttributes</strong>(array $inputData)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$inputData</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getInputAttributes">
+        <div class="location">at         line 728</div>
+        <code>                    
+    <strong>getInputAttributes</strong>(string $key)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_loadAttributes">
+        <div class="location">at         line 733</div>
+        <code>                    
+    <strong>loadAttributes</strong>(array $attr = null, array $skipTypes = [], array $skipKeys = [])
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$attr</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$skipTypes</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$skipKeys</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+            </div>
+                <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/">Sami, the API Documentation Generator</a>.
+    </div>
+
+        </div>
+    </div>
+    </body>
+
+</html>
