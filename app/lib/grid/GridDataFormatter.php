@@ -11,8 +11,6 @@ namespace App\lib\grid
 {
     class GridDataFormatter
     {
-        //TODO Make grid data fields mutable according to it's data format.
-
         public static function dashName(string $name)
         {
             return trim(strtolower(preg_replace('/([A-Z])/', '-$1', $name)), '-');

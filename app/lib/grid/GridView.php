@@ -15,7 +15,7 @@ namespace App\lib\grid
 
         protected $renderTemplate = 'grid-view/view.php';
 
-        protected $fetch = null;
+        protected $fetch;
 
         public function fetch(callable $fetch)
         {

@@ -9,7 +9,7 @@ if (false == isset($this->getTagAttributes()['id']))
 
     $this->setTagAttributes(['id' => ['grid-view-' . substr(md5(microtime(true)), 0, 10)]]);
 
-if ($this->getItems() !== null)
+if ($this->getProviderItems() !== null)
 {
     include 'items.php';
 
@@ -60,7 +60,7 @@ $rows = '';
 
 $attr = GF::getAttributes($this->getRowAttributes());
 
-$opt = $this->getProvider() instanceof IGridFormProvider ? array_flip(array_keys($this->getProvider()->gridInputOptions())) : null;
+$options = $this->getProvider() instanceof IGridFormProvider ? $this->getProvider()->gridInputOptions() : [];
 
 foreach ($this->fetchSortOrder() as $k)
 {
@@ -68,12 +68,16 @@ foreach ($this->fetchSortOrder() as $k)
 
         continue;
 
-    $value = $this->getEntityProp($k);
+    $value = $this->getProviderProperty($k);
+
+    if ((is_string($value) || is_numeric($value)) && isset($options[$k][$value]))
+
+        $value = $options[$k][$value];
 
     $tr = [
         '{name}' => $this->getField($k),
         '{attr}' => $attr,
-        '{row}'  => ($opt && isset($opt[$k])) ? ($this->getProvider()->gridInputOptions()[$k][$value] ?? $value) : $value,
+        '{row}'  => $value,
     ];
 
     if ($this->checkRow($k))

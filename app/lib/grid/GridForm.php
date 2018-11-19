@@ -27,13 +27,13 @@ namespace App\lib\grid
 
         protected $label = [];
 
-        protected $labelTemplate = null;
+        protected $labelTemplate;
 
         protected $labelAttributes = [];
 
-        protected $inputRequestName = null;
+        protected $inputRequestName;
 
-        protected $prefixID = null;
+        protected $prefixID;
 
         protected $renderTemplate = 'grid-form/form.php';
 
@@ -70,7 +70,7 @@ namespace App\lib\grid
 
         public function setInputRequestName(bool $dash = true, string $name = null, array $inputData = [])
         {
-            $name = $name ?: $this->getEntityName();
+            $name = $name ?: $this->getProviderName();
 
             $this->inputRequestName = $dash ? GridDataFormatter::dashName($name) : $name;
 
@@ -98,7 +98,7 @@ namespace App\lib\grid
 
         public function setPrefixID(string $name = null, bool $dash = true)
         {
-            $name = $name ?? substr(md5(microtime(true)), 0, 10) . $this->getEntityName();
+            $name = $name ?? substr(md5(microtime(true)), 0, 10) . $this->getProviderName();
 
             $this->prefixID = ($dash ? GridDataFormatter::dashName($name) : $name) . '-';
 
@@ -138,7 +138,7 @@ namespace App\lib\grid
                 'name'  => $this->input[$key]['name'] ?? $this->getInputName($key),
                 'type'  => $this->input[$key]['type'] ?? self::DEFAULT_INPUT_TYPE,
                 'tag'   => $this->input[$key]['tag'] ?? self::DEFAULT_INPUT_TAG,
-                'value' => $this->input[$key]['value'] ?? $this->getEntityProp($key),
+                'value' => $this->input[$key]['value'] ?? $this->getProviderProperty($key),
                 'error' => $this->getError($key),
             ];
 
@@ -159,25 +159,15 @@ namespace App\lib\grid
 
         public function loadInputs()
         {
-            if (empty($this->getProvider()->gridInputTypes()))
-
-                throw new \logicException(
-
-                    sprintf('The `gridInputTypes` method`s result is empty in `%s` class.', get_class($this->getEntity())));
-
             $this->setPrefixID();
 
             $setTypes = array_flip($this->setTypes);
-
-            $safe = array_flip($this->getProvider()->gridSafeFields());
-
-            $types = array_diff_key($this->getProvider()->gridInputTypes(), $safe);
-
-            $opt = array_keys(array_diff_key($this->getProvider()->gridInputOptions(), $safe));
-
-            $sizes = $this->getProvider()->gridInputSizes();
-
-            $optKeys = array_flip($opt);
+            $safe     = array_flip($this->getProvider()->gridSafeFields());
+            $types    = array_diff_key($this->getProvider()->gridInputTypes(), $safe);
+            $options  = $this->inputOptions ?: $this->fetchInputOptions();
+            $opt      = array_keys(array_diff_key($options, $safe));
+            $sizes    = $this->getProvider()->gridInputSizes();
+            $optKeys  = array_flip($opt);
 
             foreach (array_merge($optKeys, $types) as $k => $type)
             {
@@ -222,11 +212,12 @@ namespace App\lib\grid
 
         protected function switchInputType($type, $inputKey)
         {
-            switch ($type)
+            switch (preg_replace('#[^a-z_]+#', '', explode("\x20", strtolower($type))[0]))
             {
                 case 'string':
                 case 'varchar':
                 case 'char':
+                case 'character':
                 case 'tinytext':
                     $this->setInputType($inputKey, self::DEFAULT_INPUT_TYPE);
                     break;
@@ -257,8 +248,6 @@ namespace App\lib\grid
                 case 'bool':
                     $this->setRadio($inputKey);
                     break;
-                case 'hidden':
-                    $this->hideInput($inputKey);
             }
         }
 
@@ -279,9 +268,7 @@ namespace App\lib\grid
                     if (is_array($size))
                     {
                         $min = $size[0] ?? null;
-
                         $max = $size[1] ?? null;
-
                         $step = $size[2] ?? null;
 
                         if (isset($min) && false == isset($this->getInputAttributes($k)['min']))
@@ -410,7 +397,7 @@ namespace App\lib\grid
 
         public function setValue(string $key, $value = null)
         {
-            $this->input[$key]['value'] = $value === null ? $this->getEntityProp($key) : $value;
+            $this->input[$key]['value'] = $value === null ? $this->getProviderProperty($key) : $value;
 
             return $this;
         }
@@ -440,9 +427,19 @@ namespace App\lib\grid
 
         public function setInputOptions(string $key, array $options = null)
         {
-            $this->inputOptions[$key] = $options === null ? ($this->getProvider()->gridInputOptions()[$key] ?? []) : $options;
+            $this->inputOptions[$key] = $options === null ? $this->getInputOptions($key) : $options;
 
             return $this;
+        }
+
+        protected function fetchInputOptions()
+        {
+            foreach ($this->getProvider()->gridInputOptions() as $k => $options)
+            {
+                $this->inputOptions[$k] = $options;
+            }
+
+            return $this->inputOptions;
         }
 
         public function getInputOptions(string $key)
@@ -753,6 +750,5 @@ namespace App\lib\grid
 
             return $this;
         }
-
     }
 }

@@ -9,15 +9,15 @@
 
 namespace App\lib\grid
 {
+    use Exception;
+
     class GridDataProvider implements IGridFormProvider, IGridTableProvider
     {
-        /*
-         * The fetching data
-         * */
-        private $data = [
+        protected $data = [
             'items'            => null,
             'fields'           => [],
             'safeFields'       => [],
+            'requiredFields'   => [],
             'inputTypes'       => [],
             'inputSizes'       => [],
             'inputOptions'     => [],
@@ -27,60 +27,55 @@ namespace App\lib\grid
         ];
 
         /*
+         * IGridData Provider
+         * */
+        protected $dataProvider;
+
+        /*
          * Data Object
          * */
-        protected $entity = null;
-
-        /*
-         * The Total Number of Items fetched by PDO data object
-         * */
-        protected $count = null;
-
-        /*
-         * The Current Page
-         * */
-        protected $page = null;
-
-        /*
-         * Config Data
-         *
-         * Example: ['sort' => [
-         *    'field_name_1' => SORT_ASC,
-         *    'field_name_2' => SORT_DESC,
-         * ]]
-         * */
-        protected $config = [
-            'limit'     => 25, // The Number of items per page
-            'pageCount' => 10, // The Number of pages at pagination
-            'sort'      => []  // The sorting order of data table columns
-        ];
+        protected $entity;
 
         /**
          * GridDataProvider constructor.
          *
-         * @param object|null $entity
-         * @param array $data
-         * @param array $config
+         * @param object $entity
          */
-        public function __construct($entity = null, array $data = [], array $config = [])
+        public function __construct($entity)
         {
             $this->setEntity($entity);
+        }
 
-            $this->setData($data);
+        public function setDataProvider(IGridData $provider)
+        {
+            $this->dataProvider = $provider;
 
-            $this->setConfig($config);
+            return $this;
         }
 
         /**
-         * @param object|null $entity
+         * @return IGridData|GridData
+         */
+        public function getDataProvider()
+        {
+            return $this->dataProvider;
+        }
+
+        /**
+         * @param object $entity
          *
          * @return $this
+         * @throws \Exception
          */
-        protected function setEntity($entity)
+        public function setEntity($entity)
         {
-            if ($entity !== null && false == get_class($entity))
+            if (false === empty($this->entity))
 
-                throw new \logicException('The given entity is not a valid class instance.');
+                throw new Exception('The Entity is already set.');
+
+            if (false === get_class($entity))
+
+                throw new Exception('The Entity is not a valid class object.');
 
             $this->entity = $entity;
 
@@ -95,11 +90,23 @@ namespace App\lib\grid
             return $this->entity;
         }
 
-        private function checkData(string $key)
+        public function getItems()
+        {
+            return $this->data['items'];
+        }
+
+        public function setItems(array $items)
+        {
+            $this->data['items'] = $items;
+
+            return $this;
+        }
+
+        public function checkData(string $key)
         {
             if (false == array_key_exists($key, $this->data))
 
-                throw new \logicException(sprintf('The data key `%s` is not found in GridDataProvider.', $key));
+                throw new Exception(sprintf('The data key `%s` is not found in GridDataProvider.', $key));
         }
 
         public function setData(array $data)
@@ -114,84 +121,47 @@ namespace App\lib\grid
             return $this;
         }
 
-        public function setConfig(array $config)
+        public function appendData(array $data)
         {
-            $this->config = array_merge($this->config, $config);
+            foreach ($data as $key => $value)
+            {
+                $this->checkData($key);
+
+                $this->data[$key] = is_array($value) ? array_merge($this->data[$key], $value) : $value;
+            }
 
             return $this;
         }
 
-        public function getConfig()
+        public function fetchData()
         {
-            return $this->config;
-        }
+            foreach ($this->getDataProvider()->fetchFields() as $field)
+            {
+                $this->data['fields'][$field['field']] = $field['name'];
 
-        /**
-         * @param int $count
-         *
-         * @return $this
-         */
-        public function setCount(int $count)
-        {
-            $this->count = $count;
+                if (false == empty($field['type']))
+                {
+                    if ($field['type'] === GridForm::DEFAULT_INPUT_TYPE)
+
+                        $field['type'] = 'textarea';
+
+                    $this->data['inputTypes'][$field['field']] = $field['type'];
+                }
+
+                if (false == empty($field['size']))
+
+                    $this->data['inputSizes'][$field['field']] = $field['size'];
+
+                if (false == empty($field['prompt']))
+
+                    $this->data['inputPrompts'][$field['field']] = $field['prompt'];
+
+                if (false == empty($field['required']))
+
+                    $this->data['requiredFields'][] = $field['field'];
+            }
 
             return $this;
-        }
-
-        /**
-         * @return int
-         */
-        public function getCount()
-        {
-            return $this->count;
-        }
-
-        /**
-         * @param int $page
-         *
-         * @return $this
-         */
-        public function setPage(int $page)
-        {
-            $this->page = $page;
-
-            return $this;
-        }
-
-        /**
-         * @return int
-         */
-        public function getPage()
-        {
-            return $this->page;
-        }
-
-        public function fetchFields(IGridData $data)
-        {
-            $fields = $data->fetchFields();
-
-            //TODO
-
-            return $this;
-        }
-
-        public function fetchCount(IGridData $data)
-        {
-            $this->count = $data->fetchCount();
-
-            return $this;
-        }
-
-        public function fetchItems(IGridData $data)
-        {
-            $this->data['items'] = $data->fetchItems();
-
-            return $this;
-        }
-
-        public function getItems()
-        {
-            return $this->data['items'];
         }
 
         public function gridFields(): array
@@ -202,6 +172,11 @@ namespace App\lib\grid
         public function gridSafeFields(): array
         {
             return $this->data['safeFields'];
+        }
+
+        public function gridRequiredFields(): array
+        {
+            return $this->data['requiredFields'];
         }
 
         public function gridInputTypes(): array
@@ -232,6 +207,11 @@ namespace App\lib\grid
         public function gridTableCellPrompts()
         {
             return $this->data['tableCellPrompts'];
+        }
+
+        public function __get(string $prop)
+        {
+            return $this->entity->{$prop};
         }
     }
 }

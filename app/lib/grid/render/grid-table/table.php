@@ -1,15 +1,17 @@
 <?php
 
 use App\lib\grid\GridDataFormatter as GF;
+use App\lib\grid\IGridFormProvider;
+use App\lib\grid\GridForm;
 
 /* @var \App\lib\grid\GridTable $this */
 
+if (false == isset($this->getTagAttributes()['id']))
+
+    $this->setTagAttributes(['id' => ['grid-table-' . substr(md5(microtime(true)), 0, 10)]]);
+
 if ($this->getTag() === 'table')
 {
-    if (false == isset($this->getTagAttributes()['id']))
-
-        $this->setTagAttributes(['id' => ['grid-table-' . substr(md5(microtime(true)), 0, 10)]]);
-
     if (false == isset($this->getTagAttributes()['class']))
 
         $this->setTagAttributes(['class' => ['table', 'table-striped', 'table-bordered']]);
@@ -31,9 +33,7 @@ if ($this->getTag() === 'table')
         $this->setCellTemplate('<td {attr}>{cell}</td>');
 }
 
-$output = $this->getLayout()
-
-    ?: ($this->getTag() ? '<{tag} {attr}>{columns}{rows}</{tag}>' : '{columns}{rows}');
+$output = $this->getLayout() ?: ($this->getTag() ? '<{tag} {attr}>{columns}{rows}</{tag}>' : '{columns}{rows}');
 
 $columns = '';
 
@@ -71,13 +71,29 @@ foreach ($sortOrder as $col)
     $columns .= strtr($template, $tr);
 }
 
-$columns = str_replace('{columns}', $columns, str_replace('{attr}', GF::getAttributes($this->getRowAttributes()), $this->getColumnRowTemplate()));
+$columns = str_replace('{columns}', $columns,
+
+    str_replace('{attr}', GF::getAttributes($this->getRowAttributes()), $this->getColumnRowTemplate()));
 
 $rows = '';
 
 $template = $this->getCellTemplate();
 
-foreach ($this->getItems() as $key => $val)
+$options = [];
+
+if ($this->checkPluginFetched('filter') && $this->getPluginFetched('filter') instanceof GridForm)
+{
+    foreach ($this->fetchSortOrder() as $item)
+    {
+        if ($opt = $this->getPluginFetched('filter')->getInputOptions($item))
+
+            $options[$item] = $opt;
+    }
+}
+
+else $options = $this->getProvider() instanceof IGridFormProvider ? $this->getProvider()->gridInputOptions() : [];
+
+foreach ($this->getProviderItems() as $key => $val)
 {
     $cells = '';
 
@@ -89,9 +105,9 @@ foreach ($this->getItems() as $key => $val)
 
         $value = $val->{$sortOrder[$i]} ?? ($val[$sortOrder[$i]] ?? null);
 
-        if (false == is_array($value) && isset($this->getProvider()->gridInputOptions()[$sortOrder[$i]][$value]))
+        if ((is_string($value) || is_numeric($value)) && isset($options[$sortOrder[$i]][$value]))
 
-            $value = $this->getProvider()->gridInputOptions()[$sortOrder[$i]][$value];
+            $value = $options[$sortOrder[$i]][$value];
 
         $tr = [
             'template' => null,

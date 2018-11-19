@@ -1,19 +1,13 @@
 <?php
 
-/* @var \App\lib\grid\GridTable $this */
+use App\lib\grid\GridForm;
+
+/* @var App\lib\grid\GridTable $this */
 
 $this->setPluginConfig('filter', ['provider' => $this->getProvider()]);
 
-$this->fetchPlugin('filter', function($plugin)
+$this->fetchPlugin('filter', function(GridForm $plugin)
 {
-    /* @var \App\lib\grid\GridTable $this */
-
-    if (false == $plugin instanceof \App\lib\grid\GridForm)
-
-        return null;
-
-    /* @var $plugin \App\lib\grid\GridForm */
-
     $id = $plugin->getTagAttributes()['id'] ?? 'grid-table-filter-' . substr(md5(microtime(true)), 0, 10);
 
     if (empty($plugin->getSortOrder()))
@@ -34,30 +28,40 @@ $this->fetchPlugin('filter', function($plugin)
     foreach ($plugin->fetchSortOrder() as $item)
     {
         if (false == $this->checkRow($item))
-
+        {
             $plugin->unsetInput($item);
 
-        if (false == $plugin->checkInput($item) && $this->checkRow($item))
+            continue;
+        }
 
+        if (false == $plugin->checkInput($item) && $this->checkRow($item))
+        {
             $plugin->setRow($item, '');
+
+            continue;
+        }
 
         if (null === $plugin->getRowTemplate($item))
         {
             $type = $plugin->getInputType($item);
 
             if ($plugin->isOptionalInput($item))
+            {
+                if ($type !== 'select')
 
-                $plugin->setSelect($item, null, ['' => '']);
+                    $plugin->setSelect($item);
 
-            if ($type === 'textarea' || $type === 'file')
+                if ($plugin->getPrompt($item) === null)
+
+                    $plugin->setPrompt($item, ['' => '']);
+            }
+            elseif ($type === 'date' && isset($plugin->getInput($item)['time']))
+
+                $plugin->setInputType($item, $plugin::DEFAULT_INPUT_TYPE)->setInputAttribute($item, ['data-type' => 'datetime']);
+
+            elseif ($type !== 'number')
 
                 $plugin->setInput($item, null, $plugin::DEFAULT_INPUT_TYPE);
-
-            if ($type === 'date' && isset($plugin->getInput($item)['time']))
-
-                $plugin->setInputType($item, $plugin::DEFAULT_INPUT_TYPE)->setInputAttribute($item, [
-                    'data' => ['type-datetime' => 1]
-                ]);
         }
     }
 
@@ -77,10 +81,10 @@ $this->fetchPlugin('filter', function($plugin)
                     });
                     window.location.href = parser.pathname + \'?\' + params.toString()
                 ',
-                [
-                    '{id}'  => $id,
-                    '{url}' => $buttons['submit']['url'] ?? getenv('REQUEST_URI'),
-                ]),
+                        [
+                            '{id}'  => $id,
+                            '{url}' => $buttons['submit']['url'] ?? getenv('REQUEST_URI'),
+                        ]),
             ],
             'reset'  => [
                 'id'      => $buttons['submit']['id'] ?? 'grid-table-filter-reset-' . substr(md5(microtime(true)), 0, 10),

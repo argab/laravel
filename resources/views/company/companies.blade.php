@@ -16,7 +16,7 @@
                 'filter' => false,
             ])
 
-            ->setItems($companies)
+            ->setProviderItems($companies)
 
             ->setCell('user', function($data)
             {

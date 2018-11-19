@@ -1,13 +1,9 @@
 <?php
 
-$this->fetchPlugin('bulk_actions', function($plugin)
+use App\lib\grid\GridTable;
+
+$this->fetchPlugin('bulk_actions', function(GridTable $plugin)
 {
-    /* @var $plugin \App\lib\grid\GridTable */
-
-    if (false == $plugin instanceof \App\lib\grid\GridTable)
-
-        return null;
-
     $params = $plugin->getPluginConfig('bulk_actions');
 
     $actionColumns = [
@@ -83,11 +79,10 @@ $this->fetchPlugin('bulk_actions', function($plugin)
         });
 
         if (false == isset(
-                $params['view']['text'],
-                $plugin->getColumnAttributes($column)['class'],
-                $plugin->getColumnAttributes($column)['style']
-            )
-        )
+            $params['view']['text'],
+            $plugin->getColumnAttributes($column)['class'],
+            $plugin->getColumnAttributes($column)['style']))
+
             $plugin->setColumnAttributes($column, ['style' => ['width' => '20px']]);
     }
 

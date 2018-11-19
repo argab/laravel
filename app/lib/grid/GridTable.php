@@ -9,7 +9,9 @@
 
 namespace App\lib\grid
 {
+
     use App\lib\grid\plugins\pagination\Pagination;
+    use App\lib\grid\GridDataFormatter as GDF;
 
     class GridTable extends Grid
     {
@@ -21,13 +23,13 @@ namespace App\lib\grid
 
         protected $cellRowAttributes = ['index' => [], 'base' => []];
 
-        protected $cellTemplate = null;
+        protected $cellTemplate;
 
         protected $cellRowTemplate = ['index' => [], 'base' => null];
 
         protected $columnAttributes = [];
 
-        protected $columnRowTemplate = null;
+        protected $columnRowTemplate;
 
         protected $plugins = [
             'bulk_actions' => GridTable::class,
@@ -101,7 +103,7 @@ namespace App\lib\grid
 
         public function loadColumn(string $key, string $name = null)
         {
-            $this->row[$key] = $name ?? $key;
+            $this->row[$key] = $this->field[$key] = $name ?? $key;
 
             $this->prompt[$key] = is_array($this->getProvider()->gridTableCellPrompts())
 
@@ -112,10 +114,6 @@ namespace App\lib\grid
 
         public function loadColumns()
         {
-            if (empty($this->getFields()))
-
-                throw new \Exception(sprintf('{%s} - field names array is empty.', $this->getEntityName()));
-
             foreach ($this->getFields() as $k => $val)
             {
                 $this->loadColumn($k, $val);
@@ -135,7 +133,7 @@ namespace App\lib\grid
         {
             if ($this->checkRow($key))
 
-                unset($this->row[$key], $this->prompt[$key]);
+                unset($this->row[$key], $this->field[$key], $this->prompt[$key]);
 
             return $this;
         }
@@ -166,7 +164,7 @@ namespace App\lib\grid
         {
             if (is_callable($this->cell[$key]))
 
-                return call_user_func($this->cell[$key], $this->getItems()[$index] ?? null, $index, $this);
+                return call_user_func($this->cell[$key], $this->getProviderItems()[$index] ?? null, $index, $this);
 
             return $this->cell[$key];
         }
@@ -182,11 +180,11 @@ namespace App\lib\grid
 
                 ? $this->cellAttributes['cell'][$cell] =
 
-                $attr === null ? [] : GridDataFormatter::setAttribute($this->getCellAttributes($cell), $attr)
+                ($attr === null ? [] : GDF::setAttribute($this->getCellAttributes($cell), $attr))
 
                 : $this->cellAttributes['base'] =
 
-                $attr === null ? [] : GridDataFormatter::setAttribute($this->cellAttributes['base'], $attr);
+                ($attr === null ? [] : GDF::setAttribute($this->cellAttributes['base'], $attr));
 
             return $this;
         }
@@ -202,11 +200,11 @@ namespace App\lib\grid
 
                 ? $this->cellRowAttributes['index'][$index] =
 
-                $attr === null ? [] : GridDataFormatter::setAttribute($this->getCellRowAttributes($index), $attr)
+                ($attr === null ? [] : GDF::setAttribute($this->getCellRowAttributes($index), $attr))
 
                 : $this->cellRowAttributes['base'] =
 
-                $attr === null ? [] : GridDataFormatter::setAttribute($this->cellRowAttributes['base'], $attr);
+                ($attr === null ? [] : GDF::setAttribute($this->cellRowAttributes['base'], $attr));
 
             return $this;
         }
@@ -220,7 +218,7 @@ namespace App\lib\grid
         {
             $this->columnAttributes[$column] =
 
-                $attr === null ? [] : GridDataFormatter::setAttribute($this->columnAttributes[$column] ?? [], $attr);
+                $attr === null ? [] : GDF::setAttribute($this->columnAttributes[$column] ?? [], $attr);
 
             return $this;
         }
@@ -265,6 +263,5 @@ namespace App\lib\grid
         {
             return $this->cellRowTemplate['index'][$index] ?? $this->cellRowTemplate['base'];
         }
-
     }
 }

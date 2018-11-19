@@ -48,7 +48,7 @@ $rows = '';
 
 $attr = GF::getAttributes($this->getRowAttributes());
 
-foreach ($this->getItems() as $i => $item)
+foreach ($this->getProviderItems() as $i => $item)
 {
     $data = $this->fetchData($item, $i);
 
