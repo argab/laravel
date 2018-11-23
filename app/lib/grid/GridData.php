@@ -196,6 +196,14 @@ namespace App\lib\grid
             return $this->tableData[$tableName] ?? [];
         }
 
+        /**
+         * The magic method for retrieving the Grid Data Driver`s SQL query, and execute it.
+         *
+         * @param string $method
+         * @param array $arg
+         *
+         * @return array
+         */
         public function __call(string $method, array $arg = [])
         {
             if (empty($this->getTableData($this->getTable())))
