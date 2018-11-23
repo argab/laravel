@@ -17,7 +17,7 @@
                 ->setTable('users')
                 ->setLocale('ru'))
             ->fetchData()
-            ->appendData([
+            ->setData([
                 'fields' => [
                     'company' => 'Company'
                 ],

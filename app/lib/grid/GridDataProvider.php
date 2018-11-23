@@ -115,19 +115,7 @@ namespace App\lib\grid
             {
                 $this->checkData($key);
 
-                $this->data[$key] = $value;
-            }
-
-            return $this;
-        }
-
-        public function appendData(array $data)
-        {
-            foreach ($data as $key => $value)
-            {
-                $this->checkData($key);
-
-                $this->data[$key] = is_array($value) ? array_merge($this->data[$key], $value) : $value;
+                $this->data[$key] = is_array($value) ? array_merge((array) $this->data[$key], $value) : $value;
             }
 
             return $this;
