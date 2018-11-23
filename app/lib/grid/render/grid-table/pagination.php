@@ -1,10 +1,15 @@
 <?php
 
-use App\lib\grid\plugins\pagination\Pagination;
+use App\lib\grid\plugin\components\pagination\Pagination;
 
-$this->fetchPlugin('pagination', function(Pagination $plugin)
+/* @var \App\lib\grid\plugin\GridPlugin $this */
+
+$this->setConfig('pagination', [
+    'perPage'  => 25,
+    'pageSize' => 10,
+]);
+
+$this->fetchComponent('pagination', function(Pagination $plugin)
 {
-    /* @var \App\lib\grid\GridTable $this */
-
-    $this->bindLayout('{pagination}', [$plugin->fetchPages()->render(), null, '</{tag}>']);
+    $this->gridObject()->bindLayout('{pagination}', [$plugin->fetchPages()->render(), null, '</{tag}>']);
 });

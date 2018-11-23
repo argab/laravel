@@ -8,7 +8,7 @@
  * @copyright 2018-2019, ArGabid, License MIT, All rights reserved
  */
 
-namespace App\lib\grid\plugins\pagination
+namespace App\lib\grid\plugin\components\pagination
 {
     class Pagination
     {
@@ -35,62 +35,62 @@ namespace App\lib\grid\plugins\pagination
         /**
          * @var int Total Items
          */
-        private $totalCount;
+        protected $totalCount;
 
         /**
          * @var int Number of the current page
          */
-        private $currentPage;
+        protected $currentPage;
 
         /**
          * @var int Items per page
          */
-        private $perPage = 25;
+        protected $perPage = 25;
 
         /**
          * @var int Total pages
          */
-        private $totalPages;
+        protected $totalPages;
 
         /**
          * @var int Number of pages at list
          */
-        private $pageSize = 10;
+        protected $pageSize = 10;
 
         /**
          * @var string name of page get parameter
          */
-        private $pageName = 'page';
+        protected $pageName = 'page';
 
         /**
          * @var string query url string
          */
-        private $queryString = null;
+        protected $queryString = null;
 
         /**
          * @var string base url
          */
-        private $url = null;
+        protected $url = null;
 
         /**
          * @var array Output array
          */
-        private $pages = [];
+        protected $pages = [];
 
         /**
          * @var bool show direct control buttons
          */
-        private $directControls = true;
+        protected $directControls = true;
 
         /**
          * @var bool show control buttons for first & last pages
          */
-        private $marginControls = true;
+        protected $marginControls = true;
 
         /**
          * @var array control button names
          */
-        private $controls = [
+        protected $controls = [
             self::FIRST    => self::FIRST,
             self::LAST     => self::LAST,
             self::PREVIOUS => self::PREVIOUS,
@@ -98,7 +98,7 @@ namespace App\lib\grid\plugins\pagination
         ];
 
         /**
-         * Create instance.
+         * Pagination constructor.
          *
          * @param int $totalCount  Total items
          * @param int $currentPage Number of the current page
@@ -191,9 +191,8 @@ namespace App\lib\grid\plugins\pagination
         protected function build()
         {
             if ($this->pages || ($this->totalCount == 0 || $this->totalPages == 1))
-            {
+
                 return $this;
-            }
 
             $step = floor($this->pageSize / 2);
 
@@ -220,14 +219,14 @@ namespace App\lib\grid\plugins\pagination
                 $end = $this->totalPages;
             }
 
-            $qs = $this->getQueryString() ?? $this->setQueryString()->getQueryString();
+            $q = $this->getQueryString() ?? $this->setQueryString()->getQueryString();
 
             $url = $this->getUrl() ?? $this->setUrl()->getUrl();
 
             $this->pages = [
                 'pages'       => array_slice(range((int) $start, (int) $end, 1), 0, $this->pageSize),
-                'urlQuery'    => $url . ($qs ? '?' . $qs . '&' : '?'),
-                'queryString' => $qs,
+                'urlQuery'    => $url . ($q ? '?' . $q . '&' : '?'),
+                'queryString' => $q,
                 'url'         => $url,
                 'currentPage' => $this->currentPage,
                 'totalCount'  => $this->totalCount,
@@ -300,15 +299,12 @@ namespace App\lib\grid\plugins\pagination
 
             ob_start();
 
-            if ($params)
+            foreach ($params as $k => $v)
             {
-                foreach ($params as $k => $v)
-                {
-                    $$k = $v;
-                }
-
-                unset($params);
+                $$k = $v;
             }
+
+            unset($params);
 
             @include($template);
 

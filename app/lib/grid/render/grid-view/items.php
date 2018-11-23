@@ -1,6 +1,6 @@
 <?php
 
-use App\lib\grid\GridDataFormatter as GF;
+use App\lib\grid\GridDataFormatter as Format;
 
 /* @var \App\lib\grid\GridView $this */
 
@@ -46,7 +46,7 @@ $output = $this->getLayout() ?: ($this->getTag() ? '<{tag} {attr}>{rows}</{tag}>
 
 $rows = '';
 
-$attr = GF::getAttributes($this->getRowAttributes());
+$attr = Format::getAttributes($this->getRowAttributes());
 
 foreach ($this->getProviderItems() as $i => $item)
 {
@@ -61,7 +61,7 @@ foreach ($this->getProviderItems() as $i => $item)
     {
         if (isset($data['{attr}']) && is_array($data['{attr}']))
 
-            $data['{attr}'] = GF::getAttributes($data['{attr}']);
+            $data['{attr}'] = Format::getAttributes($data['{attr}']);
 
         $tr = array_merge($tr, $data);
     }
@@ -75,6 +75,6 @@ foreach ($this->getProviderItems() as $i => $item)
 
 echo strtr($this->fetchLayout($output), [
     '{tag}'  => $this->getTag(),
-    '{attr}' => GF::getAttributes($tagAttr),
+    '{attr}' => Format::getAttributes($tagAttr),
     '{rows}' => $rows
 ]);

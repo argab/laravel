@@ -9,6 +9,7 @@
 
 namespace App\lib\grid
 {
+
     use Exception;
 
     class GridDataProvider implements IGridFormProvider, IGridTableProvider
@@ -46,7 +47,7 @@ namespace App\lib\grid
             $this->setEntity($entity);
         }
 
-        public function setDataProvider(IGridData $provider)
+        final function setDataProvider(IGridData $provider)
         {
             $this->dataProvider = $provider;
 
@@ -54,7 +55,7 @@ namespace App\lib\grid
         }
 
         /**
-         * @return IGridData|GridData
+         * @return IGridData
          */
         public function getDataProvider()
         {
@@ -127,14 +128,11 @@ namespace App\lib\grid
             {
                 $this->data['fields'][$field['field']] = $field['name'];
 
-                if (false == empty($field['type']))
-                {
-                    if ($field['type'] === GridForm::DEFAULT_INPUT_TYPE)
+                if ($field['type'] === GridForm::DEFAULT_INPUT_TYPE)
 
-                        $field['type'] = 'textarea';
+                    $field['type'] = 'textarea';
 
-                    $this->data['inputTypes'][$field['field']] = $field['type'];
-                }
+                $this->data['inputTypes'][$field['field']] = $field['type'];
 
                 if (false == empty($field['size']))
 
@@ -147,9 +145,15 @@ namespace App\lib\grid
                 if (false == empty($field['required']))
 
                     $this->data['requiredFields'][] = $field['field'];
+
+                $this->fetchDataField($field);
             }
 
             return $this;
+        }
+
+        protected function fetchDataField(array $field)
+        {
         }
 
         public function gridFields(): array
@@ -162,7 +166,14 @@ namespace App\lib\grid
             return $this->data['safeFields'];
         }
 
-        public function gridRequiredFields(): array
+        public function unSafeFields(array $fields)
+        {
+            $this->data['safeFields'] = array_diff($this->data['safeFields'], $fields);
+
+            return $this;
+        }
+
+        public function requiredFields(): array
         {
             return $this->data['requiredFields'];
         }

@@ -10,8 +10,9 @@
 namespace App\lib\grid
 {
 
-    use App\lib\grid\plugins\pagination\Pagination;
-    use App\lib\grid\GridDataFormatter as GDF;
+    use App\lib\grid\GridDataFormatter as Format;
+
+    use App\lib\grid\plugin\components\pagination\Pagination;
 
     class GridTable extends Grid
     {
@@ -31,45 +32,10 @@ namespace App\lib\grid
 
         protected $columnRowTemplate;
 
-        protected $plugins = [
+        protected $pluginComponents = [
             'bulk_actions' => GridTable::class,
             'filter'       => GridForm::class,
             'pagination'   => Pagination::class,
-        ];
-
-        protected $requiredPluginParams = ['pagination' => ['totalCount']];
-
-        protected $pluginConfig = [
-            'bulk_actions' => [
-                'set_query'      => true,
-                'action_columns' => [
-                    'view'   => ['column' => 'bulk_action_view', 'name' => null, 'field' => null, 'template' => '{view}'],
-                    'update' => ['column' => 'bulk_action_update', 'name' => null, 'field' => null, 'template' => '{update}'],
-                    'delete' => ['column' => 'bulk_action_delete', 'name' => null, 'field' => null, 'template' => '{delete}'],
-                ],
-                'field'          => null,
-                'template'       => '{view} {update} {delete}',
-                'view'           => ['template' => null, 'url' => null, 'attr' => null, 'text' => null],
-                'update'         => ['template' => null, 'url' => null, 'attr' => null, 'text' => null],
-                'delete'         => ['template' => null, 'url' => null, 'attr' => null, 'text' => null],
-            ],
-            'filter'       => [
-                'buttons' => [
-                    'submit'   => ['url' => null, 'id' => null, 'attr' => null, 'onclick' => null, 'text' => 'Apply Filter'],
-                    'reset'    => ['url' => null, 'id' => null, 'attr' => null, 'onclick' => null, 'text' => 'Reset Filter'],
-                    'template' => null // '{submit} {reset}'
-                ]
-            ],
-            'pagination'   => [
-                'perPage'  => 25,
-                'pageSize' => 10,
-            ],
-        ];
-
-        protected $pluginFetchPath = [
-            'bulk_actions' => __DIR__ . '/render/grid-table/bulk-actions.php',
-            'filter'       => __DIR__ . '/render/grid-table/filter.php',
-            'pagination'   => __DIR__ . '/render/grid-table/pagination.php',
         ];
 
         protected $renderTemplate = 'grid-table/table.php';
@@ -78,20 +44,13 @@ namespace App\lib\grid
          * GridTable constructor.
          *
          * @param IGridTableProvider $provider
-         * @param array|null $tagAttributes
-         * @param bool $loadColumns
+         * @param GridDataFormatter $formatter
          */
-        public function __construct(IGridTableProvider $provider, array $tagAttributes = null, bool $loadColumns = true)
+        public function __construct(IGridTableProvider $provider, GridDataFormatter $formatter = null)
         {
             parent::__construct($provider);
 
-            if ($tagAttributes !== null)
-
-                $this->setTable($tagAttributes);
-
-            if ($loadColumns)
-
-                $this->loadColumns();
+            $this->setFormatter($formatter ?? new GridDataFormatter);
         }
 
         public function setTable(array $attr = [])
@@ -103,7 +62,9 @@ namespace App\lib\grid
 
         public function loadColumn(string $key, string $name = null)
         {
-            $this->row[$key] = $this->field[$key] = $name ?? $key;
+            $this->row[$key] = $name ?? $key;
+
+            $this->setFields([$key => $this->row[$key]]);
 
             $this->prompt[$key] = is_array($this->getProvider()->gridTableCellPrompts())
 
@@ -160,11 +121,11 @@ namespace App\lib\grid
             return isset($this->cell[$key]);
         }
 
-        public function getCell(string $key, $index = null)
+        public function getCell(string $key, $index = null, array $rowData = [])
         {
             if (is_callable($this->cell[$key]))
 
-                return call_user_func($this->cell[$key], $this->getProviderItems()[$index] ?? null, $index, $this);
+                return call_user_func($this->cell[$key], $this->getProviderItems()[$index] ?? null, $index, $rowData);
 
             return $this->cell[$key];
         }
@@ -174,17 +135,13 @@ namespace App\lib\grid
             return array_keys($this->row);
         }
 
-        public function setCellAttributes(string $cell = null, array $attr = null)
+        public function setCellAttributes(string $cell = null, array $attr = [])
         {
             $cell !== null
 
-                ? $this->cellAttributes['cell'][$cell] =
+                ? $this->cellAttributes['cell'][$cell] = ($attr ? Format::setAttribute($this->getCellAttributes($cell), $attr) : [])
 
-                ($attr === null ? [] : GDF::setAttribute($this->getCellAttributes($cell), $attr))
-
-                : $this->cellAttributes['base'] =
-
-                ($attr === null ? [] : GDF::setAttribute($this->cellAttributes['base'], $attr));
+                : $this->cellAttributes['base'] = ($attr ? Format::setAttribute($this->cellAttributes['base'], $attr) : []);
 
             return $this;
         }
@@ -194,17 +151,13 @@ namespace App\lib\grid
             return $this->cellAttributes['cell'][$cell] ?? $this->cellAttributes['base'];
         }
 
-        public function setCellRowAttributes(array $attr = null, $index = null)
+        public function setCellRowAttributes(array $attr = [], $index = null)
         {
             $index !== null
 
-                ? $this->cellRowAttributes['index'][$index] =
+                ? $this->cellRowAttributes['index'][$index] = ($attr ? Format::setAttribute($this->getCellRowAttributes($index), $attr) : [])
 
-                ($attr === null ? [] : GDF::setAttribute($this->getCellRowAttributes($index), $attr))
-
-                : $this->cellRowAttributes['base'] =
-
-                ($attr === null ? [] : GDF::setAttribute($this->cellRowAttributes['base'], $attr));
+                : $this->cellRowAttributes['base'] = ($attr ? Format::setAttribute($this->cellRowAttributes['base'], $attr) : []);
 
             return $this;
         }
@@ -214,18 +167,16 @@ namespace App\lib\grid
             return $this->cellRowAttributes['index'][$index] ?? $this->cellRowAttributes['base'];
         }
 
-        public function setColumnAttributes(string $column, array $attr = null)
+        public function setColumnAttributes(string $column, array $attr = [])
         {
-            $this->columnAttributes[$column] =
-
-                $attr === null ? [] : GDF::setAttribute($this->columnAttributes[$column] ?? [], $attr);
+            $this->columnAttributes[$column] = $attr ? Format::setAttribute($this->columnAttributes[$column] ?? [], $attr) : [];
 
             return $this;
         }
 
         public function getColumnAttributes(string $column)
         {
-            return $this->columnAttributes[$column] ?? null;
+            return $this->columnAttributes[$column] ?? [];
         }
 
         public function setColumnRowTemplate(string $template)
@@ -262,6 +213,19 @@ namespace App\lib\grid
         public function getCellRowTemplate($index = null)
         {
             return $this->cellRowTemplate['index'][$index] ?? $this->cellRowTemplate['base'];
+        }
+
+        public function render()
+        {
+            if (false === empty($this->pluginComponents))
+
+                $this->plugin()->setComponentFetchPath([
+                    'bulk_actions' => $this->plugin()->getComponentFetchPath('bulk_actions') ?? __DIR__ . '/render/grid-table/bulk-actions.php',
+                    'filter'       => $this->plugin()->getComponentFetchPath('filter') ?? __DIR__ . '/render/grid-table/filter.php',
+                    'pagination'   => $this->plugin()->getComponentFetchPath('pagination') ?? __DIR__ . '/render/grid-table/pagination.php',
+                ]);
+
+            return parent::render();
         }
     }
 }

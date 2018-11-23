@@ -9,6 +9,9 @@
 
 namespace App\lib\grid
 {
+
+    use App\lib\grid\GridDataFormatter as Format;
+
     class GridForm extends Grid
     {
         const DEFAULT_INPUT_TYPE = 'text';
@@ -45,20 +48,13 @@ namespace App\lib\grid
          * GridForm constructor.
          *
          * @param IGridFormProvider $provider
-         * @param array|null $tagAttributes
-         * @param bool $loadInputs
+         * @param GridDataFormatter $formatter
          */
-        public function __construct(IGridFormProvider $provider, array $tagAttributes = null, bool $loadInputs = true)
+        public function __construct(IGridFormProvider $provider, GridDataFormatter $formatter = null)
         {
             parent::__construct($provider);
 
-            if ($tagAttributes !== null)
-
-                $this->setForm($tagAttributes);
-
-            if ($loadInputs)
-
-                $this->loadInputs();
+            $this->setFormatter($formatter ?? new GridDataFormatter);
         }
 
         public function setForm(array $attr = [])
@@ -66,69 +62,6 @@ namespace App\lib\grid
             $this->setTagAttributes(array_merge(['method' => 'post', 'enctype' => 'multipart/form-data'], $attr));
 
             return $this;
-        }
-
-        public function setInputRequestName(bool $dash = true, string $name = null, array $inputData = [])
-        {
-            $name = $name ?: $this->getProviderName();
-
-            $this->inputRequestName = $dash ? GridDataFormatter::dashName($name) : $name;
-
-            foreach ($inputData as $k => $data)
-            {
-                if ($this->checkInput($k))
-
-                    $this->input[$k]['request_name'] = $data;
-            }
-
-            return $this;
-        }
-
-        public function getInputRequestName(string $key = null)
-        {
-            $rn = $this->input[$key]['request_name'] ?? $this->inputRequestName;
-
-            return $rn ? sprintf('%s[%s]', $rn, $this->getInputName($key)) : $this->getInputName($key);
-        }
-
-        public function getInputName(string $key)
-        {
-            return preg_replace('#[^a-z\d\-_\[\]]+#i', '', $this->input[$key]['name'] ?? $key);
-        }
-
-        public function setPrefixID(string $name = null, bool $dash = true)
-        {
-            $name = $name ?? substr(md5(microtime(true)), 0, 10) . $this->getProviderName();
-
-            $this->prefixID = ($dash ? GridDataFormatter::dashName($name) : $name) . '-';
-
-            return $this;
-        }
-
-        public function getPrefixedInputID(string $key)
-        {
-            return $this->prefixID . $this->getInputID($key);
-        }
-
-        public function setInputID(array $inputData, bool $dash = true)
-        {
-            if (null === $this->prefixID)
-
-                $this->setPrefixID(null, $dash);
-
-            foreach ($inputData as $k => $data)
-            {
-                if ($this->checkInput($k))
-
-                    $this->input[$k]['id'] = $data;
-            }
-
-            return $this;
-        }
-
-        public function getInputID(string $key)
-        {
-            return preg_replace('#[^a-z\d\-_]+#i', '', $this->input[$key]['id'] ?? $key);
         }
 
         public function loadInput(string $key)
@@ -139,19 +72,14 @@ namespace App\lib\grid
                 'type'  => $this->input[$key]['type'] ?? self::DEFAULT_INPUT_TYPE,
                 'tag'   => $this->input[$key]['tag'] ?? self::DEFAULT_INPUT_TAG,
                 'value' => $this->input[$key]['value'] ?? $this->getProviderProperty($key),
-                'error' => $this->getError($key),
+                'error' => $this->getError($key) ?? ($this->getProvider()->gridInputErrors()[$key] ?? null),
             ];
 
             $this->prompt[$key] = $this->getPrompt($key) ?? ($this->getProvider()->gridInputPrompts()[$key] ?? null);
-
             $this->inputAttributes[$key] = $this->getInputAttributes($key);
-
             $this->inputOptions[$key] = $this->getInputOptions($key);
-
-            $this->label[$key] = $this->getLabel($key);
-
+            $this->label[$key] = $this->getLabel($key) ?? ($this->getField($key) ?? ($this->getProvider()->gridFields()[$key] ?? null));
             $this->labelTemplate[$key] = $this->getLabelTemplate($key);
-
             $this->labelAttributes[$key] = $this->getLabelAttributes($key);
 
             return $this;
@@ -162,12 +90,10 @@ namespace App\lib\grid
             $this->setPrefixID();
 
             $setTypes = array_flip($this->setTypes);
-            $safe     = array_flip($this->getProvider()->gridSafeFields());
-            $types    = array_diff_key($this->getProvider()->gridInputTypes(), $safe);
-            $options  = $this->inputOptions ?: $this->fetchInputOptions();
-            $opt      = array_keys(array_diff_key($options, $safe));
-            $sizes    = $this->getProvider()->gridInputSizes();
-            $optKeys  = array_flip($opt);
+            $safe = array_flip($this->getProvider()->gridSafeFields());
+            $types = array_diff_key($this->getProvider()->gridInputTypes(), $safe);
+            $optKeys = array_flip(array_keys(array_diff_key($this->inputOptions ?: $this->fetchInputOptions(), $safe)));
+            $sizes = $this->getProvider()->gridInputSizes();
 
             foreach (array_merge($optKeys, $types) as $k => $type)
             {
@@ -210,45 +136,41 @@ namespace App\lib\grid
             return $this;
         }
 
-        protected function switchInputType($type, $inputKey)
+        protected function switchInputType(string $type, string $field)
         {
-            switch (preg_replace('#[^a-z_]+#', '', explode("\x20", strtolower($type))[0]))
+            switch (preg_replace('#[^a-z_]+#', '', strtolower($type)))
             {
                 case 'string':
                 case 'varchar':
                 case 'char':
                 case 'character':
                 case 'tinytext':
-                    $this->setInputType($inputKey, self::DEFAULT_INPUT_TYPE);
-                    break;
+                    return $this->setInputType($field, self::DEFAULT_INPUT_TYPE);
                 case 'textarea':
                 case 'longtext':
                 case 'mediumtext':
-                    $this->setTextarea($inputKey);
-                    break;
+                    return $this->setTextarea($field);
                 case 'integer':
                 case 'bigint':
                 case 'mediumint':
                 case 'smallint':
                 case 'tinyint':
                 case 'int':
-                    $this->setInputType($inputKey, 'number');
-                    break;
+                    return $this->setInputType($field, 'number');
                 case 'datetime':
                 case 'timestamp':
-                    $this->setDateTime($inputKey);
-                    break;
+                    return $this->setDateTime($field);
                 case 'float':
                 case 'double':
                 case 'decimal':
                 case 'numeric':
-                    $this->setInputType($inputKey, 'number')->setInputAttribute($inputKey, ['step' => 0.1]);
-                    break;
+                    return $this->setInputType($field, 'number')->setInputAttribute($field, ['step' => 0.1]);
                 case 'boolean':
                 case 'bool':
-                    $this->setRadio($inputKey);
-                    break;
+                    return $this->setRadio($field);
             }
+
+            return $this;
         }
 
         public function setSizes(array $sizes)
@@ -310,11 +232,68 @@ namespace App\lib\grid
             return $this;
         }
 
-        public function setValues(array $values = [], callable $func = null)
+        public function setInputRequestName(bool $dash = true, string $name = null, array $names = [])
+        {
+            $name = $name ?? $this->getProviderName();
+
+            $this->inputRequestName = $dash ? Format::dashName($name) : $name;
+
+            foreach ($names as $k => $data)
+            {
+                if ($this->checkInput($k))
+
+                    $this->input[$k]['request_name'] = $data;
+            }
+
+            return $this;
+        }
+
+        public function getInputRequestName(string $key = null)
+        {
+            $name = $this->input[$key]['request_name'] ?? $this->inputRequestName;
+
+            return $name ? sprintf('%s[%s]', $name, $this->getInputName($key)) : $this->getInputName($key);
+        }
+
+        public function getInputName(string $key)
+        {
+            return preg_replace('#[^a-z\d\-_\[\]]+#i', '', $this->input[$key]['name'] ?? $key);
+        }
+
+        public function setPrefixID(string $name = null, bool $dash = true)
+        {
+            $name = $name ?? substr(md5(microtime(true)), 0, 10) . $this->getProviderName();
+
+            $this->prefixID = ($dash ? Format::dashName($name) : $name) . '-';
+
+            return $this;
+        }
+
+        public function getPrefixedInputID(string $key)
+        {
+            return $this->prefixID . $this->getInputID($key);
+        }
+
+        public function setInputID(array $inputData)
+        {
+            foreach ($inputData as $k => $data)
+            {
+                if ($this->checkInput($k)) $this->input[$k]['id'] = $data;
+            }
+
+            return $this;
+        }
+
+        public function getInputID(string $key)
+        {
+            return preg_replace('#[^a-z\d\-_]+#i', '', $this->input[$key]['id'] ?? $key);
+        }
+
+        public function setValues(array $values = [])
         {
             foreach ($this->getInputKeys() as $k)
             {
-                $this->setValue($k, $values[$k] ?? ($func !== null ? call_user_func($func, $k, $this) : $this->getInputValue($k)));
+                $this->setValue($k, $values[$k] ?? ($this->getInputValue($k) ?? $this->getPrompt($k)));
             }
 
             return $this;
@@ -341,7 +320,7 @@ namespace App\lib\grid
 
         public function getInput(string $key = null)
         {
-            return $key !== null ? ($this->input[$key] ?? null) : $this->input;
+            return $this->input[$key] ?? $this->input;
         }
 
         public function setError(string $key, $message)
@@ -353,7 +332,7 @@ namespace App\lib\grid
 
         public function getError(string $key)
         {
-            return $this->input[$key]['error'] ?? ($this->getProvider()->gridInputErrors()[$key] ?? null);
+            return $this->input[$key]['error'] ?? null;
         }
 
         public function unsetInput(string $key)
@@ -366,8 +345,7 @@ namespace App\lib\grid
                     $this->labelTemplate[$key],
                     $this->inputAttributes[$key],
                     $this->inputOptions[$key],
-                    $this->prompt[$key]
-                );
+                    $this->prompt[$key]);
             }
 
             return $this;
@@ -397,37 +375,28 @@ namespace App\lib\grid
 
         public function setValue(string $key, $value = null)
         {
-            $this->input[$key]['value'] = $value === null ? $this->getProviderProperty($key) : $value;
+            $this->input[$key]['value'] = $value ?? ($this->input[$key]['value'] ?? $this->getProviderProperty($key));
 
             return $this;
         }
 
-        public function getInputValue(string $key, bool $getPrompt = true)
+        public function getInputValue(string $key)
         {
-            if ($this->checkInput($key))
-            {
-                $value = ($this->input[$key]['value'] === null && $getPrompt)
-
-                    ? $this->getPrompt($key) : $this->input[$key]['value'];
-
-                return (is_array($value) && false === $this->isOptionalInput($key)) ? $value[key($value)] : $value;
-            }
-
-            return null;
+            return $this->checkInput($key)
+                ? ((is_array($this->input[$key]['value']) && false === $this->isOptionalInput($key))
+                    ? $this->input[$key]['value'][key($this->input[$key]['value'])]
+                    : $this->input[$key]['value'])
+                : null;
         }
 
-        public function isOptionalInput(string $key, bool $checkValue = false)
+        public function isOptionalInput(string $key)
         {
-            if (in_array($this->getInputType($key), ['checkbox', 'radio', 'select']))
-
-                return $checkValue ? false == empty($this->inputOptions[$key]) : true;
-
-            return false;
+            return in_array($this->getInputType($key), ['checkbox', 'radio', 'select']);
         }
 
         public function setInputOptions(string $key, array $options = null)
         {
-            $this->inputOptions[$key] = $options === null ? $this->getInputOptions($key) : $options;
+            $this->inputOptions[$key] = $options ?? $this->getInputOptions($key);
 
             return $this;
         }
@@ -447,37 +416,11 @@ namespace App\lib\grid
             return $this->inputOptions[$key] ?? [];
         }
 
-        public function setLabel(string $key, string $name, array $attr = [])
+        public function setLabel(string $key, string $name)
         {
             $this->label[$key] = $name;
 
-            if ($attr)
-
-                $this->labelAttributes[$key] = GridDataFormatter::setAttribute($this->getLabelAttributes($key), $attr);
-
             return $this;
-        }
-
-        public function getLabel(string $key)
-        {
-            return $this->label[$key] ?? ($this->getField($key) ?? ($this->getProvider()->gridFields()[$key] ?? null));
-        }
-
-        public function setLabelAttributes(string $key, array $attr = null)
-        {
-            $this->labelAttributes[$key] = $attr === null ? [] : GridDataFormatter::setAttribute($this->labelAttributes[$key] ?? [], $attr);
-
-            return $this;
-        }
-
-        public function getLabelAttributes(string $key)
-        {
-            return $this->labelAttributes[$key] ?? null;
-        }
-
-        public function getLabels()
-        {
-            return $this->label;
         }
 
         public function setLabels(array $data = [])
@@ -488,6 +431,28 @@ namespace App\lib\grid
             }
 
             return $this;
+        }
+
+        public function getLabel(string $key)
+        {
+            return $this->label[$key] ?? null;
+        }
+
+        public function getLabels()
+        {
+            return $this->label;
+        }
+
+        public function setLabelAttributes(string $key, array $attr = [])
+        {
+            $this->labelAttributes[$key] = $attr ? Format::setAttribute($this->labelAttributes[$key] ?? [], $attr) : [];
+
+            return $this;
+        }
+
+        public function getLabelAttributes(string $key)
+        {
+            return $this->labelAttributes[$key] ?? [];
         }
 
         public function setLabelTemplate(string $template, array $inputKeys = [])
@@ -524,16 +489,14 @@ namespace App\lib\grid
 
         public function inputUnwrap(string $key)
         {
-            if (null === $this->getTemplate())
-
-                $this->setTemplate('{input}', $key);
+            $this->setTemplate('{input}', $key);
 
             return $this;
         }
 
-        public function hideInput(string $key, $value = null, array $attr = [])
+        public function hideInput(string $key)
         {
-            return $this->setInput($key, $value, 'hidden', $attr)->inputUnwrap($key);
+            return $this->setInput($key, null, 'hidden')->inputUnwrap($key);
         }
 
         public function hideInputs(array $keys)
@@ -670,7 +633,7 @@ namespace App\lib\grid
         {
             $this->loadInput($key);
 
-            $value = $value ?: $this->getInputValue($key);
+            $value = $value ?? ($this->getInputValue($key) ?? $this->getPrompt($key));
 
             $this->setInput($key, $value ? date('Y-m-d', strtotime($value)) : null, 'date', $attr);
 
@@ -681,7 +644,7 @@ namespace App\lib\grid
         {
             $this->loadInput($key);
 
-            $value = $value ?: $this->getInputValue($key);
+            $value = $value ?? ($this->getInputValue($key) ?? $this->getPrompt($key));
 
             $this->setInput($key, $value ? date('H:i:s', strtotime($value)) : null, 'time', $attr);
 
@@ -692,7 +655,7 @@ namespace App\lib\grid
         {
             $this->loadInput($key);
 
-            $value = $value ?: $this->getInputValue($key);
+            $value = $value ?? ($this->getInputValue($key) ?? $this->getPrompt($key));
 
             $this->setDate($key, $value, $attrDate);
 
@@ -703,11 +666,19 @@ namespace App\lib\grid
             return $this;
         }
 
-        public function setInputAttribute(string $key, array $attr = null)
+        public function setRequired(array $keys)
         {
-            $this->inputAttributes[$key] =
+            foreach ($keys as $k)
+            {
+                $this->setInputAttribute($k, ['required' => 1]);
+            }
 
-                $attr === null ? [] : GridDataFormatter::setAttribute($this->inputAttributes[$key] ?? [], $attr);
+            return $this;
+        }
+
+        public function setInputAttribute(string $key, array $attr = [])
+        {
+            $this->inputAttributes[$key] = $attr ? Format::setAttribute($this->inputAttributes[$key] ?? [], $attr) : [];
 
             return $this;
         }
@@ -724,17 +695,14 @@ namespace App\lib\grid
 
         public function getInputAttributes(string $key)
         {
-            return $this->inputAttributes[$key] ?? null;
+            return $this->inputAttributes[$key] ?? [];
         }
 
-        public function loadAttributes(array $attr = null, array $skipTypes = [], array $skipKeys = [])
+        public function loadAttributes(array $attr = [], array $skipTypes = [], array $onlyKeys = [])
         {
             foreach ($this->getInputKeys() as $k)
             {
-                if (($skipTypes && in_array($this->getInputType($k), $skipTypes))
-
-                    || ($skipKeys && in_array($k, $skipKeys))
-                )
+                if (($skipTypes && in_array($this->getInputType($k), $skipTypes)) || ($onlyKeys && false == in_array($k, $onlyKeys)))
 
                     continue;
 

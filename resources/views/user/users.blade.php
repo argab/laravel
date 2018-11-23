@@ -10,36 +10,39 @@
         use App\lib\grid\GridDataProvider;
         use App\lib\grid\GridData;
 
+        /* @var $provider \App\User */
+
         $dataProvider = (new GridDataProvider($provider))
-            //->setData()
             ->setDataProvider((new GridData)
                 ->setPdo(DB::connection()->getPdo())
                 ->setTable('users')
                 ->setLocale('ru'))
             ->fetchData()
             ->setData([
-                'fields' => [
-                    'company' => 'Company'
-                ],
+                //'fields' => $provider->gridFields(),
                 'inputTypes'     => [
                     'company'    => 'text',
                 ],
+                'inputOptions' => $provider->gridInputOptions(),
                 'safeFields' => [
                     'password',
                     'deleted_at',
                     'email_verified_at',
-                    'remember_token'
+                    'remember_token',
+                    'updated_at',
                 ]
             ])
         ;
 
-        $table = (new GridTable($dataProvider))
+        #$table = (new GridTable($provider))->loadColumns();
 
-            ->setPluginConfig('bulk_actions', ['view' => false, 'set_query' => false])
+        $table = (new GridTable($dataProvider))->loadColumns();
 
-            ->setPlugin('pagination', false)
+        $table->plugin()->setConfig('bulk_actions', ['view' => false, 'set_query' => false]);
 
-            ->setProviderItems($users)
+        $table->plugin()->setComponent('pagination', null);
+
+        $table->setProviderItems($users)
 
             ->setCell('company', function($data)
              {

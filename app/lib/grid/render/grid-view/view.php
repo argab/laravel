@@ -1,7 +1,7 @@
 <?php
 
 use App\lib\grid\IGridFormProvider;
-use App\lib\grid\GridDataFormatter as GF;
+use App\lib\grid\GridDataFormatter as Format;
 
 /* @var \App\lib\grid\GridView $this */
 
@@ -58,7 +58,7 @@ $output = $this->getLayout() ?: ($this->getTag() ? '<{tag} {attr}>{rows}</{tag}>
 
 $rows = '';
 
-$attr = GF::getAttributes($this->getRowAttributes());
+$attr = Format::getAttributes($this->getRowAttributes());
 
 $options = $this->getProvider() instanceof IGridFormProvider ? $this->getProvider()->gridInputOptions() : [];
 
@@ -70,9 +70,14 @@ foreach ($this->fetchSortOrder() as $k)
 
     $value = $this->getProviderProperty($k);
 
-    if ((is_string($value) || is_numeric($value)) && isset($options[$k][$value]))
+    if (is_string($value) || is_numeric($value))
+    {
+        if (isset($options[$k][$value]))
 
-        $value = $options[$k][$value];
+            $value = $options[$k][$value];
+
+        $value = $this->formatter()->format($k, $value)->getValue();
+    }
 
     $tr = [
         '{name}' => $this->getField($k),
@@ -82,7 +87,7 @@ foreach ($this->fetchSortOrder() as $k)
 
     if ($this->checkRow($k))
     {
-        $row = $this->getRow($k);
+        $row = $this->getRow($k, $tr);
 
         is_array($row) ? $tr = array_merge($tr, $row) : $tr['{row}'] = $row;
     }
@@ -93,17 +98,17 @@ foreach ($this->fetchSortOrder() as $k)
 
     if (is_array($tr['{attr}']))
 
-        $tr['{attr}'] = GF::getAttributes($tr['{attr}']);
+        $tr['{attr}'] = Format::getAttributes($tr['{attr}']);
 
     if ($tr['{row}'] === null)
 
-        $tr['{row}'] = $this->getPrompt($k) ?? '<nodata>' . $this::NO_DATA . '</nodata>';
+        $tr['{row}'] = $this->getPrompt($k) ?? '<div class="no-data">' . $this::NO_DATA . '</div>';
 
     $rows .= strtr($this->checkRowTemplate($k) ? $this->getRowTemplate($k) : $this->getTemplate(), $tr);
 }
 
 echo strtr($this->fetchLayout($output), [
     '{tag}'  => $this->getTag(),
-    '{attr}' => GF::getAttributes($tagAttr),
+    '{attr}' => Format::getAttributes($tagAttr),
     '{rows}' => $rows
 ]);

@@ -2,21 +2,33 @@
 
 use App\lib\grid\GridForm;
 
-/* @var App\lib\grid\GridTable $this */
+/* @var \App\lib\grid\plugin\GridPlugin $this */
 
-$this->setPluginConfig('filter', ['provider' => $this->getProvider()]);
+$this->setConfig('filter', [
+    'provider'  => $this->gridObject()->getProvider(),
+    'formatter' => $this->gridObject()->formatter(),
+    'buttons'   => [
+        'submit'   => ['url' => null, 'id' => null, 'attr' => null, 'onclick' => null, 'text' => 'Apply Filter'],
+        'reset'    => ['url' => null, 'id' => null, 'attr' => null, 'onclick' => null, 'text' => 'Reset Filter'],
+        'template' => null // '{submit} {reset}'
+    ]
+]);
 
-$this->fetchPlugin('filter', function(GridForm $plugin)
+$this->fetchComponent('filter', function(GridForm $plugin)
 {
+    /* @var \App\lib\grid\plugin\GridPlugin $this */
+
+    $plugin->loadInputs();
+
     $id = $plugin->getTagAttributes()['id'] ?? 'grid-table-filter-' . substr(md5(microtime(true)), 0, 10);
 
     if (empty($plugin->getSortOrder()))
 
-        $plugin->setSortOrder($this->fetchSortOrder());
+        $plugin->setSortOrder($this->gridObject()->fetchSortOrder());
 
-    if ($this->getTag() === 'table' && null === $plugin->getTemplate() && $plugin->getTag() === 'form')
+    if ($this->gridObject()->getTag() === 'table' && null === $plugin->getTemplate() && $plugin->getTag() === 'form')
     {
-        $plugin->setTag('tr')->setTagAttributes(null)->setTemplate('<td {attr}>{input}</td>');
+        $plugin->setTag('tr')->setTagAttributes([])->setTemplate('<td {attr}>{input}</td>');
 
         if (false == isset($plugin->getRowAttributes()['class']))
 
@@ -27,14 +39,14 @@ $this->fetchPlugin('filter', function(GridForm $plugin)
 
     foreach ($plugin->fetchSortOrder() as $item)
     {
-        if (false == $this->checkRow($item))
+        if (false == $this->gridObject()->checkRow($item))
         {
             $plugin->unsetInput($item);
 
             continue;
         }
 
-        if (false == $plugin->checkInput($item) && $this->checkRow($item))
+        if (false == $plugin->checkInput($item) && $this->gridObject()->checkRow($item))
         {
             $plugin->setRow($item, '');
 
@@ -65,7 +77,7 @@ $this->fetchPlugin('filter', function(GridForm $plugin)
         }
     }
 
-    if ($buttons = $this->getPluginConfig('filter')['buttons'] ?? null)
+    if ($this->checkConfig('filter', 'buttons') && $buttons = $this->getConfig('filter', 'buttons'))
     {
         $btn = [
             'submit' => [
@@ -114,9 +126,9 @@ $this->fetchPlugin('filter', function(GridForm $plugin)
                 'onkeydown' => sprintf('if (event.keyCode === 13) $(\'#%s\').trigger(\'click\')', $btn['submit']['id'])
             ]);
 
-        $this->bindLayout('{filter_btn}', [$template, '<{tag}']);
+        $this->gridObject()->bindLayout('{filter_btn}', [$template, '<{tag}']);
     }
 
-    $this->bindLayout('{filter}', [$plugin->render(), null, '{columns}']);
+    $this->gridObject()->bindLayout('{filter}', [$plugin->render(), null, '{columns}']);
 
 });
