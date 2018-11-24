@@ -9,8 +9,16 @@
 
 namespace App\lib\grid
 {
-    /*
-     * @property IGridProvider|GridDataProvider $provider
+
+    use App\lib\grid\plugin\IGridPlugin;
+
+    use App\lib\grid\plugin\GridPlugin;
+
+    /**
+     * show off @property, @property-read, @property-write
+     * @property IGridProvider|GridDataProvider $provider;
+     * @property GridDataFormatter $formatter            ;
+     * @property IGridPlugin|GridPlugin $pluginInstance  ;
      * */
     abstract class Grid implements IGrid
     {
@@ -18,19 +26,21 @@ namespace App\lib\grid
 
         protected $provider;
 
-        protected $items = null;
+        protected $providerItems;
 
         protected $field = [];
 
-        protected $prompt = [];
-
         protected $row = [];
+
+        protected $formatter;
+
+        protected $prompt = [];
 
         protected $renderPath;
 
         protected $renderTemplate;
 
-        protected $template = null;
+        protected $template;
 
         protected $rowTemplate = [];
 
@@ -38,7 +48,7 @@ namespace App\lib\grid
 
         protected $bindLayout = [];
 
-        protected $tag = '';
+        protected $tag;
 
         protected $tagAttributes = [];
 
@@ -46,19 +56,11 @@ namespace App\lib\grid
 
         protected $sortOrder = [];
 
-        protected $plugins = [];
+        protected $plugin = GridPlugin::class;
 
-        protected $pluginData = [];
+        protected $pluginInstance;
 
-        protected $requiredPluginParams = [];
-
-        protected $pluginConfig = [];
-
-        protected $pluginHook = [];
-
-        protected $pluginFetchPath = [];
-
-        protected $pluginFetched = [];
+        protected $pluginComponents = [];
 
         /**
          * Grid constructor.
@@ -77,31 +79,41 @@ namespace App\lib\grid
             return $this->provider;
         }
 
-        public function getEntity()
+        public function getProviderName()
         {
-            return $this->provider instanceof GridDataProvider ? $this->provider->getEntity() : $this->provider;
+            return substr(strrchr(get_class($this->getProvider() instanceof GridDataProvider
+
+                ? $this->getProvider()->getEntity() : $this->getProvider()), "\\"), 1);
         }
 
-        public function getEntityName()
+        public function getProviderProperty(string $property)
         {
-            return substr(strrchr(get_class($this->getEntity()), "\\"), 1);
+            return $this->getProvider()->{$property};
         }
 
-        public function getEntityProp(string $property)
+        public function getProviderFormattedProperty(string $property)
         {
-            return $this->getEntity()->{$property} ?? null;
+            return $this->formatter()->format($property, $this->getProvider()->{$property})->getValue();
         }
 
-        public function setItems(array $items = null)
+        public function getProviderItems()
         {
-            $this->items = $items;
+            if ($this->getProvider() instanceof GridDataProvider)
+
+                return $this->getProvider()->getItems();
+
+            return $this->providerItems;
+        }
+
+        public function setProviderItems(array $items)
+        {
+            if ($this->getProvider() instanceof GridDataProvider)
+
+                $this->getProvider()->setItems($items);
+
+            else $this->providerItems = $items;
 
             return $this;
-        }
-
-        public function getItems()
-        {
-            return $this->items ?? ($this->provider instanceof GridDataProvider ? $this->provider->getItems() : null);
         }
 
         public function checkField(string $key)
@@ -126,6 +138,74 @@ namespace App\lib\grid
             return $this->field[$key] ?? null;
         }
 
+        public function setRow(string $key, $val, string $template = null)
+        {
+            $this->row[$key] = $val;
+
+            if ($template !== null)
+
+                $this->setTemplate($template, $key);
+
+            return $this;
+        }
+
+        public function getRows()
+        {
+            return $this->row;
+        }
+
+        public function checkRow(string $key)
+        {
+            return isset($this->row[$key]);
+        }
+
+        public function getRow(string $key, array $rowData = [])
+        {
+            if (is_callable($this->row[$key]))
+
+                return call_user_func($this->row[$key], $rowData);
+
+            return $this->row[$key];
+        }
+
+        public function unsetFields(array $keys)
+        {
+            foreach ($keys as $key)
+            {
+                if ($this->checkField($key))
+
+                    unset($this->field[$key]);
+            }
+
+            return $this;
+        }
+
+        final function setFormatter(GridDataFormatter $formatter)
+        {
+            $this->formatter = $formatter;
+
+            return $this;
+        }
+
+        public function formatter()
+        {
+            return $this->formatter;
+        }
+
+        public function setFormat(array $formatFields)
+        {
+            $this->formatter->setFormat($formatFields);
+
+            return $this;
+        }
+
+        public function setFormatAll(array $formatAll)
+        {
+            $this->formatter->setFormatAll($formatAll);
+
+            return $this;
+        }
+
         public function setPrompt(string $key, $value)
         {
             $this->prompt[$key] = $value;
@@ -148,48 +228,6 @@ namespace App\lib\grid
         public function getPrompt(string $key)
         {
             return $this->prompt[$key] ?? null;
-        }
-
-        public function setRow(string $key, $val, string $template = null)
-        {
-            $this->row[$key] = $val;
-
-            if ($template !== null)
-
-                $this->setTemplate($template, $key);
-
-            return $this;
-        }
-
-        public function getRows()
-        {
-            return $this->row;
-        }
-
-        public function checkRow(string $key)
-        {
-            return isset($this->row[$key]);
-        }
-
-        public function getRow(string $key)
-        {
-            if (is_callable($this->row[$key]))
-
-                return call_user_func($this->row[$key], $this->getEntity(), $this);
-
-            return $this->row[$key];
-        }
-
-        public function unsetFields(array $keys)
-        {
-            foreach ($keys as $key)
-            {
-                if ($this->checkField($key))
-
-                    unset($this->field[$key]);
-            }
-
-            return $this;
         }
 
         public function setRenderPath(string $path)
@@ -253,11 +291,11 @@ namespace App\lib\grid
         }
 
         /**
+         * Example: bindLayout('{some-key}', ['<template></template>', '<{tag}']) - insert template before tag;
+         * Example: bindLayout('{some-key}', ['<template></template>', null, '</{tag}>']) - insert template after tag;
+         *
          * @param string $bindKey
          * @param array|callable $data
-         *  Example: bindLayout('{some-key}', ['<template></template>', '<{tag}']) - insert template before tag;
-         *  Example: bindLayout('{some-key}', ['<template></template>', null, '</{tag}>']) - insert template after tag;
-         *  Example: bindLayout('{some-key}', function($layout){return $layout;}) - set layout string;
          *
          * @return $this
          */
@@ -279,19 +317,6 @@ namespace App\lib\grid
 
             foreach ($this->bindLayout as $key => $data)
             {
-                if (is_callable($data))
-                {
-                    $layout = call_user_func($data, $layout);
-
-                    if ('string' !== gettype($layout))
-
-                        throw new \logicException(
-
-                            sprintf('The result value of `%s` bind layout key must be returned as the type of `string`.', $key));
-
-                    continue;
-                }
-
                 $bind[$key] = $data[0] ?? null;
 
                 if (strpos($layout, $key) !== false)
@@ -322,9 +347,9 @@ namespace App\lib\grid
             return $this->tag;
         }
 
-        public function setTagAttributes(array $attr = null)
+        public function setTagAttributes(array $attr = [])
         {
-            $this->tagAttributes = $attr === null ? [] : GridDataFormatter::setAttribute($this->tagAttributes, $attr);
+            $this->tagAttributes = $attr ? GridDataFormatter::setAttribute($this->tagAttributes, $attr) : [];
 
             return $this;
         }
@@ -334,9 +359,9 @@ namespace App\lib\grid
             return $this->tagAttributes;
         }
 
-        public function setRowAttributes(array $attr = null)
+        public function setRowAttributes(array $attr = [])
         {
-            $this->rowAttributes = $attr === null ? [] : GridDataFormatter::setAttribute($this->rowAttributes, $attr);
+            $this->rowAttributes = $attr ? GridDataFormatter::setAttribute($this->rowAttributes, $attr) : [];
 
             return $this;
         }
@@ -351,6 +376,16 @@ namespace App\lib\grid
             $this->sortOrder = array_keys(array_merge(array_flip($order), $this->getFields(), $this->getRows()));
 
             return $this;
+        }
+
+        public function fetchSortOrder()
+        {
+            return $this->setSortOrder($this->sortOrder)->getSortOrder();
+        }
+
+        public function getSortOrder()
+        {
+            return $this->sortOrder;
         }
 
         protected function setReplaceOrder(array $order)
@@ -387,203 +422,34 @@ namespace App\lib\grid
             return $this;
         }
 
-        public function fetchSortOrder()
+        final function setPlugin(IGridPlugin $plugin)
         {
-            return $this->setSortOrder($this->sortOrder)->getSortOrder();
-        }
-
-        public function getSortOrder()
-        {
-            return $this->sortOrder;
-        }
-
-        public function setPlugin(string $plugin, string $class = null)
-        {
-            $this->plugins[$plugin] = $class;
+            $this->pluginInstance = $plugin;
 
             return $this;
         }
 
-        public function setPlugins(array $data)
+        public function plugin()
         {
-            foreach ($data as $plugin => $class)
-            {
-                $this->setPlugin($plugin, $class);
-            }
+            return $this->pluginInstance ?? ($this->pluginInstance = new $this->plugin($this->pluginComponents, $this));
+        }
+
+        public function setPluginComponents(array $components)
+        {
+            $this->pluginComponents = $components;
+
+            $this->plugin()->setComponents($this->pluginComponents);
 
             return $this;
         }
 
-        public function getPlugin(string $plugin)
+        public function render()
         {
-            return $this->plugins[$plugin] ?? null;
-        }
+            $path = $this->getRenderPath() ?? __DIR__ . '/render/';
 
-        public function setRequiredPluginParams(string $plugin, array $params)
-        {
-            $this->requiredPluginParams[$plugin] = $params;
+            if (false == empty($this->pluginComponents))
 
-            return $this;
-        }
-
-        public function getRequiredPluginParams(string $plugin)
-        {
-            return $this->requiredPluginParams[$plugin] ?? null;
-        }
-
-        public function checkRequiredPluginParams(string $plugin)
-        {
-            if (false == empty($this->requiredPluginParams[$plugin]))
-            {
-                foreach ($this->requiredPluginParams[$plugin] as $param)
-                {
-                    if (false == isset($this->pluginConfig[$plugin])
-
-                        || false == array_key_exists($param, $this->pluginConfig[$plugin])
-                    )
-
-                        throw new \logicException(
-
-                            sprintf('The `%s` Plugin`s `%s` config parameter have to be set at first.', $plugin, $param));
-                }
-            }
-        }
-
-        public function setPluginConfig(string $plugin, array $params)
-        {
-            $this->pluginConfig[$plugin] = array_merge($this->pluginConfig[$plugin] ?? [], $params);
-
-            return $this;
-        }
-
-        public function getPluginConfig(string $plugin)
-        {
-            return $this->pluginConfig[$plugin] ?? null;
-        }
-
-        public function setPluginData(string $plugin, array $data)
-        {
-            $this->pluginData[$plugin] = array_merge($this->pluginData[$plugin] ?? [], $data);
-
-            return $this;
-        }
-
-        public function getPluginData(string $plugin)
-        {
-            return $this->pluginData[$plugin] ?? null;
-        }
-
-        protected function getPluginInstance(string $plugin)
-        {
-            $prm = [];
-
-            $rfc = new \ReflectionClass($this->plugins[$plugin]);
-
-            if ($constructor = $rfc->getConstructor())
-            {
-                foreach ($constructor->getParameters() as $param)
-                {
-                    $prm[] = (isset($this->pluginConfig[$plugin]) && array_key_exists($param->name, $this->pluginConfig[$plugin]))
-
-                        ? $this->pluginConfig[$plugin][$param->name]
-
-                        : $param->getDefaultValue();
-                }
-            }
-
-            return call_user_func_array([$rfc, 'newInstance'], $prm);
-        }
-
-        public function fetchPlugin(string $plugin, callable $fetch)
-        {
-            if (false == class_exists($this->plugins[$plugin]) || $this->checkPluginFetched($plugin))
-
-                return $this;
-
-            $this->checkRequiredPluginParams($plugin);
-
-            $instance = $this->plugins[$plugin] === get_class($this) ? $this : $this->getPluginInstance($plugin);
-
-            $class = get_class($instance);
-
-            if (isset($this->pluginHook[$plugin]))
-            {
-                foreach ($this->pluginHook[$plugin] as $hook)
-                {
-                    $instance = call_user_func($hook, $instance);
-
-                    if (false == $instance instanceof $class)
-
-                        throw new \logicException(
-
-                            sprintf('The `%s` Plugin`s Hook must return an instance of `%s` class.', $plugin, $class));
-                }
-            }
-
-            call_user_func($fetch, $instance);
-
-            $this->setPluginFetched($plugin);
-
-            return $this;
-        }
-
-        public function fetchPlugins(array $plugins = [])
-        {
-            foreach ($plugins ?: array_keys($this->plugins) as $plugin)
-            {
-                $path = $this->getPluginFetchPath($plugin);
-
-                if (is_file($path)) include $path;
-            }
-
-            return $this;
-        }
-
-        public function setPluginFetched(string $plugin, bool $fetched = true)
-        {
-            $this->pluginFetched[$plugin] = $fetched;
-
-            return $this;
-        }
-
-        public function checkPluginFetched(string $plugin)
-        {
-            return false == empty($this->pluginFetched[$plugin]);
-        }
-
-        public function pluginHook(string $plugin, callable $hook)
-        {
-            if (false == isset($this->pluginHook[$plugin]))
-
-                $this->pluginHook[$plugin] = [];
-
-            $this->pluginHook[$plugin][] = $hook;
-
-            return $this;
-        }
-
-        public function setPluginFetchPaths(array $data)
-        {
-            foreach ($data as $plugin => $path)
-            {
-                $this->pluginFetchPath[$plugin] = $path;
-            }
-
-            return $this;
-        }
-
-        public function getPluginFetchPath(string $plugin)
-        {
-            return $this->pluginFetchPath[$plugin] ?? null;
-        }
-
-        public function render(bool $fetchPlugins = true)
-        {
-            $path = $this->getRenderPath() ?: __DIR__ . '/render/';
-
-            if ($fetchPlugins)
-
-                $this->fetchPlugins();
+                $this->plugin()->fetchComponents();
 
             ob_start();
 

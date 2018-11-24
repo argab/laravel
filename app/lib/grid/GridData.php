@@ -9,36 +9,99 @@
 
 namespace App\lib\grid
 {
+
     use PDO;
 
+    use Exception;
+
+    use App\lib\grid\drv\IGridDataDriver;
+
+    use App\lib\grid\drv\GridDataMysqlDriver;
+
+    use App\lib\grid\drv\GridDataPgsqlDriver;
+
+    /**
+     * show off @property, @property-read, @property-write
+     * @property IGridDataDriver $dataDriver
+     * */
     class GridData implements IGridData
     {
         /*
          * PDO instance
          * */
-        protected $pdo = null;
+        protected $pdo;
 
         /*
-        * The Entity's Database Table name
-        * */
-        protected $table = null;
-
-        /*
-         * The database Raw SQL query string for fetching entity's items from database table
-         *
-         * Example: 'SELECT * FROM `users`'
+         * PDO driver name
          * */
-        protected $query = null;
+        protected $driver;
+
+        /*
+         * Grid data driver components list
+         * */
+        protected $dataDrivers = [
+            'mysql' => GridDataMysqlDriver::class,
+            'pgsql' => GridDataPgsqlDriver::class,
+        ];
+
+        /*
+         * Grid data driver`s instance
+         * */
+        protected $dataDriver;
+
+        /*
+         * Current Locale
+         * */
+        protected $locale = 'en';
+
+        /*
+         * The Database Table name
+         * */
+        protected $table;
+
+        /*
+         * The Database Table Columns info, retrieved by PDO Statement;
+         * Notice: You can specify the field name for the current application locale name,
+         * storing it in JSON format on the column comment.
+         *
+         * Example: [[
+         *   "Field" => "username",
+         *   "Type" => "varchar(255)",
+         *   "Collation" => "utf8mb4_unicode_ci",
+         *   "Null" => "NO",
+         *   "Key" => "",
+         *   "Default" => null,
+         *   "Extra" => "",
+         *   "Privileges" => "select,insert,update,references",
+         *   "Comment" => "{{"name": {"en": "First Name"}}}"
+         * ]]
+         * */
+        protected $tableData = [];
 
         /**
          * @param PDO $pdo
          * @param array $conn : PDO connection options
          *
          * @return $this
+         * @throws Exception
          */
         public function setPdo(PDO $pdo = null, array $conn = [])
         {
-            $this->pdo = $pdo ?? new PDO($conn['dsn'], $conn['user'] ?? null, $conn['pass'] ?? null, $conn['options'] ?? null);
+            if ($pdo !== null)
+
+                $this->pdo = $pdo;
+
+            elseif (isset($conn['dsn'], $conn['user'], $conn['pass']))
+
+                $this->pdo = new PDO($conn['dsn'], $conn['user'], $conn['pass'], $conn['options'] ?? null);
+
+            else throw new Exception('The PDO Statement is not defined.');
+
+            $this->driver = $this->pdo->getAttribute(PDO::ATTR_DRIVER_NAME);
+
+            if (null === $this->getDataDriver())
+
+                $this->setDataDriver(new $this->dataDrivers[$this->driver]);
 
             return $this;
         }
@@ -48,11 +111,46 @@ namespace App\lib\grid
          */
         public function getPdo()
         {
-            if (null === $this->pdo)
-
-                throw new \logicException('The pdo property is not defined.');
-
             return $this->pdo;
+        }
+
+        /**
+         * @return string
+         */
+        public function getDriver()
+        {
+            return $this->driver;
+        }
+
+        /**
+         * @param IGridDataDriver $dataDriver
+         *
+         * @return $this
+         */
+        final function setDataDriver(IGridDataDriver $dataDriver)
+        {
+            $this->dataDriver = $dataDriver;
+
+            return $this;
+        }
+
+        /**
+         * @return IGridDataDriver
+         */
+        public function getDataDriver()
+        {
+            return $this->dataDriver;
+        }
+
+        /**
+         * @param string $name
+         * @param array $bind
+         *
+         * @return string
+         */
+        protected function getSql(string $name, array $bind = [])
+        {
+            return strtr($this->getDataDriver()->getSqlStatement($name), $bind);
         }
 
         /**
@@ -62,7 +160,7 @@ namespace App\lib\grid
          */
         public function setTable(string $table)
         {
-            $this->table = $table;
+            $this->table = preg_replace('#[^a-z_\-\s\d\\\'\\"]+#i', '', $table);
 
             return $this;
         }
@@ -72,21 +170,59 @@ namespace App\lib\grid
          */
         public function getTable()
         {
-            if (null === $this->table)
-
-                throw new \logicException('The table property is not defined.');
-
             return $this->table;
         }
 
         /**
-         * @param string $query
+         * @param string $tableName
+         * @param array $data
          *
          * @return $this
          */
-        public function setQuery(string $query)
+        public function setTableData(string $tableName, array $data)
         {
-            $this->query = $query;
+            $this->tableData[$tableName] = $data;
+
+            return $this;
+        }
+
+        /**
+         * @param string $tableName
+         *
+         * @return array
+         */
+        public function getTableData(string $tableName): array
+        {
+            return $this->tableData[$tableName] ?? [];
+        }
+
+        /**
+         * The magic method for retrieving the Grid Data Driver`s SQL query, and execute it.
+         *
+         * @param string $method
+         * @param array $arg
+         *
+         * @return array
+         */
+        public function __call(string $method, array $arg = [])
+        {
+            if (empty($this->getTableData($this->getTable())))
+
+                $this->setTableData($this->getTable(),
+
+                    $this->getPdo()->query($this->getSql($method, $arg[0] ?? []))->fetchAll(PDO::FETCH_ASSOC));
+
+            return $this->getTableData($this->getTable());
+        }
+
+        /**
+         * @param string $locale
+         *
+         * @return $this
+         */
+        public function setLocale(string $locale)
+        {
+            $this->locale = $locale;
 
             return $this;
         }
@@ -94,52 +230,56 @@ namespace App\lib\grid
         /**
          * @return string
          */
-        public function getQuery()
+        public function getLocale(): string
         {
-            return $this->query;
+            return $this->locale;
         }
 
         public function fetchFields(): array
         {
-            $types = [];
+            $fields = [];
 
-            $sizes = [];
-
-            $prompts = [];
-
-            if ($data = $this->getPdo()->query('DESCRIBE ' . $this->getTable())->fetchAll(PDO::FETCH_ASSOC))
+            if ($desc = $this->describe([':table' => $this->getTable()]))
             {
-                foreach ($data as $field)
+                foreach ($desc as $field)
                 {
-                    preg_match('|^([a-z]+)((\()([\d]+)(\)))?$|', $field['Type'], $match);
+                    $data = [];
 
-                    $name = $field['Field'];
+                    $data['comment'] = $field['comment'] = $this->fetchColumnComment($field);
 
-                    $types[$name] = $match[1];
+                    $data['field'] = $this->fetchColumnField($field);
 
-                    $sizes[$name] = $match[4] ?? null;
+                    $data['name'] = $this->fetchColumnName($field);
 
-                    $prompts[$name] = $field['Default'];
+                    $data['required'] = $this->fetchColumnRequired($field);
+
+                    $this->getDataDriver()->fetchColumnData($data, $field);
+
+                    $fields[] = $data;
                 }
             }
 
-            return [
-                'types'   => $types,
-                'sizes'   => $sizes,
-                'prompts' => $prompts,
-            ];
+            return $fields;
         }
 
-        public function fetchCount(): int
+        protected function fetchColumnComment(array $field)
         {
-            return $this->getPdo()->query('SELECT COUNT(*) FROM (' . $this->getQuery() . ') AS count')->fetchColumn();
+            return json_decode($field['Comment'], true) ?: $field['Comment'];
         }
 
-        public function fetchItems(): array
+        protected function fetchColumnField(array $field)
         {
-            // TODO
+            return $field['Field'];
+        }
 
-            return [];
+        protected function fetchColumnName(array $field)
+        {
+            return $field['comment']['name'][$this->getLocale()] ?? ucfirst(str_replace(['_', '-'], "\x20", $field['Field']));
+        }
+
+        protected function fetchColumnRequired(array $field)
+        {
+            return ($field['Null'] === 'NO' && $field['Default'] === null);
         }
     }
 }

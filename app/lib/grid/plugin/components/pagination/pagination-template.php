@@ -1,6 +1,6 @@
 <?php
 
-/* @var $this \App\lib\grid\plugins\pagination\Pagination */
+/* @var $this \App\lib\grid\plugin\components\pagination\Pagination */
 
 if (false == empty($this->pages['pages'])):
     ?>

@@ -9,9 +9,231 @@
 
 namespace App\lib\grid
 {
+
+    use Exception;
+
     class GridDataFormatter
     {
-        //TODO Make grid data fields mutable according to it's data format.
+        protected $format = [];
+
+        protected $formats = [['htmlEncode', []]];
+
+        protected $value;
+
+        /**
+         * @param mixed $value
+         *
+         * @return $this
+         */
+        public function setValue($value)
+        {
+            $this->value = $value;
+
+            return $this;
+        }
+
+        /**
+         * @return mixed
+         */
+        public function getValue()
+        {
+            return $this->value;
+        }
+
+        /**
+         * @param array $fieldFormats
+         *
+         * @return $this
+         * @throws Exception
+         */
+        public function setFormat(array $fieldFormats)
+        {
+            foreach ($fieldFormats as $format)
+            {
+                if (false == is_array($format))
+
+                    throw new Exception('The format field parameter is not properly defined.');
+
+                $methods = [];
+
+                foreach ((array) $format[1] as $k => $v)
+                {
+                    if (method_exists($this, $k))
+
+                        $methods[] = [$k, (array) $v];
+
+                    elseif (method_exists($this, $v))
+
+                        $methods[] = [$v, []];
+                }
+
+                foreach ((array) $format[0] as $field)
+                {
+                    $this->format[$field] = [];
+
+                    foreach ($this->mergeFormats($methods) as $method => $params)
+                    {
+                        $this->format[$field][] = [$method, $params];
+                    }
+                }
+            }
+
+            return $this;
+        }
+
+        /**
+         * @param array $methods
+         *
+         * @return array
+         */
+        public function mergeFormats(array $methods)
+        {
+            $formats = [];
+
+            foreach (array_merge($this->formats, $methods) as $k => $v)
+            {
+                $formats[$v[0]] = $v[1];
+            }
+
+            if (isset($formats['rawHtml']))
+
+                $formats = array_diff_key($formats, ['htmlEncode' => true, 'stripHtml' => true, 'stripTags' => true]);
+
+            return $formats;
+        }
+
+        /**
+         * @param array $formats
+         *
+         * @return $this
+         */
+        public function setFormatAll(array $formats)
+        {
+            $this->formats = [];
+
+            foreach ($formats as $k => $v)
+            {
+                if (method_exists($this, $k))
+
+                    $this->formats[] = [$k, (array) $v];
+
+                elseif (method_exists($this, $v))
+
+                    $this->formats[] = [$v, []];
+            }
+
+            return $this;
+        }
+
+        /**
+         * @param string $field
+         * @param mixed $value
+         *
+         * @return GridDataFormatter
+         */
+        public function format(string $field, $value)
+        {
+            $this->value = $value;
+
+            if (isset($this->format[$field]))
+
+                return $this->formatField($this->format[$field]);
+
+            return $this->formatField($this->formats);
+        }
+
+        protected function formatField(array $methods)
+        {
+            for ($i = 0; $i < sizeof($methods); ++$i)
+            {
+                call_user_func_array([$this, $methods[$i][0]], $methods[$i][1]);
+            }
+
+            return $this;
+        }
+
+        /**
+         * @return $this
+         */
+        public function rawHtml()
+        {
+            $this->value = html_entity_decode($this->value, ENT_QUOTES);
+
+            return $this;
+        }
+
+        /**
+         * @return $this
+         */
+        public function htmlEncode()
+        {
+            $this->value = htmlentities($this->value, ENT_QUOTES);
+
+            return $this;
+        }
+
+        /**
+         * @param array $allowTags
+         *
+         * @return $this
+         */
+        public function stripTags(array $allowTags = [])
+        {
+            $this->value = strip_tags($this->value, $allowTags);
+
+            return $this;
+        }
+
+        /**
+         * @param int $size      = 20
+         * @param string $suffix = '...'
+         *
+         * @return $this
+         */
+        public function truncate(int $size = 20, string $suffix = '...')
+        {
+            $words = preg_split('/(\s+)/u', trim($this->value), null, PREG_SPLIT_DELIM_CAPTURE);
+
+            if (sizeof($words) / 2 > $size)
+
+                $this->value = implode('', array_slice($words, 0, ($size * 2) - 1)) . $suffix;
+
+            return $this;
+        }
+
+        /**
+         * Removes all HTML tags, javascript sections, whitespace characters.
+         * It is also necessary to replace some HTML entities at their equivalent.
+         *
+         * @param bool $nl2br = true
+         *
+         * @return string
+         */
+        public function stripHtml(bool $nl2br = true)
+        {
+            $search = [
+                "'<script[^>]*?>.*?</script>'si",  # cut javaScript
+                "'<[\/\!]*?[^<>]*?>'si",           # cut HTML-tags
+                "'([\r\n])[\s]+'",                 # cut whitespace characters
+                "'&(quot|#34);'i",                 # replace HTML-entities
+                "'&(amp|#38);'i",
+                "'&(lt|#60);'i",
+                "'&(gt|#62);'i",
+                "'&(nbsp|#160);'i",
+                "'&(iexcl|#161);'i",
+                "'&(cent|#162);'i",
+                "'&(pound|#163);'i",
+                "'&(copy|#169);'i",
+            ];
+
+            $replace = ["", "", "\\1", "\"", "&", "<", ">", " ", chr(161), chr(162), chr(163), chr(169)];
+
+            $this->value = preg_replace($search, $replace, $this->value);
+
+            if ($nl2br) $this->value = nl2br($this->value);
+
+            return $this;
+        }
 
         public static function dashName(string $name)
         {
@@ -97,6 +319,11 @@ namespace App\lib\grid
             }
 
             return join("\x20", $output);
+        }
+
+        public function __destruct()
+        {
+            $this->value = null;
         }
     }
 }

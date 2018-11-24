@@ -1,14 +1,26 @@
 <?php
 
-$this->fetchPlugin('bulk_actions', function($plugin)
+use App\lib\grid\GridTable;
+
+/* @var \App\lib\grid\plugin\GridPlugin $this */
+
+$this->setConfig('bulk_actions', [
+    'set_query'      => true,
+    'action_columns' => [
+        'view'   => ['column' => 'bulk_action_view', 'name' => null, 'field' => null, 'template' => '{view}'],
+        'update' => ['column' => 'bulk_action_update', 'name' => null, 'field' => null, 'template' => '{update}'],
+        'delete' => ['column' => 'bulk_action_delete', 'name' => null, 'field' => null, 'template' => '{delete}'],
+    ],
+    'field'          => null,
+    'template'       => '{view} {update} {delete}',
+    'view'           => ['template' => null, 'url' => null, 'attr' => null, 'text' => null],
+    'update'         => ['template' => null, 'url' => null, 'attr' => null, 'text' => null],
+    'delete'         => ['template' => null, 'url' => null, 'attr' => null, 'text' => null],
+]);
+
+$this->fetchComponent('bulk_actions', function(GridTable $plugin)
 {
-    /* @var $plugin \App\lib\grid\GridTable */
-
-    if (false == $plugin instanceof \App\lib\grid\GridTable)
-
-        return null;
-
-    $params = $plugin->getPluginConfig('bulk_actions');
+    $params = $this->getConfig('bulk_actions');
 
     $actionColumns = [
         'view'   => ['column' => 'bulk_action_view', 'name' => null, 'field' => null, 'template' => '{view}'],
@@ -29,7 +41,7 @@ $this->fetchPlugin('bulk_actions', function($plugin)
     $template = $params['template'] ?? '{view} {update} {delete}';
 
     $actions = [
-        'view'   => $params['view']['template']
+        'view' => $params['view']['template']
             ?? sprintf('<a href="%s%s" %s>%s</a>',
                 $params['view']['url'] ?? $url . '/view',
                 $setQuery ? '?id={item_id}' : '/{item_id}',
@@ -85,9 +97,9 @@ $this->fetchPlugin('bulk_actions', function($plugin)
         if (false == isset(
                 $params['view']['text'],
                 $plugin->getColumnAttributes($column)['class'],
-                $plugin->getColumnAttributes($column)['style']
-            )
+                $plugin->getColumnAttributes($column)['style'])
         )
+
             $plugin->setColumnAttributes($column, ['style' => ['width' => '20px']]);
     }
 

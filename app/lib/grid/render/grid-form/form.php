@@ -1,6 +1,6 @@
 <?php
 
-use App\lib\grid\GridDataFormatter as GF;
+use App\lib\grid\GridDataFormatter as Format;
 
 /* @var \App\lib\grid\GridForm $this */
 
@@ -30,7 +30,7 @@ foreach ($this->fetchSortOrder() as $k)
 
         $lt = sprintf($lt ?? '<label for="{id}" %s>%s</label>',
 
-            GF::getAttributes($this->getLabelAttributes($k) ?? ['class' => ['control-label']]), $ln);
+            Format::getAttributes($this->getLabelAttributes($k) ?? ['class' => ['control-label']]), $ln);
 
     $tr = [
         '{attr}'  => $this->getRowAttributes(),
@@ -44,7 +44,7 @@ foreach ($this->fetchSortOrder() as $k)
 
     if ($this->checkRow($k))
     {
-        $row = $this->getRow($k);
+        $row = $this->getRow($k, $tr);
 
         is_array($row) ? $tr = array_merge($tr, $row) : $tr['{input}'] = $row;
     }
@@ -72,7 +72,7 @@ foreach ($this->fetchSortOrder() as $k)
             'tag'   => $this->getInput($k)['tag'],
             'attr'  => $this->getInputAttributes($k) ?? [],
             'name'  => $this->getInputRequestName($k),
-            'value' => $this->getInputValue($k),
+            'value' => $this->getInputValue($k) ?? $this->getPrompt($k),
             'error' => $tr['{error}'] ?? $this->getError($k),
         ];
 
@@ -145,7 +145,7 @@ foreach ($this->fetchSortOrder() as $k)
 
                     $tpl = sprintf('<li>%s</li>', $tpl . "\x20" . '%s');
 
-                    $attr = GF::getAttributes(GF::setAttribute($data['attr'], ['class' => ['form-control' => null]]));
+                    $attr = Format::getAttributes(Format::setAttribute($data['attr'], ['class' => ['form-control' => null]]));
 
                     $value = is_array($data['value']) ? array_flip($data['value']) : [$data['value'] => true];
 
@@ -178,7 +178,7 @@ foreach ($this->fetchSortOrder() as $k)
 
             if (is_array($tr['{attr}']))
 
-                $tr['{attr}'] = GF::setAttribute($tr['{attr}'], ['class' => ['has-error']]);
+                $tr['{attr}'] = Format::setAttribute($tr['{attr}'], ['class' => ['has-error']]);
         }
 
         if (strpos($data['type'], 'date') !== false && null !== ($time = $this->getInput($k)['time'] ?? null))
@@ -193,7 +193,7 @@ foreach ($this->fetchSortOrder() as $k)
 
                 $attr['type'] = 'time';
 
-                $tm = sprintf($tpl, $data['id'] . '-time', $data['name'] . '[time]', GF::getAttributes($attr), $time);
+                $tm = sprintf($tpl, $data['id'] . '-time', $data['name'] . '[time]', Format::getAttributes($attr), $time);
 
                 $data['name'] .= '[date]';
 
@@ -203,14 +203,14 @@ foreach ($this->fetchSortOrder() as $k)
 
         if ($input === null)
 
-            $input = sprintf($tpl, $data['id'], $data['name'], GF::getAttributes($data['attr']), $data['value']);
+            $input = sprintf($tpl, $data['id'], $data['name'], Format::getAttributes($data['attr']), $data['value']);
 
         $tr['{input}'] = $input . $tm . $te;
     }
 
     if (is_array($tr['{attr}']))
 
-        $tr['{attr}'] = GF::getAttributes($tr['{attr}']);
+        $tr['{attr}'] = Format::getAttributes($tr['{attr}']);
 
     $rows .= strtr($template, $tr);
 }
@@ -221,7 +221,7 @@ $token = $this->getTokenValue()
 
 echo strtr($this->fetchLayout($output), [
     '{tag}'   => $this->getTag(),
-    '{attr}'  => GF::getAttributes($this->getTagAttributes()),
+    '{attr}'  => Format::getAttributes($this->getTagAttributes()),
     '{token}' => $token,
     '{rows}'  => $rows
 ]);

@@ -19,10 +19,8 @@ namespace App\lib\grid
         public function setRenderPath(string $path);
 
         /**
-         * @param bool $fetchPlugins run Plugins
-         *
          * @return mixed
          */
-        public function render(bool $fetchPlugins);
+        public function render();
     }
 }

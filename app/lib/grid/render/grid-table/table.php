@@ -1,15 +1,17 @@
 <?php
 
-use App\lib\grid\GridDataFormatter as GF;
+use App\lib\grid\GridDataFormatter as Format;
+use App\lib\grid\IGridFormProvider;
+use App\lib\grid\GridForm;
 
 /* @var \App\lib\grid\GridTable $this */
 
+if (false == isset($this->getTagAttributes()['id']))
+
+    $this->setTagAttributes(['id' => ['grid-table-' . substr(md5(microtime(true)), 0, 10)]]);
+
 if ($this->getTag() === 'table')
 {
-    if (false == isset($this->getTagAttributes()['id']))
-
-        $this->setTagAttributes(['id' => ['grid-table-' . substr(md5(microtime(true)), 0, 10)]]);
-
     if (false == isset($this->getTagAttributes()['class']))
 
         $this->setTagAttributes(['class' => ['table', 'table-striped', 'table-bordered']]);
@@ -31,17 +33,15 @@ if ($this->getTag() === 'table')
         $this->setCellTemplate('<td {attr}>{cell}</td>');
 }
 
-$output = $this->getLayout()
-
-    ?: ($this->getTag() ? '<{tag} {attr}>{columns}{rows}</{tag}>' : '{columns}{rows}');
+$output = $this->getLayout() ?: ($this->getTag() ? '<{tag} {attr}>{columns}{rows}</{tag}>' : '{columns}{rows}');
 
 $columns = '';
 
-$sortOrder = $this->fetchSortOrder();
+$fields = $this->fetchSortOrder();
 
-$sortOrderSize = sizeof($sortOrder);
+$sortOrderSize = sizeof($fields);
 
-foreach ($sortOrder as $col)
+foreach ($fields as $col)
 {
     if (false == $this->checkRow($col))
 
@@ -66,68 +66,87 @@ foreach ($sortOrder as $col)
 
     if (is_array($tr['{attr}']))
 
-        $tr['{attr}'] = GF::getAttributes($tr['{attr}']);
+        $tr['{attr}'] = Format::getAttributes($tr['{attr}']);
 
     $columns .= strtr($template, $tr);
 }
 
-$columns = str_replace('{columns}', $columns, str_replace('{attr}', GF::getAttributes($this->getRowAttributes()), $this->getColumnRowTemplate()));
+$columns = str_replace('{columns}', $columns,
+
+    str_replace('{attr}', Format::getAttributes($this->getRowAttributes()), $this->getColumnRowTemplate()));
 
 $rows = '';
 
 $template = $this->getCellTemplate();
 
-foreach ($this->getItems() as $key => $val)
+if ($this->plugin()->checkFetched('filter') && $this->plugin()->getFetched('filter') instanceof GridForm)
+{
+    foreach ($this->fetchSortOrder() as $item)
+    {
+        if ($opt = $this->plugin()->getFetched('filter')->getInputOptions($item))
+
+            $options[$item] = $opt;
+    }
+}
+else $options = $this->getProvider() instanceof IGridFormProvider ? $this->getProvider()->gridInputOptions() : [];
+
+foreach ($this->getProviderItems() as $key => $val)
 {
     $cells = '';
 
     for ($i = 0; $i < $sortOrderSize; $i++)
     {
-        if (false == $this->checkRow($sortOrder[$i]))
+        if (false == $this->checkRow($fields[$i]))
 
             continue;
 
-        $value = $val->{$sortOrder[$i]} ?? ($val[$sortOrder[$i]] ?? null);
+        $value = $val->{$fields[$i]} ?? ($val[$fields[$i]] ?? null);
 
-        if (false == is_array($value) && isset($this->getProvider()->gridInputOptions()[$sortOrder[$i]][$value]))
+        if (is_string($value) || is_numeric($value))
+        {
+            if (isset($options[$fields[$i]][$value]))
 
-            $value = $this->getProvider()->gridInputOptions()[$sortOrder[$i]][$value];
+                $value = $options[$fields[$i]][$value];
+
+            $value = $this->formatter()->format($fields[$i], $value)->getValue();
+        }
 
         $tr = [
             'template' => null,
-            '{attr}'   => $this->getCellAttributes($sortOrder[$i]),
+            '{attr}'   => $this->getCellAttributes($fields[$i]),
             '{cell}'   => $value,
         ];
 
-        if ($this->checkCell($sortOrder[$i]))
+        if ($this->checkCell($fields[$i]))
         {
-            $row = $this->getCell($sortOrder[$i], $key);
+            $row = $this->getCell($fields[$i], $key, $tr);
 
             is_array($row) ? $tr = array_merge($tr, $row) : $tr['{cell}'] = $row;
         }
 
         if (is_array($tr['{attr}']))
 
-            $tr['{attr}'] = GF::getAttributes($tr['{attr}']);
+            $tr['{attr}'] = Format::getAttributes($tr['{attr}']);
 
         if ($tr['{cell}'] === null)
 
-            $tr['{cell}'] = $this->getPrompt($sortOrder[$i]) ?? '<nodata>' . $this::NO_DATA . '</nodata>';
+            $tr['{cell}'] = $this->getPrompt($fields[$i]) ?? '<div class="no-data">' . $this::NO_DATA . '</div>';
 
         $cells .= strtr($tr['template'] ?? $template, $tr);
     }
 
     $attr = $this->getCellRowAttributes($key);
 
-    $rows .= str_replace('{cells}',
+    $rows .= str_replace(
+        '{cells}',
         $cells,
-        str_replace('{attr}', ($attr ? GF::getAttributes($attr) : null), $this->getCellRowTemplate($key))
+        str_replace('{attr}', ($attr ? Format::getAttributes($attr) : null), $this->getCellRowTemplate($key))
     );
 }
 
 echo strtr($this->fetchLayout($output), [
     '{tag}'     => $this->getTag(),
-    '{attr}'    => GF::getAttributes($this->getTagAttributes()),
+    '{attr}'    => Format::getAttributes($this->getTagAttributes()),
     '{columns}' => $columns,
     '{rows}'    => $rows,
 ]);

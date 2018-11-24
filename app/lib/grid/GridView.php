@@ -15,7 +15,20 @@ namespace App\lib\grid
 
         protected $renderTemplate = 'grid-view/view.php';
 
-        protected $fetch = null;
+        protected $fetch;
+
+        /**
+         * GridView constructor.
+         *
+         * @param IGridProvider $provider
+         * @param GridDataFormatter|null $formatter
+         */
+        public function __construct(IGridProvider $provider, GridDataFormatter $formatter = null)
+        {
+            parent::__construct($provider);
+
+            $this->setFormatter($formatter ?? new GridDataFormatter);
+        }
 
         public function fetch(callable $fetch)
         {

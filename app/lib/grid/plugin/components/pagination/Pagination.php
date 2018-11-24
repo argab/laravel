@@ -2,104 +2,103 @@
 
 /**
  * Class Pagination
- *
- * @project <>
- * @package App\lib\grid\plugins\pagination
- * @author ArGabid <argabid@gmail.com>
+ * @project   <>
+ * @package   App\lib\grid\plugins\pagination
+ * @author    ArGabid <argabid@gmail.com>
  * @copyright 2018-2019, ArGabid, License MIT, All rights reserved
  */
 
-namespace App\lib\grid\plugins\pagination {
-    
+namespace App\lib\grid\plugin\components\pagination
+{
     class Pagination
     {
         /**
          * Previous pages.
          */
         const PREVIOUS = 'previous';
-        
+
         /**
          * Next pages.
          */
         const NEXT = 'next';
-        
+
         /**
          * Last page.
          */
         const FIRST = 'first';
-        
+
         /**
          * Last page.
          */
         const LAST = 'last';
-        
+
         /**
          * @var int Total Items
          */
-        private $totalCount;
-        
+        protected $totalCount;
+
         /**
          * @var int Number of the current page
          */
-        private $currentPage;
-        
+        protected $currentPage;
+
         /**
          * @var int Items per page
          */
-        private $perPage = 25;
-        
+        protected $perPage = 25;
+
         /**
          * @var int Total pages
          */
-        private $totalPages;
-        
+        protected $totalPages;
+
         /**
          * @var int Number of pages at list
          */
-        private $pageSize = 10;
-        
+        protected $pageSize = 10;
+
         /**
          * @var string name of page get parameter
          */
-        private $pageName = 'page';
-        
+        protected $pageName = 'page';
+
         /**
          * @var string query url string
          */
-        private $queryString = null;
-        
+        protected $queryString = null;
+
         /**
          * @var string base url
          */
-        private $url = null;
-        
+        protected $url = null;
+
         /**
          * @var array Output array
          */
-        private $pages = [];
-        
+        protected $pages = [];
+
         /**
          * @var bool show direct control buttons
          */
-        private $directControls = true;
-        
+        protected $directControls = true;
+
         /**
          * @var bool show control buttons for first & last pages
          */
-        private $marginControls = true;
-        
+        protected $marginControls = true;
+
         /**
          * @var array control button names
          */
-        private $controls = [
+        protected $controls = [
             self::FIRST    => self::FIRST,
             self::LAST     => self::LAST,
             self::PREVIOUS => self::PREVIOUS,
             self::NEXT     => self::NEXT,
         ];
-        
+
         /**
-         * Create instance.
+         * Pagination constructor.
          *
          * @param int $totalCount  Total items
          * @param int $currentPage Number of the current page
@@ -109,93 +108,98 @@ namespace App\lib\grid\plugins\pagination {
         public function __construct($totalCount, $currentPage = null, $perPage = null, $pageSize = null)
         {
             $this->totalCount = intval($totalCount);
-            
+
             $this->currentPage = intval($currentPage ?? ($_GET[$this->pageName] ?? 1));
-            
+
             $this->perPage = intval($perPage ?? $this->perPage);
-            
+
             $this->pageSize = intval($pageSize ?? $this->pageSize);
-            
+
             if ($this->perPage <= 0)
-                
+
                 $this->perPage = 1;
-            
+
             if ($this->currentPage < 1)
-                
+
                 $this->currentPage = 1;
-            
+
             $this->totalPages = ceil($this->totalCount / $this->perPage);
-            
+
             if ($this->currentPage > $this->totalPages)
-                
+
                 $this->currentPage = $this->totalPages;
         }
-        
+
         public function setPageName(string $name)
         {
             $this->pageName = $name;
-            
+
             return $this;
         }
-        
+
         public function getPages()
         {
             return $this->build()->pages;
         }
-        
+
         public function getOffset()
         {
             return ($this->perPage * $this->currentPage - $this->perPage);
         }
-        
+
         public function getLimit()
         {
             return $this->perPage;
         }
-        
+
         public function setUrl(string $url = null)
         {
             $this->url = $url ?? parse_url(getenv('REQUEST_URI'))['path'];
-            
+
             return $this;
         }
-        
+
         public function getUrl()
         {
             return $this->url;
         }
-        
+
         public function setQueryString(array $appendData = [])
         {
-            $data = array_merge($_GET, $appendData);
-            
+            $data = [];
+
+            if ($query = parse_url(getenv('REQUEST_URI'))['query'] ?? null)
+
+                parse_str($query, $data);
+
+            $data = array_merge($data, $appendData);
+
             if (isset($data[$this->pageName]))
-                
+
                 unset($data[$this->pageName]);
-            
+
             $this->queryString = http_build_query($data);
-            
+
             return $this;
         }
-        
+
         public function getQueryString()
         {
             return $this->queryString;
         }
-        
+
         protected function build()
         {
             if ($this->pages || ($this->totalCount == 0 || $this->totalPages == 1))
-            {
+
                 return $this;
-            }
-            
+
             $step = floor($this->pageSize / 2);
-            
+
             $start = $this->currentPage - $step;
-            
+
             $end = $this->currentPage + $step;
-            
+
             if ($this->totalPages > $this->pageSize)
             {
                 if ($start <= 1)
@@ -214,15 +218,15 @@ namespace App\lib\grid\plugins\pagination {
                 $start = 1;
                 $end = $this->totalPages;
             }
-            
-            $qs = $this->getQueryString() ?? $this->setQueryString()->getQueryString();
-            
+
+            $q = $this->getQueryString() ?? $this->setQueryString()->getQueryString();
+
             $url = $this->getUrl() ?? $this->setUrl()->getUrl();
-            
+
             $this->pages = [
                 'pages'       => array_slice(range((int) $start, (int) $end, 1), 0, $this->pageSize),
-                'urlQuery'    => $url . ($qs ? '?' . $qs . '&' : '?'),
-                'queryString' => $qs,
+                'urlQuery'    => $url . ($q ? '?' . $q . '&' : '?'),
+                'queryString' => $q,
                 'url'         => $url,
                 'currentPage' => $this->currentPage,
                 'totalCount'  => $this->totalCount,
@@ -237,14 +241,14 @@ namespace App\lib\grid\plugins\pagination {
                     static::NEXT     => ($this->currentPage < $this->totalPages ? $this->currentPage + 1 : null),
                 ],
             ];
-            
+
             return $this;
         }
-        
+
         public function fetchPages()
         {
             $this->build();
-            
+
             if (isset($this->pages['pages']))
             {
                 foreach ($this->pages['pages'] as $key => $page)
@@ -252,31 +256,31 @@ namespace App\lib\grid\plugins\pagination {
                     if ($page == $this->pages['currentPage'])
                     {
                         $this->pages['linkPages'][$key] = null;
-                        
+
                         continue;
                     }
-                    
+
                     $this->pages['linkPages'][$key] = $this->pages['urlQuery'] . $this->pageName . '=' . $page;
                 }
             }
-            
+
             return $this;
         }
-        
+
         public function showDirectControls(bool $flag = null)
         {
             $this->directControls = $flag ?? $this->directControls;
-            
+
             return $this;
         }
-        
+
         public function showMarginControls(bool $flag = null)
         {
             $this->marginControls = $flag ?? $this->marginControls;
-            
+
             return $this;
         }
-        
+
         public function setControls(array $controls)
         {
             $this->controls = [
@@ -285,28 +289,25 @@ namespace App\lib\grid\plugins\pagination {
                 self::PREVIOUS => $controls[self::PREVIOUS] ?? self::PREVIOUS,
                 self::NEXT     => $controls[self::NEXT] ?? self::NEXT,
             ];
-            
+
             return $this;
         }
-        
+
         public function render(array $params = [], string $template = 'pagination-template.php')
         {
             $this->build();
-            
+
             ob_start();
-            
-            if ($params)
+
+            foreach ($params as $k => $v)
             {
-                foreach ($params as $k => $v)
-                {
-                    $$k = $v;
-                }
-                
-                unset($params);
+                $$k = $v;
             }
-            
+
+            unset($params);
+
             @include($template);
-            
+
             return ob_get_clean();
         }
     }

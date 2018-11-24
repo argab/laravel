@@ -8,15 +8,11 @@
 
         use App\lib\grid\GridTable;
 
-        $table = (new GridTable($provider))
+        $table = (new GridTable($provider))->loadColumns();
 
-            ->setPlugins([
-                'pagination' => false,
-                'bulk_actions' => false,
-                'filter' => false,
-            ])
+        $table->plugin()->setComponents([]);
 
-            ->setItems($companies)
+        $table->setProviderItems($companies)
 
             ->setCell('user', function($data)
             {
