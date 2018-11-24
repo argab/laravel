@@ -19,7 +19,7 @@
                 ->setLocale('ru'))
             ->fetchData()
             ->setData([
-                //'fields' => $provider->gridFields(),
+                'fields' => $provider->gridFields(),
                 'inputTypes'     => [
                     'company'    => 'text',
                 ],
