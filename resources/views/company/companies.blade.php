@@ -6,11 +6,11 @@
 
     @php
 
-        use App\lib\grid\GridTable;
+        use argabe\grid\GridTable;
 
         $table = (new GridTable($provider))->loadColumns();
 
-        $table->plugin()->setComponents([]);
+        $table->disableEmbeddedPlugins();
 
         $table->setProviderItems($companies)
 

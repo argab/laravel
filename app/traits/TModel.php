@@ -29,6 +29,20 @@ namespace App\traits
         {
             $this->_errors = $errors;
         }
+
+        public function filter(array $data)
+        {
+            $query = $this->newQuery();
+
+            foreach ($this->filterRules as $key => $condition)
+            {
+                if (isset($data[$key]))
+
+                    $query->where($key, $condition, $condition === 'like' ? '%' . $data[$key] . '%' : $data[$key]);
+            }
+
+            return $query;
+        }
     }
 
 }

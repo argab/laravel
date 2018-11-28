@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-use App\lib\grid\
+use argabe\grid\
 {
     IGridTableProvider, IGridFormProvider
 };

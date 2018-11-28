@@ -12,9 +12,9 @@
 
     @php
 
-        use App\lib\grid\GridForm;
-        use App\lib\grid\GridDataProvider;
-        use App\lib\grid\GridData;
+        use argabe\grid\GridForm;
+        use argabe\grid\GridDataProvider;
+        use argabe\grid\GridData;
 
         /* @var $provider \App\User */
 
@@ -41,8 +41,6 @@
                 'inputErrors' => $provider->gridInputErrors()
             ])
         ;
-
-        #$form = (new GridForm($provider))->loadInputs();
 
         $form = (new GridForm($dataProvider))->loadInputs();
 

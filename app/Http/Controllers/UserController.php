@@ -14,19 +14,31 @@ class UserController extends Controller
      * Display a listing of the Users.
      *
      * @param User $provider
+     *
      * @return \Illuminate\Http\Response
      */
     public function index(User $provider)
     {
-        return view('user.users', ['provider' => $provider, 'users' => $provider->with('companies')->get()->all()]);
+        $filter = $provider->filter(Request::capture()->all())->with('companies');
+
+        if ($company = Request::capture()->get('company'))
+        {
+            $filter->whereHas('companies', function($query) use ($company)
+            {
+                $query->whereCompanyId($company);
+            });
+        }
+
+        return view('user.users', ['provider' => $provider, 'users' => $filter->get()->all()]);
     }
 
     /**
      * Display the form for creating a new User;
      * Create a new User if the form post data sent.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @param  User $provider
+     *
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request, User $provider)
@@ -80,8 +92,9 @@ class UserController extends Controller
      * Display the form for updating specified User;
      * Update the specified User in storage if the form post data sent.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -124,7 +137,8 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

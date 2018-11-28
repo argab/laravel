@@ -6,12 +6,19 @@
 
     @php
 
-        use App\lib\grid\GridTable;
-        use App\lib\grid\GridDataProvider;
-        use App\lib\grid\GridData;
+        use argabe\grid\GridTable;
+        use argabe\grid\GridDataProvider;
+        use argabe\grid\GridData;
+        use argabe\grid\GridForm;
+        use Illuminate\Http\Request;
 
         /* @var $provider \App\User */
 
+        # Для инициализации провайдера напрямую из сущности:
+        # $table = (new GridTable($provider))->loadColumns();
+
+        # Либо при подключении несвязанного дата провайдера, который получает данные полей
+        # из базы данных и имплементирует методы интерфейса:
         $dataProvider = (new GridDataProvider($provider))
             ->setDataProvider((new GridData)
                 ->setPdo(DB::connection()->getPdo())
@@ -34,13 +41,16 @@
             ])
         ;
 
-        #$table = (new GridTable($provider))->loadColumns();
-
         $table = (new GridTable($dataProvider))->loadColumns();
 
         $table->plugin()->setConfig('bulk_actions', ['view' => false, 'set_query' => false]);
 
-        $table->plugin()->setComponent('pagination', null);
+        $table->plugin()->hook('filter', function(GridForm $plugin)
+        {
+            $plugin->loadInputs()->setValues(Request::capture()->all());
+        });
+
+        $table->disableEmbeddedPlugin('pagination');
 
         $table->setProviderItems($users)
 

@@ -6,7 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-use App\lib\grid\
+use argabe\grid\
 {
     IGridTableProvider, IGridFormProvider
 };
@@ -43,9 +43,14 @@ class User extends Authenticatable implements IGridTableProvider, IGridFormProvi
 
     public $company;
 
+    protected $filterRules = [
+        'id'        => '=',
+        'user_name' => 'like',
+        'email'     => 'like',
+    ];
+
     /**
      * The Users many to many Companies Relationship.
-     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function companies()
@@ -56,7 +61,6 @@ class User extends Authenticatable implements IGridTableProvider, IGridFormProvi
     /**
      * Fetches the list of companies to which specified user has related to.
      * Used for filtering data in the layout, edit / create forms.
-     *
      * @return array
      */
     public function getCompanies()
@@ -73,7 +77,6 @@ class User extends Authenticatable implements IGridTableProvider, IGridFormProvi
 
     /**
      * The validation rules
-     *
      * @return array
      */
     public function rules()
@@ -88,7 +91,6 @@ class User extends Authenticatable implements IGridTableProvider, IGridFormProvi
 
     /**
      * The list of User`s data fields, required for displaying data in the layout
-     *
      * @return array
      */
     public function gridFields(): array
@@ -105,7 +107,6 @@ class User extends Authenticatable implements IGridTableProvider, IGridFormProvi
     /**
      * List of fields required for generating input fields with specified input types,
      * in the edit / create / filter forms.
-     *
      * @return array
      */
     public function gridInputTypes(): array
@@ -123,7 +124,6 @@ class User extends Authenticatable implements IGridTableProvider, IGridFormProvi
     /**
      * List of fields required for generating input fields of the type "select, checkbox, radio",
      * indicating what data they use, in the edit / create forms.
-     *
      * @return array
      */
     public function gridInputOptions(): array
@@ -135,7 +135,6 @@ class User extends Authenticatable implements IGridTableProvider, IGridFormProvi
 
     /**
      * The property is used to display errors that occurred during the validation of data fields.
-     *
      * @return array
      */
     public function gridInputErrors(): array
