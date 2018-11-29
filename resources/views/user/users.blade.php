@@ -50,7 +50,7 @@
             $plugin->loadInputs()->setValues(Request::capture()->all());
         });
 
-        $table->disableEmbeddedPlugin('pagination');
+        $table->disableEmbedPlugin('pagination');
 
         $table->setProviderItems($users)
 

@@ -10,7 +10,7 @@
 
         $table = (new GridTable($provider))->loadColumns();
 
-        $table->disableEmbeddedPlugins();
+        $table->disableEmbedPlugins();
 
         $table->setProviderItems($companies)
 
