@@ -43,7 +43,7 @@
 
         $table = (new GridTable($dataProvider))->loadColumns();
 
-        $table->plugin()->setConfig('bulk_actions', ['view' => false, 'set_query' => false]);
+        $table->plugin()->setConfig('bulk-actions', ['view' => false, 'set_query' => false]);
 
         $table->plugin()->hook('filter', function(GridForm $plugin)
         {
