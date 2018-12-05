@@ -6,7 +6,7 @@
 
     @php
 
-        use argabe\grid\GridTable;
+        use gdgrid\gd\GridTable;
 
         $table = (new GridTable($provider))->loadColumns();
 

@@ -6,10 +6,10 @@
 
     @php
 
-        use argabe\grid\GridTable;
-        use argabe\grid\GridDataProvider;
-        use argabe\grid\GridData;
-        use argabe\grid\GridForm;
+        use gdgrid\gd\GridTable;
+        use gdgrid\gd\GridDataProvider;
+        use gdgrid\gd\GridData;
+        use gdgrid\gd\GridForm;
         use Illuminate\Http\Request;
 
         /* @var $provider \App\User */

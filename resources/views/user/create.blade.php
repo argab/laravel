@@ -12,9 +12,9 @@
 
     @php
 
-        use argabe\grid\GridForm;
-        use argabe\grid\GridDataProvider;
-        use argabe\grid\GridData;
+        use gdgrid\gd\GridForm;
+        use gdgrid\gd\GridDataProvider;
+        use gdgrid\gd\GridData;
 
         /* @var $provider \App\User */
 
